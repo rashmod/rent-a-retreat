@@ -8,6 +8,7 @@ import ListingRoutes from './routes/ListingRoutes';
 import CategoryRoutes from './routes/CategoryRoutes';
 import AmenityRoutes from './routes/AmenityRoutes';
 import HouseRuleRoutes from './routes/HouseRuleRoutes';
+import ListingPhotoRoutes from './routes/ListingPhotoRoutes';
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use('/api/listings', ListingRoutes);
 app.use('/api/categories', CategoryRoutes);
 app.use('/api/amenities', AmenityRoutes);
 app.use('/api/houseRules', HouseRuleRoutes);
+app.use('/api/listing', ListingPhotoRoutes);
 
 connectDB();
 

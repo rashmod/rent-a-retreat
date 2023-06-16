@@ -5,6 +5,9 @@ import connectDB from './db/prisma';
 
 import UserRoutes from './routes/UserRoutes';
 import ListingRoutes from './routes/ListingRoutes';
+import CategoryRoutes from './routes/CategoryRoutes';
+import AmenityRoutes from './routes/AmenityRoutes';
+import HouseRuleRoutes from './routes/HouseRuleRoutes';
 
 dotenv.config();
 
@@ -14,6 +17,9 @@ app.use(express.json());
 
 app.use('/api/users', UserRoutes);
 app.use('/api/listings', ListingRoutes);
+app.use('/api/categories', CategoryRoutes);
+app.use('/api/amenities', AmenityRoutes);
+app.use('/api/houseRules', HouseRuleRoutes);
 
 connectDB();
 

@@ -52,7 +52,7 @@ export const getListingDetails = async (req: Request, res: Response) => {
 
 export const postListing = async (req: Request, res: Response) => {
 	try {
-		const { hostId } = req.body;
+		const { hostId, categoryId, amenityId, houseRuleId } = req.body;
 		const {
 			listingName,
 			bedroomCount,
@@ -83,6 +83,21 @@ export const postListing = async (req: Request, res: Response) => {
 				host: {
 					connect: {
 						hostId,
+					},
+				},
+				category: {
+					connect: {
+						categoryId,
+					},
+				},
+				amenity: {
+					connect: {
+						amenityId,
+					},
+				},
+				houseRule: {
+					connect: {
+						houseRuleId,
 					},
 				},
 			},

@@ -56,7 +56,7 @@ model Guest {
 
   user        User          @relation(fields: [userId], references: [userId])
   userId      String        @unique
-  Reservation Reservation[]
+  reservation Reservation[]
 }
 
 model EmergencyContact {
@@ -111,7 +111,7 @@ model Listing {
   amenity      Amenity[]
   host         Host           @relation(fields: [hostId], references: [hostId])
   hostId       String
-  Reservation  Reservation[]
+  reservation  Reservation[]
 }
 
 model ListingPhoto {

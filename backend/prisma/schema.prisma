@@ -11,156 +11,156 @@ datasource db {
 }
 
 model User {
-  user_id       String   @id @default(uuid())
-  first_name    String
-  last_name     String
-  gender        String
-  email         String   @unique
-  phone_number  BigInt
-  date_of_birth DateTime
+  userId      String   @id @default(uuid())
+  firstName   String
+  lastName    String
+  gender      String
+  email       String   @unique
+  phoneNumber BigInt
+  dateOfBirth DateTime
 
-  profile_photo ProfilePhoto?
-  host          Host?
-  guest         Guest?
+  profilePhoto ProfilePhoto?
+  host         Host?
+  guest        Guest?
 }
 
 model ProfilePhoto {
-  profile_photo_id String @id @default(uuid())
-  img_url          String
+  profilePhotoId String @id @default(uuid())
+  imgUrl         String
 
-  user    User   @relation(fields: [user_id], references: [user_id])
-  user_id String @unique
+  user   User   @relation(fields: [userId], references: [userId])
+  userId String @unique
 }
 
 model Host {
-  host_id            String   @id @default(uuid())
-  avg_rating         Float
-  total_rating_count Int
-  created_at         DateTime @default(now())
-  updated_at         DateTime @updatedAt
+  hostId           String   @id @default(uuid())
+  avgRating        Float
+  totalRatingCount Int
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
-  user    User   @relation(fields: [user_id], references: [user_id])
-  user_id String @unique
+  user   User   @relation(fields: [userId], references: [userId])
+  userId String @unique
 
-  address           Address?
-  emergency_contact EmergencyContact[]
-  listing           Listing[]
+  address          Address?
+  emergencyContact EmergencyContact[]
+  listing          Listing[]
 }
 
 model Guest {
-  guest_id           String   @id @default(uuid())
-  avg_rating         Float
-  total_rating_count Int
-  created_at         DateTime @default(now())
-  updated_at         DateTime @updatedAt
+  guestId          String   @id @default(uuid())
+  avgRating        Float
+  totalRatingCount Int
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
-  user        User          @relation(fields: [user_id], references: [user_id])
-  user_id     String        @unique
+  user        User          @relation(fields: [userId], references: [userId])
+  userId      String        @unique
   Reservation Reservation[]
 }
 
 model EmergencyContact {
-  emergency_contact_id String @id @default(uuid())
-  first_name           String
-  last_name            String
-  email                String @unique
-  phone_number         BigInt
-  relationship         String
+  emergencyContactId String @id @default(uuid())
+  firstName          String
+  lastName           String
+  email              String @unique
+  phoneNumber        BigInt
+  relationship       String
 
-  host    Host   @relation(fields: [host_id], references: [host_id])
-  host_id String
+  host   Host   @relation(fields: [hostId], references: [hostId])
+  hostId String
 }
 
 model Address {
-  address_id   String @id @default(uuid())
-  unit_number  String
-  street_name  String
-  address_line String
-  city         String
-  postal_code  String
-  state        String
-  country      String
+  addressId   String @id @default(uuid())
+  unitNumber  String
+  streetName  String
+  addressLine String
+  city        String
+  postalCode  String
+  state       String
+  country     String
 
-  host     Host?    @relation(fields: [owner_id], references: [host_id], map: "host_address")
-  listing  Listing? @relation(fields: [owner_id], references: [listing_id], map: "listing_address")
-  owner_id String   @unique
+  host    Host?    @relation(fields: [ownerId], references: [hostId], map: "hostAddress")
+  listing Listing? @relation(fields: [ownerId], references: [listingId], map: "listingAddress")
+  ownerId String   @unique
 }
 
 model Listing {
-  listing_id         String @id @default(uuid())
-  listing_name       String
-  bedroom_count      Int
-  bathroom_count     Int
-  price_per_night    Int
-  cleaning_fee       Int
-  max_guest          Int
-  avg_rating         Float
-  total_rating_count Int
+  listingId        String @id @default(uuid())
+  listingName      String
+  bedroomCount     Int
+  bathroomCount    Int
+  pricePerNight    Int
+  cleaningFee      Int
+  maxGuest         Int
+  avgRating        Float
+  totalRatingCount Int
 
-  is_refundable            Boolean
-  percent_refundable       Int?
-  days_before_cancellation Int?
+  isRefundable           Boolean
+  percentRefundable      Int?
+  daysBeforeCancellation Int?
 
   latitude  Decimal
   longitude Decimal
 
-  address       Address?
-  listing_photo ListingPhoto[]
-  house_rule    HouseRule[]
-  category      Category[]
-  amenity       Amenity[]
-  host          Host           @relation(fields: [host_id], references: [host_id])
-  host_id       String
-  Reservation   Reservation[]
+  address      Address?
+  listingPhoto ListingPhoto[]
+  houseRule    HouseRule[]
+  category     Category[]
+  amenity      Amenity[]
+  host         Host           @relation(fields: [hostId], references: [hostId])
+  hostId       String
+  Reservation  Reservation[]
 }
 
 model ListingPhoto {
-  listing_photo_id String @id @default(uuid())
-  photo_url        String
-  position         Int
+  listingPhotoId String @id @default(uuid())
+  photoUrl       String
+  position       Int
 
-  listing    Listing @relation(fields: [listing_id], references: [listing_id])
-  listing_id String
+  listing   Listing @relation(fields: [listingId], references: [listingId])
+  listingId String
 }
 
 model HouseRule {
-  house_rule_id    String @id @default(uuid())
-  rule_title       String
-  rule_description String
+  houseRuleId     String @id @default(uuid())
+  ruleTitle       String
+  ruleDescription String
 
   listing Listing[]
 }
 
 model Category {
-  category_id          String @id @default(uuid())
-  category_title       String
-  category_description String
+  categoryId          String @id @default(uuid())
+  categoryTitle       String
+  categoryDescription String
 
   listing Listing[]
 }
 
 model Amenity {
-  amenity_id          String @id @default(uuid())
-  amenity_title       String
-  amenity_description String
+  amenityId          String @id @default(uuid())
+  amenityTitle       String
+  amenityDescription String
 
   listing Listing[]
 }
 
 model Reservation {
-  reservation_id    String   @id @default(uuid())
-  booking_date      DateTime @default(now())
-  check_in_date     DateTime
-  check_out_date    DateTime
-  tax               Int
-  total_cost        Int
-  num_of_guests     Int
-  is_cancelled      Boolean
-  refund_amount     Int?
-  cancellation_date DateTime
+  reservationId    String   @id @default(uuid())
+  bookingDate      DateTime @default(now())
+  checkInDate      DateTime
+  checkOutDate     DateTime
+  tax              Int
+  totalCost        Int
+  numOfGuests      Int
+  isCancelled      Boolean
+  refundAmount     Int?
+  cancellationDate DateTime
 
-  guest      Guest   @relation(fields: [guest_id], references: [guest_id])
-  guest_id   String
-  listing    Listing @relation(fields: [listing_id], references: [listing_id])
-  listing_id String
+  guest     Guest   @relation(fields: [guestId], references: [guestId])
+  guestId   String
+  listing   Listing @relation(fields: [listingId], references: [listingId])
+  listingId String
 }

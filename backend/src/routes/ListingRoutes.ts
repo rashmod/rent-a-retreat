@@ -3,7 +3,7 @@ import { prisma } from '../db/prisma';
 import {
 	deleteListing,
 	getAllListings,
-	getListing,
+	getListingDetails,
 	postListing,
 } from '../controllers/ListingController';
 
@@ -13,7 +13,7 @@ router.get('/', getAllListings);
 
 router.post('/', postListing);
 
-router.get('/:listingId', getListing);
+router.get('/:listingId', getListingDetails);
 
 router.delete('/:listingId', deleteListing);
 

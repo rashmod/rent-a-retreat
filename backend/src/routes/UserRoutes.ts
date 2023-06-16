@@ -5,7 +5,7 @@ import {
 	deleteHost,
 	deleteUser,
 	getAllUsers,
-	getUser,
+	getUserDetails,
 	postGuest,
 	postHost,
 	postUser,
@@ -14,7 +14,7 @@ import {
 const router = Router();
 
 router.get('/', getAllUsers);
-router.get('/:userId', getUser);
+router.get('/:userId', getUserDetails);
 
 router.post('/', postUser);
 router.post('/host', postHost);

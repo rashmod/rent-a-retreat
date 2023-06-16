@@ -5,6 +5,8 @@ import generateUser, { generateGuest, generateHost } from '../seedDB/user';
 // todo get all hosts
 // todo get all guests
 // todo error checking
+// todo add profile photo when posting user
+// todo delete all related listing to user
 
 export const getAllUsers = async (req: Request, res: Response) => {
 	try {
@@ -21,7 +23,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 	}
 };
 
-export const getUser = async (req: Request, res: Response) => {
+export const getUserDetails = async (req: Request, res: Response) => {
 	try {
 		const { userId } = req.params;
 		const user = await prisma.user.findFirst({
@@ -82,7 +84,7 @@ export const postHost = async (req: Request, res: Response) => {
 				totalRatingCount,
 				user: {
 					connect: {
-						userId: userId,
+						userId,
 					},
 				},
 			},

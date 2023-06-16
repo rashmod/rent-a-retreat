@@ -148,6 +148,7 @@ export const deleteUser = async (req: Request, res: Response) => {
 		const { userId } = req.params;
 
 		const user = await prisma.$transaction([
+			prisma.profilePhoto.delete({ where: { userId } }),
 			prisma.host.deleteMany({
 				where: {
 					userId,
@@ -165,7 +166,6 @@ export const deleteUser = async (req: Request, res: Response) => {
 			}),
 		]);
 
-		console.log(user);
 		res.status(200).json({ success: true });
 	} catch (error) {
 		console.error(error);

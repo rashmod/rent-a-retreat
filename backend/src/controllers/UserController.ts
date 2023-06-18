@@ -184,7 +184,7 @@ export const deleteHost = async (req: Request, res: Response) => {
 		const { hostId } = req.params;
 
 		const host = await prisma.$transaction([
-			prisma.address.deleteMany({ where: { ownerId: hostId } }),
+			prisma.address.deleteMany({ where: { hostId } }),
 			prisma.emergencyContact.deleteMany({ where: { hostId } }),
 
 			prisma.address.deleteMany({ where: { listing: { hostId } } }),

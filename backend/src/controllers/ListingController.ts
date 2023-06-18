@@ -121,7 +121,7 @@ export const deleteListing = async (req: Request, res: Response) => {
 		const { listingId } = req.params;
 
 		const listing = await prisma.$transaction([
-			prisma.address.deleteMany({ where: { ownerId: listingId } }),
+			prisma.address.deleteMany({ where: { listingId } }),
 			prisma.listingPhoto.deleteMany({ where: { listingId } }),
 			prisma.reservation.deleteMany({ where: { listingId } }),
 

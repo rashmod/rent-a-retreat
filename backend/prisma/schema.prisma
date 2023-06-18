@@ -81,9 +81,11 @@ model Address {
   state       String
   country     String
 
-  host    Host?    @relation(fields: [ownerId], references: [hostId], map: "hostAddress")
-  listing Listing? @relation(fields: [ownerId], references: [listingId], map: "listingAddress")
-  ownerId String   @unique
+  host   Host?   @relation(fields: [hostId], references: [hostId])
+  hostId String? @unique
+
+  listing   Listing? @relation(fields: [listingId], references: [listingId])
+  listingId String?  @unique
 }
 
 model Listing {

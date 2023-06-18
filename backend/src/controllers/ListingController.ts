@@ -52,7 +52,17 @@ export const getListingDetails = async (req: Request, res: Response) => {
 
 export const postListing = async (req: Request, res: Response) => {
 	try {
-		const { hostId, categoryId, amenityId, houseRuleId } = req.body;
+		const {
+			hostId,
+			categoryIds,
+			amenityIds,
+			houseRuleIds,
+		}: {
+			hostId: string;
+			categoryIds: string[];
+			amenityIds: string[];
+			houseRuleIds: string[];
+		} = req.body;
 		const {
 			listingName,
 			bedroomCount,
@@ -86,19 +96,15 @@ export const postListing = async (req: Request, res: Response) => {
 					},
 				},
 				category: {
-					connect: {
-						categoryId,
-					},
+					connect: categoryIds.map((categoryId) => ({ categoryId })),
 				},
 				amenity: {
-					connect: {
-						amenityId,
-					},
+					connect: amenityIds.map((amenityId) => ({ amenityId })),
 				},
 				houseRule: {
-					connect: {
+					connect: houseRuleIds.map((houseRuleId) => ({
 						houseRuleId,
-					},
+					})),
 				},
 			},
 		});
@@ -123,22 +129,6 @@ export const deleteListing = async (req: Request, res: Response) => {
 			prisma.address.deleteMany({
 				where: {
 					ownerId: listingId,
-				},
-			}),
-			prisma.listing.update({
-				where: {
-					listingId,
-				},
-				data: {
-					amenity: {
-						set: [],
-					},
-					category: {
-						set: [],
-					},
-					houseRule: {
-						set: [],
-					},
 				},
 			}),
 			prisma.listing.delete({

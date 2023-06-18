@@ -2,6 +2,9 @@ import { Request, Response } from 'express';
 import { prisma } from '../db/prisma';
 import generateAmenity from '../seedDB/amenity';
 
+// @desc Get all amenities
+// @route GET /api/amenities
+// @access Host
 export const getAllAmenities = async (req: Request, res: Response) => {
 	try {
 		const amenities = await prisma.amenity.findMany();
@@ -13,6 +16,9 @@ export const getAllAmenities = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Post amenity
+// @route POST /api/amenities
+// @access Admin
 export const postAmenity = async (req: Request, res: Response) => {
 	try {
 		const { amenityTitle, amenityDescription } = generateAmenity();
@@ -31,6 +37,9 @@ export const postAmenity = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Delete amenity
+// @route DELETE /api/amenities/:amenityId
+// @access Admin
 export const deleteAmenity = async (req: Request, res: Response) => {
 	try {
 		const { amenityId } = req.params;

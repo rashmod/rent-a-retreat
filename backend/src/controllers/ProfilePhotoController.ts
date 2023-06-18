@@ -2,6 +2,9 @@ import { Request, Response } from 'express';
 import { prisma } from '../db/prisma';
 import generateProfilePhoto from '../seedDB/profilePhoto';
 
+// @desc Post user profile photo
+// @route POST /api/user/:userId
+// @access User
 export const postProfilePhoto = async (req: Request, res: Response) => {
 	try {
 		const { userId } = req.params;
@@ -25,6 +28,9 @@ export const postProfilePhoto = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Delete profile photo
+// @route DELETE /api/user/:userId/:profilePhotoId
+// @access User
 export const deleteProfilePhoto = async (req: Request, res: Response) => {
 	try {
 		const { userId, profilePhotoId } = req.params;

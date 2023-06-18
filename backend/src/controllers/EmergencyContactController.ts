@@ -2,6 +2,9 @@ import { Request, Response } from 'express';
 import { prisma } from '../db/prisma';
 import generateEmergencyContact from '../seedDB/emergencyContact';
 
+// @desc Get all emergency contacts of host
+// @route GET /api/host/:hostId
+// @access Host
 export const getAllEmergencyContact = async (req: Request, res: Response) => {
 	try {
 		const { hostId } = req.params;
@@ -26,6 +29,9 @@ export const getAllEmergencyContact = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Post emergency contact of host
+// @route POST /api/host/:hostId
+// @access Host
 export const postEmergencyContact = async (req: Request, res: Response) => {
 	try {
 		const { hostId } = req.params;
@@ -59,6 +65,9 @@ export const postEmergencyContact = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Delete emergency contact of host
+// @route DELETE /api/host/:hostId/:emergencyContactId
+// @access Host
 export const deleteEmergencyContact = async (req: Request, res: Response) => {
 	try {
 		const { hostId, emergencyContactId } = req.params;

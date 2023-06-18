@@ -3,7 +3,11 @@ import { prisma } from '../db/prisma';
 import generateReservation from '../seedDB/reservation';
 
 // todo should a guest only able to place on reservation per listing?
+// todo should i make a new controller for reservation of single listing
 
+// @desc Get all reservation for guest
+// @route GET /api/reservation/:guestId
+// @access Guest
 export const getAllReservations = async (req: Request, res: Response) => {
 	try {
 		const { guestId } = req.params;
@@ -19,6 +23,9 @@ export const getAllReservations = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Post reservation
+// @route POST /api/reservation/:guestId/:listingId
+// @access Guest
 export const postReservation = async (req: Request, res: Response) => {
 	try {
 		const { guestId, listingId } = req.params;
@@ -52,6 +59,9 @@ export const postReservation = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Delete reservation
+// @route DELETE /api/reservation/:guestId/:listingId/:reservationId
+// @access Guest
 export const deleteReservation = async (req: Request, res: Response) => {
 	try {
 		const { guestId, listingId, reservationId } = req.params;

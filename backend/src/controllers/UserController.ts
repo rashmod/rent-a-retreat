@@ -8,6 +8,9 @@ import generateUser, { generateGuest, generateHost } from '../seedDB/user';
 // todo add profile photo when posting user
 // todo delete all related listing to user
 
+// @desc Get all users
+// @route GET /api/users
+// @access Admin
 export const getAllUsers = async (req: Request, res: Response) => {
 	try {
 		const users = await prisma.user.findMany();
@@ -23,6 +26,9 @@ export const getAllUsers = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Get user details
+// @route GET /api/users/:userId
+// @access User
 export const getUserDetails = async (req: Request, res: Response) => {
 	try {
 		const { userId } = req.params;
@@ -46,6 +52,9 @@ export const getUserDetails = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Post user
+// @route POST /api/users
+// @access Public
 export const postUser = async (req: Request, res: Response) => {
 	try {
 		const { firstName, lastName, gender, email, phoneNumber, dateOfBirth } =
@@ -73,6 +82,9 @@ export const postUser = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Post host
+// @route POST /api/users/host
+// @access User
 export const postHost = async (req: Request, res: Response) => {
 	try {
 		const { userId } = req.body;
@@ -108,6 +120,9 @@ export const postHost = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Post guest
+// @route POST /api/users/guest
+// @access User
 export const postGuest = async (req: Request, res: Response) => {
 	try {
 		const { userId } = req.body;
@@ -143,6 +158,9 @@ export const postGuest = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Delete user
+// @route DELETE /api/users/:userId
+// @access User
 export const deleteUser = async (req: Request, res: Response) => {
 	try {
 		const { userId } = req.params;
@@ -179,6 +197,9 @@ export const deleteUser = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Delete host
+// @route DELETE /api/users/host/:hostId
+// @access Host
 export const deleteHost = async (req: Request, res: Response) => {
 	try {
 		const { hostId } = req.params;
@@ -203,6 +224,9 @@ export const deleteHost = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Delete guest
+// @route DELETE /api/users/guest/:guestId
+// @access Guest
 export const deleteGuest = async (req: Request, res: Response) => {
 	try {
 		const { guestId } = req.params;

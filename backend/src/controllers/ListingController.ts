@@ -4,6 +4,9 @@ import generateListing from '../seedDB/listing';
 
 // todo add category amenity photo house rules when posting
 
+// @desc Get all listings
+// @route GET /api/listings
+// @access Public
 export const getAllListings = async (req: Request, res: Response) => {
 	try {
 		const listings = await prisma.listing.findMany();
@@ -15,6 +18,9 @@ export const getAllListings = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Get listing details
+// @route GET /api/listings/:listingId
+// @access Public
 export const getListingDetails = async (req: Request, res: Response) => {
 	try {
 		const { listingId } = req.params;
@@ -50,6 +56,9 @@ export const getListingDetails = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Post listing
+// @route POST /api/listings
+// @access Host
 export const postListing = async (req: Request, res: Response) => {
 	try {
 		const {
@@ -116,6 +125,9 @@ export const postListing = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Delete listing
+// @route DELETE /api/listings/:listingId
+// @access Host
 export const deleteListing = async (req: Request, res: Response) => {
 	try {
 		const { listingId } = req.params;

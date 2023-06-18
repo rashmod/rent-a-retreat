@@ -2,6 +2,9 @@ import { Request, Response } from 'express';
 import { prisma } from '../db/prisma';
 import generateCategory from '../seedDB/category';
 
+// @desc Get all categories
+// @route GET /api/categories
+// @access Host
 export const getAllCategories = async (req: Request, res: Response) => {
 	try {
 		const categories = await prisma.category.findMany();
@@ -13,6 +16,9 @@ export const getAllCategories = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Post categories
+// @route POST /api/categories
+// @access Admin
 export const postCategory = async (req: Request, res: Response) => {
 	try {
 		const { categoryTitle, categoryDescription } = generateCategory();
@@ -31,6 +37,9 @@ export const postCategory = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Delete categories
+// @route DELETE /api/categories/:categoryId
+// @access Admin
 export const deleteCategory = async (req: Request, res: Response) => {
 	try {
 		const { categoryId } = req.params;

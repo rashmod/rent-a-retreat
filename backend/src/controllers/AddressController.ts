@@ -17,6 +17,9 @@ interface IAddressData {
 	hostId?: string;
 }
 
+// @desc Post address
+// @route POST /api/address/:ownerId
+// @access Host
 export const postAddress = async (req: Request, res: Response) => {
 	try {
 		const { ownerId } = req.params;
@@ -67,6 +70,9 @@ export const postAddress = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Delete address
+// @route DELETE /api/address/:ownerId/:addressId
+// @access Host
 export const deleteAddress = async (req: Request, res: Response) => {
 	try {
 		const { ownerId, addressId } = req.params;

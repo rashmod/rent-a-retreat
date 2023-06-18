@@ -2,6 +2,9 @@ import { Request, Response } from 'express';
 import { prisma } from '../db/prisma';
 import generateHouseRule from '../seedDB/houseRule';
 
+// @desc Get all house rules
+// @route GET /api/houseRules
+// @access Host
 export const getAllHouseRule = async (req: Request, res: Response) => {
 	try {
 		const houseRules = await prisma.houseRule.findMany();
@@ -13,6 +16,9 @@ export const getAllHouseRule = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Post house rule
+// @route POST /api/houseRules
+// @access Admin
 export const postHouseRule = async (req: Request, res: Response) => {
 	try {
 		const { ruleTitle, ruleDescription } = generateHouseRule();
@@ -31,6 +37,9 @@ export const postHouseRule = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Delete house rule
+// @route DELETE /api/houseRules/:houseRuleId
+// @access Admin
 export const deleteHouseRule = async (req: Request, res: Response) => {
 	try {
 		const { houseRuleId } = req.params;

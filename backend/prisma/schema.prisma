@@ -150,8 +150,8 @@ model Amenity {
 }
 
 model Reservation {
-  reservationId    String   @id @default(uuid())
-  bookingDate      DateTime @default(now())
+  reservationId    String    @id @default(uuid())
+  bookingDate      DateTime  @default(now())
   checkInDate      DateTime
   checkOutDate     DateTime
   tax              Int
@@ -159,7 +159,7 @@ model Reservation {
   numOfGuests      Int
   isCancelled      Boolean
   refundAmount     Int?
-  cancellationDate DateTime
+  cancellationDate DateTime?
 
   guest     Guest   @relation(fields: [guestId], references: [guestId])
   guestId   String

@@ -148,22 +148,28 @@ export const deleteUser = async (req: Request, res: Response) => {
 		const { userId } = req.params;
 
 		const user = await prisma.$transaction([
-			prisma.profilePhoto.delete({ where: { userId } }),
-			prisma.host.deleteMany({
-				where: {
-					userId,
-				},
+			prisma.address.deleteMany({ where: { host: { userId } } }),
+			prisma.emergencyContact.deleteMany({ where: { host: { userId } } }),
+
+			prisma.address.deleteMany({
+				where: { listing: { host: { userId } } },
 			}),
-			prisma.guest.deleteMany({
-				where: {
-					userId,
-				},
+			prisma.listingPhoto.deleteMany({
+				where: { listing: { host: { userId } } },
 			}),
-			prisma.user.delete({
-				where: {
-					userId,
-				},
+			prisma.reservation.deleteMany({
+				where: { listing: { host: { userId } } },
 			}),
+			prisma.listing.deleteMany({ where: { host: { userId } } }),
+
+			prisma.host.deleteMany({ where: { userId } }),
+
+			prisma.reservation.deleteMany({ where: { guest: { userId } } }),
+			prisma.guest.deleteMany({ where: { userId } }),
+
+			prisma.profilePhoto.deleteMany({ where: { userId } }),
+
+			prisma.user.delete({ where: { userId } }),
 		]);
 
 		res.status(200).json({ success: true });
@@ -178,11 +184,16 @@ export const deleteHost = async (req: Request, res: Response) => {
 		const { hostId } = req.params;
 
 		const host = await prisma.$transaction([
-			prisma.host.delete({
-				where: {
-					hostId,
-				},
-			}),
+			prisma.address.deleteMany({ where: { ownerId: hostId } }),
+			prisma.emergencyContact.deleteMany({ where: { hostId } }),
+
+			prisma.address.deleteMany({ where: { listing: { hostId } } }),
+			prisma.listingPhoto.deleteMany({ where: { listing: { hostId } } }),
+			prisma.reservation.deleteMany({ where: { listing: { hostId } } }),
+
+			prisma.listing.deleteMany({ where: { hostId } }),
+
+			prisma.host.delete({ where: { hostId } }),
 		]);
 
 		res.status(200).json({ success: true });
@@ -197,11 +208,8 @@ export const deleteGuest = async (req: Request, res: Response) => {
 		const { guestId } = req.params;
 
 		const guest = await prisma.$transaction([
-			prisma.guest.delete({
-				where: {
-					guestId,
-				},
-			}),
+			prisma.reservation.deleteMany({ where: { guestId } }),
+			prisma.guest.delete({ where: { guestId } }),
 		]);
 
 		res.status(200).json({ success: true });

@@ -11,6 +11,7 @@ import HouseRuleRoutes from './routes/HouseRuleRoutes';
 import ListingPhotoRoutes from './routes/ListingPhotoRoutes';
 import ProfilePhotoRoutes from './routes/ProfilePhotoRoutes';
 import EmergencyContactRoutes from './routes/EmergencyContactRoutes';
+import AddressRoutes from './routes/AddressRoutes';
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use('/api/houseRules', HouseRuleRoutes);
 app.use('/api/listing', ListingPhotoRoutes);
 app.use('/api/user', ProfilePhotoRoutes);
 app.use('/api/host', EmergencyContactRoutes);
+app.use('/api/address', AddressRoutes);
 
 connectDB();
 

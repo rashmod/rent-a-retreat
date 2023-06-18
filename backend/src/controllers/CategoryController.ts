@@ -35,24 +35,11 @@ export const deleteCategory = async (req: Request, res: Response) => {
 	try {
 		const { categoryId } = req.params;
 
-		const category = await prisma.$transaction([
-			prisma.category.update({
-				where: {
-					categoryId,
-				},
-				data: {
-					listing: {
-						set: [],
-					},
-				},
-			}),
-
-			prisma.category.delete({
-				where: {
-					categoryId,
-				},
-			}),
-		]);
+		const category = await prisma.category.delete({
+			where: {
+				categoryId,
+			},
+		});
 
 		res.status(200).json(category);
 	} catch (error) {

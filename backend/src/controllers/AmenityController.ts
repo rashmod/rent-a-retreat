@@ -35,24 +35,11 @@ export const deleteAmenity = async (req: Request, res: Response) => {
 	try {
 		const { amenityId } = req.params;
 
-		const amenity = await prisma.$transaction([
-			prisma.amenity.update({
-				where: {
-					amenityId,
-				},
-				data: {
-					listing: {
-						set: [],
-					},
-				},
-			}),
-
-			prisma.amenity.delete({
-				where: {
-					amenityId,
-				},
-			}),
-		]);
+		const amenity = await prisma.amenity.delete({
+			where: {
+				amenityId,
+			},
+		});
 
 		res.status(200).json(amenity);
 	} catch (error) {

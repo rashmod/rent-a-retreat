@@ -35,24 +35,11 @@ export const deleteHouseRule = async (req: Request, res: Response) => {
 	try {
 		const { houseRuleId } = req.params;
 
-		const houseRule = await prisma.$transaction([
-			prisma.houseRule.update({
-				where: {
-					houseRuleId,
-				},
-				data: {
-					listing: {
-						set: [],
-					},
-				},
-			}),
-
-			prisma.houseRule.delete({
-				where: {
-					houseRuleId,
-				},
-			}),
-		]);
+		const houseRule = await prisma.houseRule.delete({
+			where: {
+				houseRuleId,
+			},
+		});
 
 		res.status(200).json(houseRule);
 	} catch (error) {

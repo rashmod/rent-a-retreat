@@ -1,0 +1,36 @@
+user
+  host
+    address
+    emergencyContact
+    listing
+      address
+      listingPhoto
+      reservation
+      categoryToListing
+      amenityToListing
+      houseRuleToListing
+  guest
+    reservation
+  profilePhoto
+
+host
+	address
+	emergencyContact
+	listing
+		address
+		listingPhoto
+		reservation
+		categoryToListing
+		amenityToListing
+		houseRuleToListing
+
+guest
+	reservation
+
+listing
+	address
+	listingPhoto
+	reservation
+	categoryToListing
+	amenityToListing
+	houseRuleToListing

@@ -10,6 +10,7 @@ import AmenityRoutes from './routes/AmenityRoutes';
 import HouseRuleRoutes from './routes/HouseRuleRoutes';
 import ListingPhotoRoutes from './routes/ListingPhotoRoutes';
 import ProfilePhotoRoutes from './routes/ProfilePhotoRoutes';
+import EmergencyContactRoutes from './routes/EmergencyContactRoutes';
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use('/api/amenities', AmenityRoutes);
 app.use('/api/houseRules', HouseRuleRoutes);
 app.use('/api/listing', ListingPhotoRoutes);
 app.use('/api/user', ProfilePhotoRoutes);
+app.use('/api/host', EmergencyContactRoutes);
 
 connectDB();
 

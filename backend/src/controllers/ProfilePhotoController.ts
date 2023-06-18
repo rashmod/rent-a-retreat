@@ -27,7 +27,7 @@ export const postProfilePhoto = async (req: Request, res: Response) => {
 
 export const deleteProfilePhoto = async (req: Request, res: Response) => {
 	try {
-		const { profilePhotoId } = req.params;
+		const { userId, profilePhotoId } = req.params;
 
 		const profilePhoto = await prisma.profilePhoto.delete({
 			where: {

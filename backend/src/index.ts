@@ -12,6 +12,7 @@ import ListingPhotoRoutes from './routes/ListingPhotoRoutes';
 import ProfilePhotoRoutes from './routes/ProfilePhotoRoutes';
 import EmergencyContactRoutes from './routes/EmergencyContactRoutes';
 import AddressRoutes from './routes/AddressRoutes';
+import ReservationRoutes from './routes/ReservationRoutes';
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use('/api/listing', ListingPhotoRoutes);
 app.use('/api/user', ProfilePhotoRoutes);
 app.use('/api/host', EmergencyContactRoutes);
 app.use('/api/address', AddressRoutes);
+app.use('/api/reservation', ReservationRoutes);
 
 connectDB();
 

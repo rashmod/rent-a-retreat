@@ -1,7 +1,18 @@
+import { Routes, Route } from 'react-router-dom';
+
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import About from './pages/About';
+
 function App() {
 	return (
-		<div className='h-screen bg-sky-800 flex justify-center items-center'>
-			<h1 className='text-9xl font-bold text-white'>Rent A Retreat</h1>
+		<div className='min-h-screen bg-primary flex flex-col items-center'>
+			<Navbar />
+			<Routes>
+				<Route path='/' element={<Home />} />
+				<Route path='/listing/:listingId' element={<Home />} />
+				<Route path='/landing' element={<About />} />
+			</Routes>
 		</div>
 	);
 }

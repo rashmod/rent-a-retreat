@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../db/prisma';
-import generateListing from '../seedDB/listing';
+import generateListing from '../seedDB/generators/listing';
 
 // todo add category amenity photo house rules when posting
 
@@ -66,11 +66,13 @@ export const postListing = async (req: Request, res: Response) => {
 			categoryIds,
 			amenityIds,
 			houseRuleIds,
+			listingPhoto,
 		}: {
 			hostId: string;
 			categoryIds: string[];
 			amenityIds: string[];
 			houseRuleIds: string[];
+			listingPhoto: { photoUrl: string; position: number }[];
 		} = req.body;
 		const {
 			listingName,
@@ -115,6 +117,18 @@ export const postListing = async (req: Request, res: Response) => {
 						houseRuleId,
 					})),
 				},
+				listingPhoto: {
+					create: listingPhoto.map((item) => ({
+						photoUrl: item.photoUrl,
+						position: item.position,
+					})),
+				},
+			},
+			include: {
+				category: true,
+				amenity: true,
+				houseRule: true,
+				listingPhoto: true,
 			},
 		});
 

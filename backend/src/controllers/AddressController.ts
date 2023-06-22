@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../db/prisma';
-import generateAddress from '../seedDB/address';
+import generateAddress from '../seedDB/generators/address';
 import { Prisma } from '@prisma/client';
 
 interface IAddressData {

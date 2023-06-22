@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../db/prisma';
-import generateHouseRule from '../seedDB/houseRule';
+import generateHouseRule from '../seedDB/generators/houseRule';
 
 // @desc Get all house rules
 // @route GET /api/houseRules

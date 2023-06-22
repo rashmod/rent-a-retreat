@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../db/prisma';
-import generateAmenity from '../seedDB/amenity';
+import generateAmenity from '../seedDB/generators/amenity';
 
 // @desc Get all amenities
 // @route GET /api/amenities

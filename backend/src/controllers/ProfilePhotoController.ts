@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../db/prisma';
-import generateProfilePhoto from '../seedDB/profilePhoto';
+import generateProfilePhoto from '../seedDB/generators/profilePhoto';
 
 // @desc Post user profile photo
 // @route POST /api/user/:userId

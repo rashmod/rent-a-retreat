@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
 import { prisma } from '../db/prisma';
-import generateUser, { generateGuest, generateHost } from '../seedDB/user';
+import generateUser, {
+	generateGuest,
+	generateHost,
+} from '../seedDB/generators/user';
 
 // todo get all hosts
 // todo get all guests

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../db/prisma';
-import generateListingPhoto from '../seedDB/listingPhoto';
+import generateListingPhoto from '../seedDB/generators/listingPhoto';
 
 // @desc Post listing photos
 // @route POST /api/listing/:listingId

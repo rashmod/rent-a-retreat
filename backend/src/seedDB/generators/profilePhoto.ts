@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 
 const generateProfilePhoto = () => {
-	const imgUrl = faker.image.urlPicsumPhotos({ height: 480, width: 640 });
+	const imgUrl = faker.image.avatarGitHub();
 
 	return { imgUrl };
 };

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../db/prisma';
-import generateReservation from '../seedDB/reservation';
+import generateReservation from '../seedDB/generators/reservation';
 
 // todo should a guest only able to place on reservation per listing?
 // todo should i make a new controller for reservation of single listing

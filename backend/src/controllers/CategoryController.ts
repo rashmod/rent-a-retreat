@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../db/prisma';
-import generateCategory from '../seedDB/category';
+import generateCategory from '../seedDB/generators/category';
 
 // @desc Get all categories
 // @route GET /api/categories

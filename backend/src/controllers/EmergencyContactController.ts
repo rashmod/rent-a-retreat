@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../db/prisma';
-import generateEmergencyContact from '../seedDB/emergencyContact';
+import generateEmergencyContact from '../seedDB/generators/emergencyContact';
 
 // @desc Get all emergency contacts of host
 // @route GET /api/host/:hostId

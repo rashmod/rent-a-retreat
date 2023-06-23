@@ -106,6 +106,9 @@ model Listing {
   latitude  Decimal
   longitude Decimal
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   address      Address?
   listingPhoto ListingPhoto[]
   houseRule    HouseRule[]

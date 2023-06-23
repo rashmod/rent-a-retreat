@@ -9,7 +9,9 @@ import generateListing from '../seedDB/generators/listing';
 // @access Public
 export const getAllListings = async (req: Request, res: Response) => {
 	try {
-		const listings = await prisma.listing.findMany();
+		const listings = await prisma.listing.findMany({
+			orderBy: { createdAt: 'desc' },
+		});
 
 		res.status(200).json(listings);
 	} catch (error) {

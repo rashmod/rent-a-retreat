@@ -10,6 +10,8 @@ import generateListing from '../seedDB/generators/listing';
 export const getAllListings = async (req: Request, res: Response) => {
 	try {
 		const listings = await prisma.listing.findMany({
+			include: { listingPhoto: { where: { position: 1 } } },
+			take: 10,
 			orderBy: { createdAt: 'desc' },
 		});
 

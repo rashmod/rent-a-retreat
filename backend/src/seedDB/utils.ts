@@ -52,7 +52,7 @@ export const seedListing = (
 		const listing: IListing = generateListing();
 		const address = generateAddress();
 		const listingPhotos: { photoUrl: string; position: number }[] =
-			generateArray(generateListingPhoto, randomNumInRange(5));
+			generateArray(generateListingPhoto, randomNumInRange(5, 1));
 		const categoryArray = getRandomElements(
 			categories,
 			randomNumInRange(10, 1)

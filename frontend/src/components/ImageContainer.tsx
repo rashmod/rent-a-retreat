@@ -1,12 +1,4 @@
-interface IPhoto {
-	listingPhotoId: string;
-	photoUrl: string;
-	position: number;
-	listingId: string;
-}
-interface IPhotoArray {
-	photoArray: IPhoto[];
-}
+import { IPhotoArray } from '../types/type';
 
 const gridCol = [
 	'col-span-2 row-span-2 rounded-l-2xl',
@@ -21,7 +13,8 @@ const ImageContainer = ({ photoArray }: IPhotoArray) => {
 		<div className='w-full grid grid-cols-4 grid-rows-2 gap-2 max-h-96 mb-3 relative'>
 			{photoArray.map((photo, i) => (
 				<img
-					className={`h-full object-cover ${gridCol[i]}`}
+					key={photo.listingPhotoId}
+					className={`h-full w-full object-cover ${gridCol[i]}`}
 					src={photo.photoUrl}
 				/>
 			))}

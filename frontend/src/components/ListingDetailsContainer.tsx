@@ -1,14 +1,5 @@
 import { Link } from 'react-router-dom';
-
-interface IListingDetail {
-	user: { firstName: string; lastName: string };
-	bedroomCount: number;
-	bathroomCount: number;
-	maxGuest: number;
-	amenity: { amenityTitle: string }[];
-	category: { categoryTitle: string }[];
-	houseRule: { ruleTitle: string }[];
-}
+import { IListingDetail } from '../types/type';
 
 const ListingDetailsContainer = ({
 	user,
@@ -36,21 +27,21 @@ const ListingDetailsContainer = ({
 			</div>
 			<div className='grid grid-cols-3'>
 				<div>
-					amenity
+					<span className='font-medium'>Amenities</span>
 					{amenity.map((item) => (
-						<div>{item.amenityTitle}</div>
+						<div key={item.amenityId}>{item.amenityTitle}</div>
 					))}
 				</div>
 				<div>
-					category
+					<span className='font-medium'>Categories</span>
 					{category.map((item) => (
-						<div>{item.categoryTitle}</div>
+						<div key={item.categoryId}>{item.categoryTitle}</div>
 					))}
 				</div>
 				<div>
-					houseRule
+					<span className='font-medium'>House Rules</span>
 					{houseRule.map((item) => (
-						<div>{item.ruleTitle}</div>
+						<div key={item.houseRuleId}>{item.ruleTitle}</div>
 					))}
 				</div>
 			</div>

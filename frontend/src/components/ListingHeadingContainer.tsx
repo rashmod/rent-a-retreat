@@ -1,11 +1,4 @@
-import React from 'react';
-
-interface IListingHeading {
-	listingName: string;
-	avgRating: number;
-	totalRatingCount: number;
-	address: { city: string; state: string; country: string };
-}
+import { IListingHeading } from '../types/type';
 
 const ListingHeadingContainer = ({
 	listingName,
@@ -23,9 +16,9 @@ const ListingHeadingContainer = ({
 					<span className='text-lg mr-1 leading-none text-orange-400'>
 						&#9733;
 					</span>
-					{avgRating + 4.2}
+					{avgRating}
 					<span className='mx-1.5 text-lg leading-none'>&bull;</span>
-					{totalRatingCount + 10} Reviews
+					{totalRatingCount} Reviews
 				</div>
 				<div className='flex gap-1 h-max'>
 					{/* <div>unitNumber {address.unitNumber}</div> */}

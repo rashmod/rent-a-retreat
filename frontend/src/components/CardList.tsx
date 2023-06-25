@@ -1,26 +1,22 @@
-import Card from './Card';
-const obj = {
-	listingId: 'bc5631d7-c8f6-4c88-bbee-f90d856004ca',
-	listingName: 'Aut sed reprehenderit.',
-	bedroomCount: 0,
-	bathroomCount: 0,
-	pricePerNight: 0,
-	avgRating: 0,
-	totalRatingCount: 0,
-	listingPhoto: [
-		{
-			photoUrl:
-				'https://images.unsplash.com/source-404?fit=crop&fm=jpg&h=800&q=60&w=1200',
-		},
-	],
-};
+import { useQuery } from '@tanstack/react-query';
 
-const arr = new Array(10).fill(obj);
+import Card from './Card';
+import { ICardProps } from '../types/type';
+import { getListings } from '../api/listings';
 
 const CardList = () => {
+	const { data, isLoading, isError } = useQuery({
+		queryKey: ['listings'],
+		queryFn: getListings,
+	});
+
+	if (isLoading) return <h1>Loading...</h1>;
+
+	if (isError) return <h1>Error</h1>;
+
 	return (
 		<div className='w-11/12 mx-auto grid grid-cols-4 gap-7'>
-			{arr.map((listing) => (
+			{data.map((listing: ICardProps) => (
 				<Card key={listing.listingId} {...listing} />
 			))}
 		</div>

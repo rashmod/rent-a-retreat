@@ -1,15 +1,6 @@
 import { Link } from 'react-router-dom';
-
-interface ICardProps {
-	listingId: string;
-	listingName: string;
-	bedroomCount: number;
-	bathroomCount: number;
-	pricePerNight: number;
-	avgRating: number;
-	totalRatingCount: number;
-	listingPhoto?: [{ photoUrl: string }];
-}
+import { ICardProps } from '../types/type';
+import { useState } from 'react';
 
 const Card = ({
 	listingId,
@@ -21,19 +12,34 @@ const Card = ({
 	totalRatingCount,
 	listingPhoto,
 }: ICardProps) => {
+	const [imageIsLoaded, setImageIsLoaded] = useState(false);
+
 	return (
 		<Link
 			to={`/listing/${listingId}`}
 			className='bg-white p-4 rounded-3xl text-sm font-medium block'>
 			<div className='relative'>
+				{listingPhoto && listingPhoto.length === 0 && (
+					<div className='mb-4 aspect-square rounded-xl bg-black text-my-primary flex justify-center items-center'>
+						No Image
+					</div>
+				)}
 				{listingPhoto && listingPhoto.length > 0 && (
 					<img
-						className='mb-4 aspect-square object-cover rounded-xl'
+						onLoad={() => setImageIsLoaded(true)}
+						className={`${
+							imageIsLoaded && 'mb-4'
+						} aspect-square object-cover rounded-xl`}
 						src={listingPhoto[0].photoUrl}
 						alt=''
 					/>
 				)}
-				<div className='text-xs text-white top-3 left-3 py-1 px-3 rounded-full absolute bg-black backdrop-filter backdrop-blur-lg bg-opacity-30 border border-gray-200 border-none'>
+				{listingPhoto && listingPhoto.length > 0 && !imageIsLoaded && (
+					<div className='mb-4 aspect-square rounded-xl bg-black text-my-primary flex justify-center items-center'>
+						Loading...
+					</div>
+				)}
+				<div className='text-xs text-white top-3 left-3 py-1 px-3 rounded-full absolute bg-black backdrop-filter backdrop-blur-lg bg-opacity-50 border border-gray-200 border-none'>
 					city, country
 				</div>
 			</div>
@@ -43,12 +49,12 @@ const Card = ({
 				</div>
 				<div className='whitespace-nowrap'>
 					<span className='text-lg text-orange-400'>&#9733;</span>{' '}
-					{avgRating + 4.2} ({totalRatingCount + 10})
+					{avgRating.toFixed(2)} ({totalRatingCount})
 				</div>
 			</div>
 			<div className='mb-0.5 flex justify-between'>
-				<div>{pricePerNight + 1420} night</div>
-				<div>{pricePerNight + 1420 * 5} total</div>
+				<div>{pricePerNight} night</div>
+				<div>{pricePerNight} total</div>
 			</div>
 			<div className='flex justify-between'>
 				<div>bedroom: {bedroomCount}</div>

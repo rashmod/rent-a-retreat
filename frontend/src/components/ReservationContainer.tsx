@@ -1,12 +1,5 @@
+import { IReservationData } from '../types/type';
 import { DatePickerWithRange } from './ui/DatePickerWithRange';
-
-interface IReservationData {
-	pricePerNight: number;
-	cleaningFee: number;
-	isRefundable: boolean;
-	percentRefundable: number | null;
-	daysBeforeCancellation: number | null;
-}
 
 const ReservationContainer = ({
 	pricePerNight,

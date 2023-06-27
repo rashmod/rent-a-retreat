@@ -9,10 +9,10 @@ const ReservationContainer = ({
 	daysBeforeCancellation,
 }: IReservationData) => {
 	return (
-		<div className='col-start-5 col-span-2 p-5 [&>*]:mb-4 border-2 border-my-secondary/30 rounded-lg'>
+		<div className='col-start-5 col-span-2 p-5 [&>*]:mb-4 border-2 border-my-secondary-300 rounded-lg'>
 			<div className='text-2xl'>{pricePerNight + 1420} night</div>
 			<DatePickerWithRange />
-			<button className='w-full bg-my-accent text-my-primary py-3 rounded-lg hover:bg-my-accent/80 transition'>
+			<button className='w-full bg-my-accent text-my-primary-500 py-3 rounded-lg hover:bg-my-accent/80 transition'>
 				Reserve Now
 			</button>
 			<div className='grid grid-cols-3 gap-1'>

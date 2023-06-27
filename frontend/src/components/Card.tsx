@@ -20,7 +20,7 @@ const Card = ({
 			className='bg-white p-4 rounded-3xl text-sm font-medium block'>
 			<div className='relative'>
 				{listingPhoto && listingPhoto.length === 0 && (
-					<div className='mb-4 aspect-square rounded-xl bg-black text-my-primary flex justify-center items-center'>
+					<div className='mb-4 aspect-square rounded-xl bg-black text-my-primary-500 flex justify-center items-center'>
 						No Image
 					</div>
 				)}
@@ -35,7 +35,7 @@ const Card = ({
 					/>
 				)}
 				{listingPhoto && listingPhoto.length > 0 && !imageIsLoaded && (
-					<div className='mb-4 aspect-square rounded-xl bg-black text-my-primary flex justify-center items-center'>
+					<div className='mb-4 aspect-square rounded-xl bg-black text-my-primary-500 flex justify-center items-center'>
 						Loading...
 					</div>
 				)}
@@ -59,6 +59,14 @@ const Card = ({
 			<div className='flex justify-between'>
 				<div>bedroom: {bedroomCount}</div>
 				<div>bathroom: {bathroomCount}</div>
+			</div>
+			<div className='flex justify-between mt-4'>
+				<button className='rounded-lg bg-my-secondary-200 px-3 py-1.5 hover:bg-my-secondary-700 hover:text-my-primary-500 transition'>
+					Update
+				</button>
+				<button className='rounded-lg bg-my-secondary-200 px-3 py-1.5 hover:bg-my-secondary-700 hover:text-my-primary-500 transition'>
+					Delete
+				</button>
 			</div>
 		</Link>
 	);

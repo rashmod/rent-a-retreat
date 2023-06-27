@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { IListingHeading } from '../types/type';
 
 const ListingHeadingContainer = ({
@@ -5,11 +6,22 @@ const ListingHeadingContainer = ({
 	avgRating,
 	totalRatingCount,
 	address,
+	listingId,
 }: IListingHeading) => {
 	return (
 		<>
-			<div className='text-4xl font-medium mt-5 mb-0.5'>
-				{listingName}
+			<div className='flex items-center justify-between font-medium mt-5 mb-0.5'>
+				<span className='text-4xl'>{listingName}</span>
+				<div className='flex gap-4'>
+					<button className='rounded-lg bg-my-secondary-200 px-3 py-1.5 hover:bg-my-secondary-700 hover:text-my-primary-500 transition'>
+						<Link to={`/listing/${listingId}/edit`}>
+							Edit Listing
+						</Link>
+					</button>
+					<button className='rounded-lg bg-my-secondary-200 px-3 py-1.5 hover:bg-my-secondary-700 hover:text-my-primary-500 transition'>
+						Delete Listing
+					</button>
+				</div>
 			</div>
 			<div className='flex items-end gap-5 text-sm mb-3'>
 				<div className=''>

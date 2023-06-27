@@ -83,12 +83,12 @@ export function DatePickerWithRange({
 						id='date'
 						variant={'outline'}
 						className={cn(
-							'w-full h-auto border-2 border-my-secondary justify-start text-left font-normal',
+							'w-full h-auto border-2 border-my-secondary-500 justify-start text-left font-normal',
 							!date && 'text-muted-foreground'
 						)}>
 						{date?.from ? (
 							date.to ? (
-								<div className='grid grid-cols-2 w-full divide-x-2 divide-my-secondary'>
+								<div className='grid grid-cols-2 w-full divide-x-2 divide-my-secondary-500'>
 									<div className='flex flex-col'>
 										<span className='text-xs'>
 											Check In Date

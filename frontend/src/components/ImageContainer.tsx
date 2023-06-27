@@ -18,7 +18,7 @@ const ImageContainer = ({ photoArray }: IPhotoArray) => {
 					src={photo.photoUrl}
 				/>
 			))}
-			<button className='absolute bottom-4 right-4 bg-my-primary px-2 py-1 rounded-full text-secondary text-xs backdrop-filter backdrop-blur-lg bg-opacity-60'>
+			<button className='absolute bottom-4 right-4 bg-my-primary-500 px-2 py-1 rounded-full text-secondary text-xs backdrop-filter backdrop-blur-lg bg-opacity-60'>
 				See All Photos
 			</button>
 		</div>

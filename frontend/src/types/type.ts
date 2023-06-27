@@ -46,6 +46,7 @@ export interface IListingHeading {
 	avgRating: number;
 	totalRatingCount: number;
 	address: { city: string; state: string; country: string };
+	listingId?: string;
 }
 
 export interface IReservationData {

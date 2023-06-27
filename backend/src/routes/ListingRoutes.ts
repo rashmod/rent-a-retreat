@@ -5,6 +5,7 @@ import {
 	getAllListings,
 	getListingDetails,
 	postListing,
+	updateListing,
 } from '../controllers/ListingController';
 
 const router = Router();
@@ -16,5 +17,7 @@ router.post('/', postListing);
 router.get('/:listingId', getListingDetails);
 
 router.delete('/:listingId', deleteListing);
+
+router.put('/:listingId', updateListing);
 
 export default router;

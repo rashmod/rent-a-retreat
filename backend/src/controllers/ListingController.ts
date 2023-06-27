@@ -143,6 +143,80 @@ export const postListing = async (req: Request, res: Response) => {
 	}
 };
 
+// @desc Update listing
+// @route PUT /api/listings/:listingId
+// @access Host
+export const updateListing = async (req: Request, res: Response) => {
+	try {
+		const {
+			hostId,
+			categoryIds,
+			amenityIds,
+			houseRuleIds,
+			listingPhoto,
+		}: {
+			hostId: string;
+			categoryIds: string[];
+			amenityIds: string[];
+			houseRuleIds: string[];
+			listingPhoto: { photoUrl: string; position: number }[];
+		} = req.body;
+
+		const { listingId } = req.params;
+
+		const {
+			listingName,
+			bedroomCount,
+			bathroomCount,
+			pricePerNight,
+			cleaningFee,
+			maxGuest,
+			avgRating,
+			totalRatingCount,
+			latitude,
+			longitude,
+			isRefundable,
+		} = generateListing();
+		const body = req.body;
+
+		const address = await prisma.address.findUnique({
+			where: { listingId },
+		});
+		const listingPhotos = await prisma.listingPhoto.findMany({
+			where: { listingId },
+		});
+		const reservations = await prisma.reservation.findMany({
+			where: { listingId },
+		});
+
+		const listing = await prisma.listing.update({
+			where: { listingId },
+			data: {
+				listingName,
+				// ...(address
+				// 	? {
+				// 			address: {
+				// 				update: address,
+				// 			},
+				// 	  }
+				// 	: {}),
+			},
+			include: {
+				category: true,
+				amenity: true,
+				houseRule: true,
+				listingPhoto: true,
+				address: true,
+			},
+		});
+
+		res.status(200).json(listing);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Failed to update listing' });
+	}
+};
+
 // @desc Delete listing
 // @route DELETE /api/listings/:listingId
 // @access Host

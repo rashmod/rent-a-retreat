@@ -28,12 +28,13 @@ const Details = () => {
 	}
 
 	return (
-		<section className='w-11/12 pb-10'>
+		<section className='pb-10'>
 			<ListingHeadingContainer
 				listingName={data.listingName}
 				avgRating={data.avgRating}
 				totalRatingCount={data.totalRatingCount}
 				address={data.address}
+				listingId={params.listingId ? params.listingId : undefined}
 			/>
 			<ImageContainer photoArray={data.listingPhoto} />
 

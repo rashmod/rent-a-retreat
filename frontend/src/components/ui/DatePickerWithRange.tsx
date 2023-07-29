@@ -27,7 +27,7 @@
 // 							'w-[300px] justify-start text-left font-normal',
 // 							!date && 'text-muted-foreground'
 // 						)}>
-// 						<CalendarIcon className='mr-2 h-4 w-4' />
+// 						<CalendarIcon className='w-4 h-4 mr-2' />
 // 						{date?.from ? (
 // 							date.to ? (
 // 								<>
@@ -83,25 +83,25 @@ export function DatePickerWithRange({
 						id='date'
 						variant={'outline'}
 						className={cn(
-							'w-full h-auto border-2 border-my-secondary-500 justify-start text-left font-normal',
+							'w-full h-auto justify-start text-left font-normal rounded-xl bg-white text-black py-1.5 px-5',
 							!date && 'text-muted-foreground'
 						)}>
 						{date?.from ? (
 							date.to ? (
-								<div className='grid grid-cols-2 w-full divide-x-2 divide-my-secondary-500'>
-									<div className='flex flex-col'>
-										<span className='text-xs'>
+								<div className='grid w-full grid-cols-2'>
+									<div className='flex text-lg'>
+										{/* <span className='text-xs'>
 											Check In Date
-										</span>
-										{/* <CalendarIcon className='h-4 w-4' /> */}
+										</span> */}
+										{/* <CalendarIcon className='w-4 h-4' /> */}
 										<span>
 											{format(date.from, 'LLL dd, y')}
 										</span>
 									</div>
-									<div className='flex flex-col pl-4'>
-										<span className='text-xs'>
+									<div className='flex justify-end text-lg'>
+										{/* <span className='text-xs'>
 											Check Out Date
-										</span>
+										</span> */}
 										<span>
 											{format(date.to, 'LLL dd, y')}
 										</span>

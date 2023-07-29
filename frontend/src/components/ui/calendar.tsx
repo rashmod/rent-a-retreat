@@ -34,27 +34,27 @@ function Calendar({
 				table: 'w-full border-collapse space-y-1',
 				head_row: 'flex',
 				head_cell:
-					'text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]',
+					'text-my-primary-300 rounded-md w-9 font-normal text-[0.8rem]',
 				row: 'flex w-full mt-2',
-				cell: 'text-center text-sm p-0 relative [&:has([aria-selected])]:bg-my-primary-muted-500 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20',
+				cell: 'text-center text-sm p-0 relative [&:has([aria-selected])]:bg-my-primary-100 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20',
 				day: cn(
 					buttonVariants({ variant: 'ghost' }),
 					'h-9 w-9 p-0 font-normal opacity-70 aria-selected:opacity-100'
 				),
 				day_selected:
-					'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground',
-				day_today: 'bg-accent text-accent-foreground',
-				day_outside: 'text-muted-foreground opacity-50',
-				day_disabled: 'text-muted-foreground opacity-50',
+					'bg-my-primary-500 text-white hover:bg-my-primary-500 hover:text-white focus:bg-my-primary-500 focus:text-white',
+				day_today: 'bg-my-accent-200 text-black',
+				day_outside: 'text-my-primary-300 opacity-50',
+				day_disabled: 'text-my-primary-300 opacity-50',
 				day_range_middle:
-					'aria-selected:bg-my-primary-muted-500 aria-selected:text-accent-foreground',
+					'aria-selected:bg-my-primary-100 aria-selected:text-black',
 				day_hidden: 'invisible',
 				...classNames,
 			}}
 			components={{
-				IconLeft: ({ ...props }) => <ChevronLeft className='h-4 w-4' />,
+				IconLeft: ({ ...props }) => <ChevronLeft className='w-4 h-4' />,
 				IconRight: ({ ...props }) => (
-					<ChevronRight className='h-4 w-4' />
+					<ChevronRight className='w-4 h-4' />
 				),
 			}}
 			{...props}

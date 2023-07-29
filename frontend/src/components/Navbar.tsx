@@ -2,12 +2,12 @@ import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
 	return (
-		<nav className='mb-5 w-full sticky top-0 z-50 bg-my-primary-500 border-b border-secondary shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-50'>
-			<div className='py-3 w-11/12 m-auto flex justify-between items-center font-semibold'>
-				<NavLink to='/' className='font-bold text-2xl'>
+		<nav className='sticky top-0 z-40 w-full bg-opacity-100 bg-my-secondary-II-900 backdrop-filter backdrop-blur-lg'>
+			<div className='flex items-center justify-between w-10/12 py-3 m-auto text-white'>
+				<NavLink to='/' className='text-2xl font-semibold'>
 					RAR
 				</NavLink>
-				<ul className='flex justify-between gap-5'>
+				<ul className='flex justify-between gap-5 text-lg'>
 					<li>
 						<NavLink to='/'>Home</NavLink>
 					</li>
@@ -18,12 +18,16 @@ const Navbar = () => {
 						<NavLink to='/myListings'>My Listings</NavLink>
 					</li>
 					<li>
+						<NavLink to='/myReservations'>My Reservations</NavLink>
+					</li>
+					<li>
 						<NavLink to='/me'>Profile</NavLink>
 					</li>
 					<li>
 						<NavLink
 							to='/login'
-							className='px-3 py-2 rounded-full bg-my-secondary-500 text-my-primary-500 font-normal'>
+							// className='px-3 py-2 text-white rounded-full bg-my-accent-500'
+						>
 							Sign In
 						</NavLink>
 					</li>

@@ -10,6 +10,7 @@ import AddListing from './pages/AddListing';
 import Login from './pages/Login';
 import User from './pages/User';
 import Footer from './components/Footer';
+import MyReservations from './pages/MyReservations';
 import ImageModal from './pages/ImageModal';
 
 function App() {
@@ -26,7 +27,10 @@ function App() {
 					/>
 					<Route path='/landing' element={<About />} />
 					<Route path='/myListings' element={<MyListing />} />
-
+					<Route
+						path='/myReservations'
+						element={<MyReservations />}
+					/>
 					<Route path='/addListing' element={<AddListing />} />
 					<Route
 						path='/listing/:listingId/edit'

@@ -17,10 +17,10 @@ const Card = ({
 	return (
 		<Link
 			to={`/listing/${listingId}`}
-			className='bg-white p-4 rounded-3xl text-sm font-medium block'>
+			className='p-3 text-sm font-medium text-black transition duration-300 bg-white rounded-xl hover:-translate-y-0.5 hover:drop-shadow-xl'>
 			<div className='relative'>
 				{listingPhoto && listingPhoto.length === 0 && (
-					<div className='mb-4 aspect-square rounded-xl bg-black text-my-primary-500 flex justify-center items-center'>
+					<div className='flex items-center justify-center mb-4 bg-black rounded-md aspect-square text-my-primary-500'>
 						No Image
 					</div>
 				)}
@@ -28,25 +28,23 @@ const Card = ({
 					<img
 						onLoad={() => setImageIsLoaded(true)}
 						className={`${
-							imageIsLoaded && 'mb-4'
-						} aspect-square object-cover rounded-xl`}
+							imageIsLoaded && 'mb-3'
+						} aspect-square object-cover rounded-md`}
 						src={listingPhoto[0].photoUrl}
 						alt=''
 					/>
 				)}
 				{listingPhoto && listingPhoto.length > 0 && !imageIsLoaded && (
-					<div className='mb-4 aspect-square rounded-xl bg-black text-my-primary-500 flex justify-center items-center'>
+					<div className='flex items-center justify-center mb-4 bg-black aspect-square rounded-xl text-my-primary-500'>
 						Loading...
 					</div>
 				)}
-				<div className='text-xs text-white top-3 left-3 py-1 px-3 rounded-full absolute bg-black backdrop-filter backdrop-blur-lg bg-opacity-50 border border-gray-200 border-none'>
+				<div className='absolute px-2 py-1 text-xs text-white bg-black bg-opacity-50 border border-gray-200 border-none rounded-full top-3 left-3 backdrop-filter backdrop-blur-lg'>
 					city, country
 				</div>
 			</div>
-			<div className='flex justify-between mb-1 items-center'>
-				<div className='font-bold truncate text-base'>
-					{listingName}
-				</div>
+			<div className='flex items-center justify-between mb-1'>
+				<div className='text-lg truncate'>{listingName}</div>
 				<div className='whitespace-nowrap'>
 					<span className='text-lg text-orange-400'>&#9733;</span>{' '}
 					{avgRating.toFixed(2)} ({totalRatingCount})
@@ -61,10 +59,11 @@ const Card = ({
 				<div>bathroom: {bathroomCount}</div>
 			</div>
 			<div className='flex justify-between mt-4'>
-				<button className='rounded-lg bg-my-secondary-200 px-3 py-1.5 hover:bg-my-secondary-700 hover:text-my-primary-500 transition'>
+				{/* todo colors to be decided */}
+				<button className='rounded-lg border-2 border-my-secondary-I-500 px-3 py-1.5 transition hover:bg-my-secondary-I-500 hover:text-white'>
 					Update
 				</button>
-				<button className='rounded-lg bg-my-secondary-200 px-3 py-1.5 hover:bg-my-secondary-700 hover:text-my-primary-500 transition'>
+				<button className='rounded-lg border-2 border-red-500 px-3 py-1.5 hover:bg-red-500 hover:text-white transition'>
 					Delete
 				</button>
 			</div>

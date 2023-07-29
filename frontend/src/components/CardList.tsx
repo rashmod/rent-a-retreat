@@ -15,7 +15,7 @@ const CardList = () => {
 	if (isError) return <h1>Error</h1>;
 
 	return (
-		<div className='mx-auto grid grid-cols-4 gap-7'>
+		<div className='grid grid-cols-4 gap-5 mx-auto'>
 			{data.map((listing: ICardProps) => (
 				<Card key={listing.listingId} {...listing} />
 			))}

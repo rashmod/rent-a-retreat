@@ -9,17 +9,23 @@ import EditListing from './pages/EditListing';
 import AddListing from './pages/AddListing';
 import Login from './pages/Login';
 import User from './pages/User';
+import ImageModal from './pages/ImageModal';
 
 function App() {
 	return (
-		<div className='min-h-screen bg-my-primary-600 flex flex-col items-center'>
+		<div className='flex flex-col items-center min-h-screen bg-my-primary-100'>
 			<Navbar />
-			<div className='w-11/12 my-10'>
+			<div className='w-10/12'>
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/listing/:listingId' element={<Details />} />
+					<Route
+						path='/listing/:listingId/:photoId'
+						element={<ImageModal />}
+					/>
 					<Route path='/landing' element={<About />} />
 					<Route path='/myListings' element={<MyListing />} />
+
 					<Route path='/addListing' element={<AddListing />} />
 					<Route
 						path='/listing/:listingId/edit'

@@ -12,7 +12,8 @@ const ListingHeadingContainer = ({
 	return (
 		<div className='mb-4'>
 			<div className='flex items-center justify-between font-medium mb-0.5 relative'>
-				<span className='text-5xl'>{listingName}</span>
+				{/* change width when not able to edit or delete */}
+				<h1 className='w-11/12 text-5xl'>{listingName}</h1>
 				<div className='absolute top-0 right-0 flex gap-4'>
 					<button className='rounded-lg bg-my-primary-900 px-3 py-1.5 hover:bg-my-secondary-I-500 text-white transition'>
 						<Link to={`/listing/${listingId}/edit`}>

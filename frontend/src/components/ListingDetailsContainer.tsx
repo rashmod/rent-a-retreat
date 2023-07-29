@@ -1,9 +1,52 @@
 import { Link } from 'react-router-dom';
-import { IListingDetail } from '../types/type';
+import {
+	IAmenity,
+	ICategory,
+	IHouseRule,
+	IListingDetail,
+	IModalValues,
+	TModalTitle,
+} from '../types/type';
 import { ChevronsDown } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import ModalContainer from './ModalContainer';
 import KnowMoreModal from './KnowMoreModal';
+
+type TModalType = IAmenity | ICategory | IHouseRule;
+
+interface IOutputItem {
+	id: string;
+	title: string;
+	description: string;
+}
+
+const changeToValid = (arr: TModalType[]): IOutputItem[] => {
+	const changedArr: IOutputItem[] = arr.map((item) => {
+		let id, title, description;
+
+		if ('amenityId' in item) {
+			id = item.amenityId;
+			title = item.amenityTitle;
+			description = item.amenityDescription;
+		} else if ('categoryId' in item) {
+			id = item.categoryId;
+			title = item.categoryTitle;
+			description = item.categoryDescription;
+		} else if ('houseRuleId' in item) {
+			id = item.houseRuleId;
+			title = item.ruleTitle;
+			description = item.ruleDescription;
+		} else {
+			id = '';
+			title = '';
+			description = '';
+		}
+
+		return { id, title, description };
+	});
+
+	return changedArr;
+};
 
 const ListingDetailsContainer = ({
 	user,
@@ -15,24 +58,38 @@ const ListingDetailsContainer = ({
 	houseRule,
 }: IListingDetail) => {
 	const [showModal, setShowModal] = useState(false);
+	const [modalContent, setModalContent] = useState<IModalValues>({
+		title: '',
+		content: [],
+	});
 
 	useEffect(() => {
 		if (showModal) document.body.style.overflow = 'hidden';
 		if (!showModal) document.body.style.overflow = 'unset';
 	}, [showModal]);
 
-	const displayDetails = () => setShowModal((prev) => !prev);
+	const closeModal = () => setShowModal(false);
+	const openModal = () => setShowModal(true);
+
+	const modalHandler = (title: TModalTitle, variant: TModalType[]) => {
+		const content = changeToValid(variant);
+		openModal();
+		setModalContent({ title: title, content });
+	};
 
 	return (
 		<>
 			{showModal && (
-				<ModalContainer>
-					<KnowMoreModal closeModal={displayDetails} />
+				<ModalContainer closeModal={closeModal}>
+					<KnowMoreModal
+						closeModal={closeModal}
+						content={modalContent}
+					/>
 				</ModalContainer>
 			)}
 			<div className='col-span-12 text-sm'>
 				<div className='flex text-3xl font-medium'>
-					Hosted by
+					<span className='opacity-70'>Hosted by</span>
 					<Link to='/' className='ml-1'>
 						{user.firstName} {user.lastName}
 					</Link>
@@ -47,7 +104,7 @@ const ListingDetailsContainer = ({
 			</div>
 
 			<div className='col-span-5 text-sm'>
-				<div className='mt-5'>
+				<div>
 					<span className='text-lg font-medium'>Amenities</span>
 					<ul className='grid grid-cols-4 gap-x-5'>
 						{amenity.slice(0, 8).map((item) => (
@@ -57,7 +114,7 @@ const ListingDetailsContainer = ({
 						))}
 					</ul>
 					<div
-						onClick={displayDetails}
+						onClick={() => modalHandler('Amenities', amenity)}
 						className='flex items-center justify-center mt-3 text-xs text-center transition cursor-pointer opacity-70 hover:opacity-100 hover:scale-110'>
 						<ChevronsDown height={16} />
 						<span>Know more</span>
@@ -73,7 +130,7 @@ const ListingDetailsContainer = ({
 						))}
 					</ul>
 					<div
-						onClick={displayDetails}
+						onClick={() => modalHandler('Categories', category)}
 						className='flex items-center justify-center mt-3 text-xs text-center transition cursor-pointer opacity-70 hover:opacity-100 hover:scale-110'>
 						<ChevronsDown height={16} />
 						<span>Know more</span>
@@ -89,7 +146,7 @@ const ListingDetailsContainer = ({
 						))}
 					</ul>
 					<div
-						onClick={displayDetails}
+						onClick={() => modalHandler('House Rules', houseRule)}
 						className='flex items-center justify-center mt-3 text-xs text-center transition cursor-pointer opacity-70 hover:opacity-100 hover:scale-110'>
 						<ChevronsDown height={16} />
 						<span>Know more</span>

@@ -1,11 +1,10 @@
 import CardList from '../components/CardList';
+import HeroHeading from '../components/HeroHeading';
 
 const Home = () => {
 	return (
 		<>
-			<h1 className='text-7xl w-full font-bold mb-6'>
-				Explore Your Place To Stay
-			</h1>
+			<HeroHeading />
 			<CardList />
 		</>
 	);

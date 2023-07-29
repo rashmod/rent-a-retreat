@@ -9,6 +9,7 @@ import EditListing from './pages/EditListing';
 import AddListing from './pages/AddListing';
 import Login from './pages/Login';
 import User from './pages/User';
+import Footer from './components/Footer';
 import ImageModal from './pages/ImageModal';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
 					<Route path='/me' element={<User />} />
 				</Routes>
 			</div>
+			<Footer />
 		</div>
 	);
 }

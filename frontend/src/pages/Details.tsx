@@ -28,7 +28,7 @@ const Details = () => {
 	}
 
 	return (
-		<section className='pb-10'>
+		<section className='mt-12'>
 			<ListingHeadingContainer
 				listingName={data.listingName}
 				avgRating={data.avgRating}
@@ -38,7 +38,7 @@ const Details = () => {
 			/>
 			<ImageContainer photoArray={data.listingPhoto} />
 
-			<section className='grid grid-cols-6 gap-5 mt-10'>
+			<section className='grid grid-cols-12 gap-5'>
 				<ListingDetailsContainer
 					user={data.host.user}
 					bedroomCount={data.bedroomCount}
@@ -61,6 +61,9 @@ const Details = () => {
 					<div>latitude {data.latitude}</div>
 					<div>longitude {data.longitude}</div>
 				</div> */}
+			</section>
+			<section className='flex items-center justify-center mt-10 text-4xl bg-gray-400 rounded-xl h-80'>
+				map
 			</section>
 		</section>
 	);

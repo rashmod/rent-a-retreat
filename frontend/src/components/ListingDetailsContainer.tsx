@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 import { IListingDetail } from '../types/type';
 import { ChevronsDown } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import ModalContainer from './ModalContainer';
+import KnowMoreModal from './KnowMoreModal';
 
 const ListingDetailsContainer = ({
 	user,
@@ -11,8 +14,22 @@ const ListingDetailsContainer = ({
 	category,
 	houseRule,
 }: IListingDetail) => {
+	const [showModal, setShowModal] = useState(false);
+
+	useEffect(() => {
+		if (showModal) document.body.style.overflow = 'hidden';
+		if (!showModal) document.body.style.overflow = 'unset';
+	}, [showModal]);
+
+	const displayDetails = () => setShowModal((prev) => !prev);
+
 	return (
 		<>
+			{showModal && (
+				<ModalContainer>
+					<KnowMoreModal closeModal={displayDetails} />
+				</ModalContainer>
+			)}
 			<div className='col-span-12 text-sm'>
 				<div className='flex text-3xl font-medium'>
 					Hosted by
@@ -39,7 +56,9 @@ const ListingDetailsContainer = ({
 							</li>
 						))}
 					</ul>
-					<div className='flex items-center justify-center mt-3 text-xs text-center transition cursor-pointer opacity-70 hover:opacity-100 hover:scale-110'>
+					<div
+						onClick={displayDetails}
+						className='flex items-center justify-center mt-3 text-xs text-center transition cursor-pointer opacity-70 hover:opacity-100 hover:scale-110'>
 						<ChevronsDown height={16} />
 						<span>Know more</span>
 					</div>
@@ -53,7 +72,9 @@ const ListingDetailsContainer = ({
 							</li>
 						))}
 					</ul>
-					<div className='flex items-center justify-center mt-3 text-xs text-center transition cursor-pointer opacity-70 hover:opacity-100 hover:scale-110'>
+					<div
+						onClick={displayDetails}
+						className='flex items-center justify-center mt-3 text-xs text-center transition cursor-pointer opacity-70 hover:opacity-100 hover:scale-110'>
 						<ChevronsDown height={16} />
 						<span>Know more</span>
 					</div>
@@ -67,7 +88,9 @@ const ListingDetailsContainer = ({
 							</li>
 						))}
 					</ul>
-					<div className='flex items-center justify-center mt-3 text-xs text-center transition cursor-pointer opacity-70 hover:opacity-100 hover:scale-110'>
+					<div
+						onClick={displayDetails}
+						className='flex items-center justify-center mt-3 text-xs text-center transition cursor-pointer opacity-70 hover:opacity-100 hover:scale-110'>
 						<ChevronsDown height={16} />
 						<span>Know more</span>
 					</div>

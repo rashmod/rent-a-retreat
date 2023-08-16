@@ -37,6 +37,8 @@ function ConfirmPage({
 						</h3>
 						<div>First Name</div>
 						<div>{formData.firstname}</div>
+						<div>User Name</div>
+						<div>{formData.username}</div>
 					</div>
 					<div>
 						<h3 className='flex justify-between'>

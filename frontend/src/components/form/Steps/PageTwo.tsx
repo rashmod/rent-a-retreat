@@ -6,6 +6,7 @@ import { useFormState } from '../../../store/store';
 import { TStepProps } from './PageOne';
 import Navigation from '../Navigation';
 import FormWrapper from '../FormWrapper';
+import FloatingLabelInput from '../FloatingLabelInput';
 
 const PageTwoSchema = z.object({
 	lastname: z.string().min(1, 'Last Name is required'),
@@ -18,29 +19,21 @@ function PageTwo({
 	goToNextPage,
 	goToPreviousPage,
 }: TStepProps) {
-	const {
-		formData: { lastname },
-		setFormData,
-	} = useFormState();
+	const { formData, setFormData } = useFormState();
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<TPageTwoSchema>({
-		defaultValues: { lastname },
+		defaultValues: formData,
 		mode: 'all',
 		resolver: zodResolver(PageTwoSchema),
 	});
 
-	const onSubmit = (data: TPageTwoSchema) => {
-		setFormData((prev) => {
-			return { ...prev, lastname: data.lastname };
-		});
-		goToNextPage();
-	};
+	const onSubmit = () => goToNextPage();
 
-	const onChangeHandler = (name: string, value: string) => {
+	const onChangeHandler = (name: keyof TPageTwoSchema, value: string) => {
 		setFormData((prev) => {
 			return {
 				...prev,
@@ -55,24 +48,15 @@ function PageTwo({
 				className='flex flex-col justify-between h-full'
 				onSubmit={handleSubmit(onSubmit)}>
 				<div className='flex flex-col'>
-					<label htmlFor='lastname'>Last Name</label>
-					<input
-						{...register('lastname', {
-							required: 'Last Name is required',
-							onChange(event) {
-								onChangeHandler('lastname', event.target.value);
-							},
-						})}
-						autoFocus
-						type='text'
-						id='lastname'
-						className='px-4 py-2 border border-black'
+					<FloatingLabelInput
+						register={register}
+						onChangeHandler={onChangeHandler}
+						label='Last Name'
+						placeholder='Doe'
+						errors={errors}
+						name='lastname'
+						autofocus
 					/>
-					{errors && errors.lastname && (
-						<p className='text-sm text-red-400'>
-							{errors.lastname.message}
-						</p>
-					)}
 				</div>
 				<Navigation
 					goToPreviousPage={goToPreviousPage}

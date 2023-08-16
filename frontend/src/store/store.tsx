@@ -6,18 +6,18 @@ import {
 	useContext,
 	useState,
 } from 'react';
+import { TPageOneSchema } from '../components/form/Steps/PageOne';
+import { TPageTwoSchema } from '../components/form/Steps/PageTwo';
+import { TPageThreeSchema } from '../components/form/Steps/PageThree';
 
 const INITIAL_DATA = {
 	firstname: '',
+	username: '',
 	lastname: '',
 	email: '',
 };
 
-type TFormData = {
-	firstname: string;
-	lastname: string;
-	email: string;
-};
+type TFormData = TPageOneSchema & TPageTwoSchema & TPageThreeSchema;
 
 type TFormContext = {
 	formData: TFormData;

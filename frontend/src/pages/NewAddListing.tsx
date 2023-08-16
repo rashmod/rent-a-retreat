@@ -60,7 +60,7 @@ const NewAddListing = () => {
 	return (
 		<div className='h-screen'>
 			<h1 className='font-bold text-9xl'>NewAddListing</h1>
-			<div className='grid w-1/2 grid-cols-4 m-1 mx-auto overflow-hidden border-black bg-my-primary-200 rounded-3xl'>
+			<div className='grid w-1/2 grid-cols-4 m-1 mx-auto overflow-hidden bg-white border-black rounded-3xl'>
 				<div className='col-span-1 pt-10 pb-12 pl-5 bg-my-primary-700'>
 					<Stepper
 						currentStepIndex={currentStepIndex}

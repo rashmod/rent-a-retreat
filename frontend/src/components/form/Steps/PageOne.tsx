@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useFormState } from '../../../store/store';
 import Navigation, { TNavigationProps } from '../Navigation';
 import FormWrapper from '../FormWrapper';
+import FloatingLabelInput from '../FloatingLabelInput';
 
 export type TStepProps = TNavigationProps & {
 	goToNextPage: () => void;
@@ -12,6 +13,7 @@ export type TStepProps = TNavigationProps & {
 
 const PageOneSchema = z.object({
 	firstname: z.string().min(1, 'First Name is required'),
+	username: z.string().min(1, 'User Name is required'),
 });
 export type TPageOneSchema = z.infer<typeof PageOneSchema>;
 
@@ -21,10 +23,7 @@ function PageOne({
 	goToNextPage,
 	goToPreviousPage,
 }: TStepProps) {
-	const {
-		formData: { firstname },
-		setFormData,
-	} = useFormState();
+	const { formData, setFormData } = useFormState();
 
 	const {
 		register,
@@ -32,18 +31,13 @@ function PageOne({
 		formState: { errors },
 	} = useForm<TPageOneSchema>({
 		mode: 'all',
-		defaultValues: { firstname },
+		defaultValues: formData,
 		resolver: zodResolver(PageOneSchema),
 	});
 
-	const onSubmit = (data: TPageOneSchema) => {
-		setFormData((prev) => {
-			return { ...prev, firstname: data.firstname };
-		});
-		goToNextPage();
-	};
+	const onSubmit = () => goToNextPage();
 
-	const onChangeHandler = (name: string, value: string) => {
+	const onChangeHandler = (name: keyof TPageOneSchema, value: string) => {
 		setFormData((prev) => {
 			return {
 				...prev,
@@ -58,27 +52,23 @@ function PageOne({
 				className='flex flex-col justify-between h-full'
 				onSubmit={handleSubmit(onSubmit)}>
 				<div className='flex flex-col'>
-					<label htmlFor='firstname'>First Name</label>
-					<input
-						{...register('firstname', {
-							required: 'First Name is required',
-							onChange(event) {
-								onChangeHandler(
-									'firstname',
-									event.target.value
-								);
-							},
-						})}
-						autoFocus
-						type='text'
-						id='firstname'
-						className='px-4 py-2 border border-black'
+					<FloatingLabelInput
+						register={register}
+						onChangeHandler={onChangeHandler}
+						label='First Name'
+						placeholder='John'
+						errors={errors}
+						name='firstname'
+						autofocus
 					/>
-					{errors && errors.firstname && (
-						<p className='text-sm text-red-400'>
-							{errors.firstname.message}
-						</p>
-					)}
+					<FloatingLabelInput
+						register={register}
+						onChangeHandler={onChangeHandler}
+						label='User Name'
+						placeholder='spittingbrit456'
+						errors={errors}
+						name='username'
+					/>
 				</div>
 				<Navigation
 					goToPreviousPage={goToPreviousPage}

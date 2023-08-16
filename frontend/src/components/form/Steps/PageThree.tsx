@@ -6,6 +6,7 @@ import { useFormState } from '../../../store/store';
 import { TStepProps } from './PageOne';
 import Navigation from '../Navigation';
 import FormWrapper from '../FormWrapper';
+import FloatingLabelInput from '../FloatingLabelInput';
 
 const PageThreeSchema = z.object({
 	email: z.string().min(1, 'Email is required').email('Invalid Email'),
@@ -54,24 +55,15 @@ function PageThree({
 				className='flex flex-col justify-between h-full'
 				onSubmit={handleSubmit(onSubmit)}>
 				<div className='flex flex-col'>
-					<label htmlFor='email'>Email</label>
-					<input
-						{...register('email', {
-							required: 'Email is required',
-							onChange(event) {
-								onChangeHandler('email', event.target.value);
-							},
-						})}
-						autoFocus
-						type='text'
-						id='email'
-						className='px-4 py-2 border border-black'
+					<FloatingLabelInput
+						register={register}
+						onChangeHandler={onChangeHandler}
+						label='Email'
+						placeholder='abc@xyz.com'
+						errors={errors}
+						name='email'
+						autofocus
 					/>
-					{errors && errors.email && (
-						<p className='text-sm text-red-400'>
-							{errors.email.message}
-						</p>
-					)}
 				</div>
 				<Navigation
 					goToPreviousPage={goToPreviousPage}

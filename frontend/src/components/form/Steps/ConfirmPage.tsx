@@ -1,7 +1,12 @@
-import { useFormState } from '../../../store/store';
+import { TFormData, useFormState } from '../../../store/store';
 import { useForm } from 'react-hook-form';
 import Navigation, { TNavigationProps } from '../Navigation';
 import FormWrapper from '../FormWrapper';
+import { ConfirmPageList } from '../../../data/data';
+import EditButton from '../EditButton';
+import ConfirmField from '../ConfirmField';
+import ConfirmSectionHeader from '../ConfirmSectionHeader';
+import ConfirmSectionWrapper from '../ConfirmSectionWrapper';
 
 type TConfirmPageProps = TNavigationProps & {
 	gotoIndex: (index: number) => void;
@@ -24,48 +29,32 @@ function ConfirmPage({
 			<form
 				className='flex flex-col justify-between h-full'
 				onSubmit={handleSubmit(onSubmit)}>
-				<div className='flex flex-col'>
-					<div>
-						<h3 className='flex justify-between'>
-							<span className='text-2xl'>Page One</span>
-							<button
-								type='button'
-								className='px-3 text-white bg-blue-500 rounded'
-								onClick={() => gotoIndex(0)}>
-								Edit
-							</button>
-						</h3>
-						<div>First Name</div>
-						<div>{formData.firstname}</div>
-						<div>User Name</div>
-						<div>{formData.username}</div>
-					</div>
-					<div>
-						<h3 className='flex justify-between'>
-							<span className='text-2xl'>Page Two</span>
-							<button
-								type='button'
-								className='px-3 text-white bg-blue-500 rounded'
-								onClick={() => gotoIndex(1)}>
-								Edit
-							</button>
-						</h3>
-						<div>Last Name</div>
-						<div>{formData.lastname}</div>
-					</div>
-					<div>
-						<h3 className='flex justify-between'>
-							<span className='text-2xl'>Page Three</span>
-							<button
-								type='button'
-								className='px-3 text-white bg-blue-500 rounded'
-								onClick={() => gotoIndex(2)}>
-								Edit
-							</button>
-						</h3>
-						<div>Email</div>
-						<div>{formData.email}</div>
-					</div>
+				<div className='flex flex-col mb-4 divide-y'>
+					{ConfirmPageList.map((item, index) => {
+						if (item)
+							return (
+								<ConfirmSectionWrapper key={index}>
+									<ConfirmSectionHeader title={item.title}>
+										<EditButton
+											gotoIndex={() => gotoIndex(index)}
+										/>
+									</ConfirmSectionHeader>
+									{item.children.map(
+										(childItem, childIndex) => (
+											<ConfirmField
+												key={childIndex}
+												label={childItem.label}
+												value={
+													formData[
+														childItem.name as keyof TFormData
+													]
+												}
+											/>
+										)
+									)}
+								</ConfirmSectionWrapper>
+							);
+					})}
 				</div>
 				<Navigation
 					goToPreviousPage={goToPreviousPage}

@@ -7,6 +7,7 @@ import { TStepProps } from './PageOne';
 import Navigation from '../Navigation';
 import FormWrapper from '../FormWrapper';
 import FloatingLabelInput from '../FloatingLabelInput';
+import { PageThreeInputList } from '../../../data/data';
 
 const PageThreeSchema = z.object({
 	email: z.string().min(1, 'Email is required').email('Invalid Email'),
@@ -55,15 +56,18 @@ function PageThree({
 				className='flex flex-col justify-between h-full'
 				onSubmit={handleSubmit(onSubmit)}>
 				<div className='flex flex-col'>
-					<FloatingLabelInput
-						register={register}
-						onChangeHandler={onChangeHandler}
-						label='Email'
-						placeholder='abc@xyz.com'
-						errors={errors}
-						name='email'
-						autofocus
-					/>
+					{PageThreeInputList.map((input, index) => (
+						<FloatingLabelInput
+							key={index}
+							register={register}
+							onChangeHandler={onChangeHandler}
+							errors={errors}
+							label={input.label}
+							placeholder={input.placeholder}
+							name={input.name as keyof TPageThreeSchema}
+							autofocus={index === 0}
+						/>
+					))}
 				</div>
 				<Navigation
 					goToPreviousPage={goToPreviousPage}

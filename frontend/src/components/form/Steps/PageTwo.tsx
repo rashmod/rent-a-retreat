@@ -7,6 +7,7 @@ import { TStepProps } from './PageOne';
 import Navigation from '../Navigation';
 import FormWrapper from '../FormWrapper';
 import FloatingLabelInput from '../FloatingLabelInput';
+import { PageTwoInputList } from '../../../data/data';
 
 const PageTwoSchema = z.object({
 	lastname: z.string().min(1, 'Last Name is required'),
@@ -48,15 +49,18 @@ function PageTwo({
 				className='flex flex-col justify-between h-full'
 				onSubmit={handleSubmit(onSubmit)}>
 				<div className='flex flex-col'>
-					<FloatingLabelInput
-						register={register}
-						onChangeHandler={onChangeHandler}
-						label='Last Name'
-						placeholder='Doe'
-						errors={errors}
-						name='lastname'
-						autofocus
-					/>
+					{PageTwoInputList.map((input, index) => (
+						<FloatingLabelInput
+							key={index}
+							register={register}
+							onChangeHandler={onChangeHandler}
+							errors={errors}
+							label={input.label}
+							placeholder={input.placeholder}
+							name={input.name as keyof TPageTwoSchema}
+							autofocus={index === 0}
+						/>
+					))}
 				</div>
 				<Navigation
 					goToPreviousPage={goToPreviousPage}

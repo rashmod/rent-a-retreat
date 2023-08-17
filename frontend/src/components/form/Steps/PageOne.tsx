@@ -6,6 +6,7 @@ import { useFormState } from '../../../store/store';
 import Navigation, { TNavigationProps } from '../Navigation';
 import FormWrapper from '../FormWrapper';
 import FloatingLabelInput from '../FloatingLabelInput';
+import { PageOneInputList } from '../../../data/data';
 
 export type TStepProps = TNavigationProps & {
 	goToNextPage: () => void;
@@ -52,23 +53,18 @@ function PageOne({
 				className='flex flex-col justify-between h-full'
 				onSubmit={handleSubmit(onSubmit)}>
 				<div className='flex flex-col'>
-					<FloatingLabelInput
-						register={register}
-						onChangeHandler={onChangeHandler}
-						label='First Name'
-						placeholder='John'
-						errors={errors}
-						name='firstname'
-						autofocus
-					/>
-					<FloatingLabelInput
-						register={register}
-						onChangeHandler={onChangeHandler}
-						label='User Name'
-						placeholder='spittingbrit456'
-						errors={errors}
-						name='username'
-					/>
+					{PageOneInputList.map((input, index) => (
+						<FloatingLabelInput
+							key={index}
+							register={register}
+							onChangeHandler={onChangeHandler}
+							errors={errors}
+							label={input.label}
+							placeholder={input.placeholder}
+							name={input.name as keyof TPageOneSchema}
+							autofocus={index === 0}
+						/>
+					))}
 				</div>
 				<Navigation
 					goToPreviousPage={goToPreviousPage}

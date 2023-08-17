@@ -9,15 +9,9 @@ import {
 import { TPageOneSchema } from '../components/form/Steps/PageOne';
 import { TPageTwoSchema } from '../components/form/Steps/PageTwo';
 import { TPageThreeSchema } from '../components/form/Steps/PageThree';
+import { STORE_INITIAL_DATA } from '../data/data';
 
-const INITIAL_DATA = {
-	firstname: '',
-	username: '',
-	lastname: '',
-	email: '',
-};
-
-type TFormData = TPageOneSchema & TPageTwoSchema & TPageThreeSchema;
+export type TFormData = TPageOneSchema & TPageTwoSchema & TPageThreeSchema;
 
 type TFormContext = {
 	formData: TFormData;
@@ -25,7 +19,7 @@ type TFormContext = {
 };
 
 const DEFAULT_VALUE = {
-	formData: INITIAL_DATA,
+	formData: STORE_INITIAL_DATA,
 	setFormData: (formData: TFormData) => {
 		return;
 	},
@@ -34,7 +28,7 @@ const DEFAULT_VALUE = {
 export const FormContext = createContext(DEFAULT_VALUE);
 
 export function FormContextProvider({ children }: { children: ReactElement }) {
-	const [formData, setFormData] = useState<TFormData>(INITIAL_DATA);
+	const [formData, setFormData] = useState<TFormData>(STORE_INITIAL_DATA);
 	return (
 		<FormContext.Provider value={{ formData, setFormData }}>
 			{children}

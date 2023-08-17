@@ -33,11 +33,12 @@ function Stepper({ currentStepIndex, formLength, steps }: TStepperProps) {
 						/>
 					)}
 					<div
-						className={`absolute text-xs text-center text-white left-full whitespace-nowrap ml-1.5 ${
-							index === currentStepIndex &&
-							' underline underline-offset-2'
-						} ${
-							index <= currentStepIndex && 'text-my-accent-500'
+						className={`absolute text-xs text-center left-full whitespace-nowrap ml-1.5 ${
+							index === currentStepIndex
+								? 'underline underline-offset-2 text-my-accent-500'
+								: index < currentStepIndex
+								? 'text-my-accent-500'
+								: 'text-white'
 						}`}>
 						{steps[stepNumber - 1]}
 					</div>

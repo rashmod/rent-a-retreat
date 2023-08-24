@@ -1,21 +1,12 @@
 import useMultiStepForm from '../hooks/useMultiStepForm';
-// import { useFormState } from '../store/store';
+import { useFormState } from '../store/store';
 import PageOne from '../components/form/Steps/PageOne';
 import PageTwo from '../components/form/Steps/PageTwo';
 import PageThree from '../components/form/Steps/PageThree';
 import ConfirmPage from '../components/form/Steps/ConfirmPage';
 import Stepper from '../components/form/Stepper';
-
-const stepTitles = ['First Name', 'Last Name', 'Email', 'Confirm'];
-// const stepTitles = [
-// 	'Basic Details',
-// 	'Refundable',
-// 	'Address',
-// 	'Map',
-// 	'Misc.',
-// 	'Images',
-// 	'Confirm',
-// ];
+import { stepTitles } from '../data/data';
+import PageFour from '../components/form/Steps/PageFour';
 
 const NewAddListing = () => {
 	const {
@@ -26,7 +17,7 @@ const NewAddListing = () => {
 		goToPreviousPage,
 		gotoIndex,
 		formLength,
-	} = useMultiStepForm(4);
+	} = useMultiStepForm(5);
 
 	const steps = [
 		<PageOne
@@ -47,6 +38,12 @@ const NewAddListing = () => {
 			goToNextPage={goToNextPage}
 			goToPreviousPage={goToPreviousPage}
 		/>,
+		<PageFour
+			isFirstPage={isFirstPage}
+			isLastPage={isLastPage}
+			goToNextPage={goToNextPage}
+			goToPreviousPage={goToPreviousPage}
+		/>,
 		<ConfirmPage
 			gotoIndex={gotoIndex}
 			isFirstPage={isFirstPage}
@@ -55,12 +52,12 @@ const NewAddListing = () => {
 		/>,
 	];
 
-	// const { formData } = useFormState();
+	const { formData } = useFormState();
 
 	return (
-		<div className='h-screen'>
+		<div className=''>
 			<h1 className='font-bold text-9xl'>NewAddListing</h1>
-			<div className='grid w-1/2 grid-cols-4 m-1 mx-auto overflow-hidden bg-white border-black rounded-3xl'>
+			<div className='grid w-2/3 grid-cols-4 m-1 mx-auto overflow-hidden bg-white border-black rounded-3xl'>
 				<div className='col-span-1 pt-10 pb-12 pl-5 bg-my-primary-700'>
 					<Stepper
 						currentStepIndex={currentStepIndex}

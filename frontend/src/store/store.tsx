@@ -6,12 +6,17 @@ import {
 	useContext,
 	useState,
 } from 'react';
-import { TPageOneSchema } from '../components/form/Steps/PageOne';
-import { TPageTwoSchema } from '../components/form/Steps/PageTwo';
-import { TPageThreeSchema } from '../components/form/Steps/PageThree';
-import { STORE_INITIAL_DATA } from '../data/data';
 
-export type TFormData = TPageOneSchema & TPageTwoSchema & TPageThreeSchema;
+import { STORE_INITIAL_DATA } from '../data/data';
+import { TPageOneSchema } from '../types/form/PageOne';
+import { TPageTwoSchema } from '../types/form/PageTwo';
+import { TPageThreeSchema } from '../types/form/PageThree';
+import { TPageFourSchema } from '../types/form/PageFour';
+
+export type TFormData = TPageOneSchema &
+	TPageTwoSchema &
+	TPageThreeSchema &
+	TPageFourSchema;
 
 type TFormContext = {
 	formData: TFormData;
@@ -20,12 +25,13 @@ type TFormContext = {
 
 const DEFAULT_VALUE = {
 	formData: STORE_INITIAL_DATA,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	setFormData: (formData: TFormData) => {
 		return;
 	},
 } as TFormContext;
 
-export const FormContext = createContext(DEFAULT_VALUE);
+export const FormContext = createContext<TFormContext>(DEFAULT_VALUE);
 
 export function FormContextProvider({ children }: { children: ReactElement }) {
 	const [formData, setFormData] = useState<TFormData>(STORE_INITIAL_DATA);
@@ -35,7 +41,7 @@ export function FormContextProvider({ children }: { children: ReactElement }) {
 		</FormContext.Provider>
 	);
 }
-
+// eslint-disable-next-line react-refresh/only-export-components
 export function useFormState() {
 	const context = useContext(FormContext);
 	if (!context) {

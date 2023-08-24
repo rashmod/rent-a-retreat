@@ -12,12 +12,12 @@ type TConfirmPageProps = TNavigationProps & {
 	gotoIndex: (index: number) => void;
 };
 
-function ConfirmPage({
+const ConfirmPage = ({
 	isFirstPage,
 	isLastPage,
 	goToPreviousPage,
 	gotoIndex,
-}: TConfirmPageProps) {
+}: TConfirmPageProps) => {
 	const { formData } = useFormState();
 	const { handleSubmit } = useForm();
 
@@ -56,6 +56,7 @@ function ConfirmPage({
 							);
 					})}
 				</div>
+
 				<Navigation
 					goToPreviousPage={goToPreviousPage}
 					isFirstPage={isFirstPage}
@@ -64,6 +65,6 @@ function ConfirmPage({
 			</form>
 		</FormWrapper>
 	);
-}
+};
 
 export default ConfirmPage;

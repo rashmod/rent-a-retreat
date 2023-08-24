@@ -12,12 +12,14 @@ import User from './pages/User';
 import Footer from './components/Footer';
 import MyReservations from './pages/MyReservations';
 import ImageModal from './pages/ImageModal';
+import NewAddListing from './pages/NewAddListing';
+import { FormContextProvider } from './store/store';
 
 function App() {
 	return (
 		<div className='flex flex-col items-center min-h-screen bg-my-primary-100'>
 			<Navbar />
-			<div className='w-10/12'>
+			<div className='w-10/12 grow'>
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/listing/:listingId' element={<Details />} />
@@ -32,6 +34,14 @@ function App() {
 						element={<MyReservations />}
 					/>
 					<Route path='/addListing' element={<AddListing />} />
+					<Route
+						path='/newAddListing'
+						element={
+							<FormContextProvider>
+								<NewAddListing />
+							</FormContextProvider>
+						}
+					/>
 					<Route
 						path='/listing/:listingId/edit'
 						element={<EditListing />}

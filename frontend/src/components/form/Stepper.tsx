@@ -3,7 +3,7 @@ type TStepperProps = {
 	formLength: number;
 	steps: string[];
 };
-function Stepper({ currentStepIndex, formLength, steps }: TStepperProps) {
+const Stepper = ({ currentStepIndex, formLength, steps }: TStepperProps) => {
 	const stepNumbers = Array.from(
 		{ length: formLength },
 		(_, index) => index + 1
@@ -46,6 +46,6 @@ function Stepper({ currentStepIndex, formLength, steps }: TStepperProps) {
 			))}
 		</div>
 	);
-}
+};
 
 export default Stepper;

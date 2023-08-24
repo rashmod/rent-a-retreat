@@ -4,11 +4,11 @@ export type TNavigationProps = {
 	goToPreviousPage: () => void;
 };
 
-function Navigation({
+const Navigation = ({
 	isFirstPage,
 	isLastPage,
 	goToPreviousPage,
-}: TNavigationProps) {
+}: TNavigationProps) => {
 	return (
 		<div className='flex justify-between gap-2 mt-4'>
 			{!isFirstPage && (
@@ -26,6 +26,6 @@ function Navigation({
 			</button>
 		</div>
 	);
-}
+};
 
 export default Navigation;

@@ -1,29 +1,21 @@
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useFormState } from '../../../store/store';
-import Navigation, { TNavigationProps } from '../Navigation';
+import Navigation from '../Navigation';
 import FormWrapper from '../FormWrapper';
 import FloatingLabelInput from '../FloatingLabelInput';
-import { PageOneInputList } from '../../../data/data';
+import createOnChangeHandler from './utils/onChangeHandler';
+import { PageOneSchema, TPageOneSchema } from '../../../types/form/PageOne';
+import { TStepProps } from '../../../types/form/steps';
+// import { PageOneInputList } from '../../../data/data';
 
-export type TStepProps = TNavigationProps & {
-	goToNextPage: () => void;
-};
-
-const PageOneSchema = z.object({
-	firstname: z.string().min(1, 'First Name is required'),
-	username: z.string().min(1, 'User Name is required'),
-});
-export type TPageOneSchema = z.infer<typeof PageOneSchema>;
-
-function PageOne({
+const PageOne = ({
 	isFirstPage,
 	isLastPage,
 	goToNextPage,
 	goToPreviousPage,
-}: TStepProps) {
+}: TStepProps) => {
 	const { formData, setFormData } = useFormState();
 
 	const {
@@ -38,33 +30,72 @@ function PageOne({
 
 	const onSubmit = () => goToNextPage();
 
-	const onChangeHandler = (name: keyof TPageOneSchema, value: string) => {
-		setFormData((prev) => {
-			return {
-				...prev,
-				[name]: value,
-			};
-		});
-	};
+	const onChangeHandler = createOnChangeHandler(setFormData);
 
 	return (
 		<FormWrapper>
 			<form
 				className='flex flex-col justify-between h-full'
 				onSubmit={handleSubmit(onSubmit)}>
-				<div className='flex flex-col'>
-					{PageOneInputList.map((input, index) => (
+				<div className='flex flex-col gap-3 mb-4'>
+					<FloatingLabelInput
+						register={register}
+						onChangeHandler={onChangeHandler}
+						errors={errors}
+						label='Listing Name'
+						placeholder='Farm stay in Toscana'
+						name='listingName'
+						autofocus
+					/>
+					<div className='flex gap-3'>
 						<FloatingLabelInput
-							key={index}
 							register={register}
+							registerOptions={{ valueAsNumber: true }}
 							onChangeHandler={onChangeHandler}
 							errors={errors}
-							label={input.label}
-							placeholder={input.placeholder}
-							name={input.name as keyof TPageOneSchema}
-							autofocus={index === 0}
+							label='Bedroom'
+							placeholder='4'
+							name='bedroom'
 						/>
-					))}
+						<FloatingLabelInput
+							register={register}
+							registerOptions={{ valueAsNumber: true }}
+							onChangeHandler={onChangeHandler}
+							errors={errors}
+							label='Bathroom'
+							placeholder='2'
+							name='bathroom'
+						/>
+					</div>
+					<div className='flex gap-3'>
+						<FloatingLabelInput
+							register={register}
+							registerOptions={{ valueAsNumber: true }}
+							onChangeHandler={onChangeHandler}
+							errors={errors}
+							label='Price per night'
+							placeholder='250'
+							name='pricePerNight'
+						/>
+						<FloatingLabelInput
+							register={register}
+							registerOptions={{ valueAsNumber: true }}
+							onChangeHandler={onChangeHandler}
+							errors={errors}
+							label='Cleaning Fee'
+							placeholder='130'
+							name='cleaningFee'
+						/>
+						<FloatingLabelInput
+							register={register}
+							registerOptions={{ valueAsNumber: true }}
+							onChangeHandler={onChangeHandler}
+							errors={errors}
+							label='Max Guests'
+							placeholder='5'
+							name='maxGuest'
+						/>
+					</div>
 				</div>
 				<Navigation
 					goToPreviousPage={goToPreviousPage}
@@ -74,6 +105,6 @@ function PageOne({
 			</form>
 		</FormWrapper>
 	);
-}
+};
 
 export default PageOne;

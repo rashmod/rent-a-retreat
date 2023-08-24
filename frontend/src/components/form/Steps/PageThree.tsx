@@ -1,73 +1,108 @@
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useFormState } from '../../../store/store';
-import { TStepProps } from './PageOne';
 import Navigation from '../Navigation';
 import FormWrapper from '../FormWrapper';
 import FloatingLabelInput from '../FloatingLabelInput';
-import { PageThreeInputList } from '../../../data/data';
+import createOnChangeHandler from './utils/onChangeHandler';
+import { TStepProps } from '../../../types/form/steps';
+import {
+	PageThreeSchema,
+	TPageThreeSchema,
+} from '../../../types/form/PageThree';
 
-const PageThreeSchema = z.object({
-	email: z.string().min(1, 'Email is required').email('Invalid Email'),
-});
-export type TPageThreeSchema = z.infer<typeof PageThreeSchema>;
-
-function PageThree({
+const PageThree = ({
 	isFirstPage,
 	isLastPage,
 	goToNextPage,
 	goToPreviousPage,
-}: TStepProps) {
-	const {
-		formData: { email },
-		setFormData,
-	} = useFormState();
+}: TStepProps) => {
+	const { formData, setFormData } = useFormState();
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<TPageThreeSchema>({
-		defaultValues: { email },
+		defaultValues: formData,
 		mode: 'all',
 		resolver: zodResolver(PageThreeSchema),
 	});
 
-	const onSubmit = (data: TPageThreeSchema) => {
-		setFormData((prev) => {
-			return { ...prev, email: data.email };
-		});
-		goToNextPage();
-	};
+	const onSubmit = () => goToNextPage();
 
-	const onChangeHandler = (name: string, value: string) => {
-		setFormData((prev) => {
-			return {
-				...prev,
-				[name]: value,
-			};
-		});
-	};
+	const onChangeHandler = createOnChangeHandler(setFormData);
+
 	return (
 		<FormWrapper>
 			<form
 				className='flex flex-col justify-between h-full'
 				onSubmit={handleSubmit(onSubmit)}>
-				<div className='flex flex-col'>
-					{PageThreeInputList.map((input, index) => (
+				<div className='flex flex-col gap-3 mb-4'>
+					<div className='flex gap-3'>
 						<FloatingLabelInput
-							key={index}
 							register={register}
 							onChangeHandler={onChangeHandler}
 							errors={errors}
-							label={input.label}
-							placeholder={input.placeholder}
-							name={input.name as keyof TPageThreeSchema}
-							autofocus={index === 0}
+							label='Unit Number'
+							placeholder='Room 401'
+							name='unitNumber'
+							autofocus
 						/>
-					))}
+						<FloatingLabelInput
+							register={register}
+							onChangeHandler={onChangeHandler}
+							errors={errors}
+							label='Street Name'
+							placeholder='5th Avenue'
+							name='streetName'
+						/>
+					</div>
+					<FloatingLabelInput
+						register={register}
+						onChangeHandler={onChangeHandler}
+						errors={errors}
+						label='Address Line'
+						placeholder='322 Deckow Corners'
+						name='addressLine'
+					/>
+					<div className='flex gap-3'>
+						<FloatingLabelInput
+							register={register}
+							onChangeHandler={onChangeHandler}
+							errors={errors}
+							label='City'
+							placeholder='Carissaton'
+							name='city'
+						/>
+						<FloatingLabelInput
+							register={register}
+							onChangeHandler={onChangeHandler}
+							errors={errors}
+							label='Postal Code'
+							placeholder='695284'
+							name='postalCode'
+						/>
+					</div>
+					<div className='flex gap-3'>
+						<FloatingLabelInput
+							register={register}
+							onChangeHandler={onChangeHandler}
+							errors={errors}
+							label='State'
+							placeholder='North Carolina'
+							name='state'
+						/>
+						<FloatingLabelInput
+							register={register}
+							onChangeHandler={onChangeHandler}
+							errors={errors}
+							label='Country'
+							placeholder='Belize'
+							name='country'
+						/>
+					</div>
 				</div>
 				<Navigation
 					goToPreviousPage={goToPreviousPage}
@@ -77,6 +112,6 @@ function PageThree({
 			</form>
 		</FormWrapper>
 	);
-}
+};
 
 export default PageThree;

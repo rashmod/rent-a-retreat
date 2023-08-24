@@ -1,20 +1,13 @@
-import {
-	FieldValues,
-	FieldErrors,
-	UseFormRegister,
-	Path,
-	FieldError,
-} from 'react-hook-form';
+import { FieldValues, FieldError, RegisterOptions } from 'react-hook-form';
+import { TInputProps } from './Toggle';
 
-type TFloatingLabelInputProps<TSchema extends FieldValues> = {
-	register: UseFormRegister<TSchema>;
-	onChangeHandler: (name: Path<TSchema>, value: string) => void;
-	errors: FieldErrors<TSchema>;
-	label: string;
-	placeholder: string;
-	name: Path<TSchema>;
-	autofocus?: boolean;
-};
+type TFloatingLabelInputProps<TSchema extends FieldValues> =
+	TInputProps<TSchema> & {
+		registerOptions?: RegisterOptions;
+		placeholder: string;
+		autofocus?: boolean;
+		disabled?: boolean;
+	};
 const FloatingLabelInput = <TSchema extends FieldValues>({
 	register,
 	onChangeHandler,
@@ -23,20 +16,24 @@ const FloatingLabelInput = <TSchema extends FieldValues>({
 	errors,
 	name,
 	autofocus = false,
+	disabled = false,
+	registerOptions = {},
 }: TFloatingLabelInputProps<TSchema>) => {
 	return (
-		<div className='mt-5'>
+		<div className='w-full'>
 			<div className='relative'>
 				<input
 					{...register(name, {
 						onChange(event) {
 							onChangeHandler(name, event.target.value);
 						},
+						...registerOptions,
 					})}
 					autoFocus={autofocus}
+					disabled={disabled}
 					type='text'
 					id={name as string}
-					className='block px-3 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-xl border-2 border-black/50 appearance-none focus:outline-none focus:ring-0 peer placeholder-shown:placeholder:opacity-0 focus:placeholder:opacity-100 placeholder:transition-all'
+					className='block px-3 pb-2.5 pt-4 duration-300 w-full text-sm text-gray-900 bg-white rounded-xl border-2 border-black/50 appearance-none focus:outline-none focus:ring-0 peer placeholder-shown:placeholder:opacity-0 focus:placeholder:opacity-100 placeholder:transition-all disabled:bg-my-primary-100 disabled:cursor-not-allowed'
 					placeholder={placeholder}
 				/>
 				{/* <label
@@ -47,7 +44,7 @@ const FloatingLabelInput = <TSchema extends FieldValues>({
 				</label> */}
 				<label
 					htmlFor={name as string}
-					className='absolute cursor-text text-black z-10 px-2 text-sm duration-300 transform -translate-y-4 bg-white top-2 left-6 origin-[0] peer-focus:px-2 peer-focus:text-black peer-focus:-translate-y-4 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:left-3 peer-focus:top-2 peer-focus:left-6'>
+					className='absolute cursor-text text-black z-10 px-2 text-sm duration-300 transform -translate-y-4 bg-white top-2 left-6 origin-[0] peer-focus:px-2 peer-focus:text-black peer-focus:-translate-y-4 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:left-3 peer-focus:top-2 peer-focus:left-6 peer-disabled:bg-my-primary-100 peer-disabled:cursor-not-allowed'>
 					{label}
 				</label>
 			</div>

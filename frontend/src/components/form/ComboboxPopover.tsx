@@ -5,27 +5,29 @@ import {
 	useCallback,
 	type KeyboardEvent,
 	ChangeEvent,
+	RefObject,
 } from 'react';
-import { Check, Loader2 } from 'lucide-react';
+import { Check } from 'lucide-react';
 
 import {
 	CommandGroup,
 	CommandItem,
 	CommandList,
 	CommandInput,
-} from '../../ui/command';
-import { cn } from '../../../lib/utils';
-import { TPageFourSchema } from '../../../types/form/PageFour';
+} from '../ui/command';
+import { cn } from '../../lib/utils';
+import { TPageFourSchema } from '../../types/form/PageFour';
 import usePlacesAutocomplete, {
 	getGeocode,
 	getLatLng,
 } from 'use-places-autocomplete';
-import { useLoadScript } from '@react-google-maps/api';
-import { useFormState } from '../../../store/store';
+import { useFormState } from '../../store/store';
+import { MapRef } from 'react-map-gl';
+import jumpLocation from './Steps/utils/jumpLocation';
 
 export type Option = Record<'place_id' | 'description', string>;
 
-type ComboboxPopoverProps = {
+export type ComboboxPopoverProps = {
 	emptyMessage?: string;
 	value?: Option;
 	onChangeHandler?: (
@@ -36,34 +38,7 @@ type ComboboxPopoverProps = {
 	isLoading?: boolean;
 	disabled?: boolean;
 	placeholder?: string;
-};
-
-export const AutoComplete = (props: ComboboxPopoverProps) => {
-	const { isLoaded } = useLoadScript({
-		googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAP_API_KEY,
-		libraries: ['places'],
-	});
-
-	if (!isLoaded)
-		return (
-			<div className='relative'>
-				<input
-					type='text'
-					id='loading'
-					className='block px-3 pb-2.5 border-2 rounded-xl border-black/50 pt-4 duration-300 w-full text-sm text-gray-900 bg-white appearance-none focus:outline-none focus:ring-0 peer placeholder-shown:placeholder:opacity-0 focus:placeholder:opacity-100 placeholder:transition-all disabled:bg-my-primary-100 disabled:cursor-not-allowed'
-					disabled
-				/>
-				<div className='absolute z-10 -translate-y-1/2 top-1/2 left-3'>
-					<Loader2 className='animate-spin' height={16} width={16} />
-				</div>
-				<label
-					htmlFor='loading'
-					className='absolute px-2 text-sm duration-300 transform origin-[0] -translate-y-1/2 top-1/2 text-gray-500 left-8 bg-my-primary-100 cursor-not-allowed'>
-					Loading...
-				</label>
-			</div>
-		);
-	return <ComboboxPopover {...props} />;
+	mapRef?: RefObject<MapRef>;
 };
 
 const ComboboxPopover = ({
@@ -73,6 +48,7 @@ const ComboboxPopover = ({
 	onValueChange,
 	// disabled,
 	isLoading = false,
+	mapRef,
 }: ComboboxPopoverProps) => {
 	const {
 		// value: placesValue,
@@ -151,13 +127,14 @@ const ComboboxPopover = ({
 			setFormData((prev) => {
 				return { ...prev, latitude: lat, longitude: lng };
 			});
+			if (mapRef) jumpLocation({ lat, lng, mapRef });
 			// This is a hack to prevent the input from being focused after the user selects an option
 			// We can call this hack: "The next tick"
 			setTimeout(() => {
 				inputRef?.current?.blur();
 			}, 0);
 		},
-		[onValueChange, clearSuggestions, setFormData, setPlacesValue]
+		[onValueChange, clearSuggestions, setFormData, setPlacesValue, mapRef]
 	);
 
 	return (
@@ -188,7 +165,9 @@ const ComboboxPopover = ({
 									<div className='p-1'>skeleton</div>
 								</CommandPrimitive.Loading>
 							) : null}
-							{data.length > 0 && !isLoading ? (
+							{status === 'OK' &&
+							data.length > 0 &&
+							!isLoading ? (
 								<CommandGroup>
 									{data.map(({ place_id, description }) => {
 										const isSelected =

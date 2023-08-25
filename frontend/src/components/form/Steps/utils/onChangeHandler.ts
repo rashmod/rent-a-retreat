@@ -1,7 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
 import { TFormData } from '../../../../store/store';
 
-type TOnChangeHandler<T> = (name: keyof T, value: string | boolean) => void;
+type TOnChangeHandler<T> = (
+	name: keyof T,
+	value: string | number | boolean
+) => void;
 
 const createOnChangeHandler =
 	<T extends TFormData>(

@@ -8,6 +8,12 @@ import {
 	RefObject,
 } from 'react';
 import { Check } from 'lucide-react';
+import usePlacesAutocomplete, {
+	getGeocode,
+	getLatLng,
+} from 'use-places-autocomplete';
+import { MapRef } from 'react-map-gl';
+import { FieldValues, UseFormSetValue } from 'react-hook-form';
 
 import {
 	CommandGroup,
@@ -17,12 +23,7 @@ import {
 } from '../ui/command';
 import { cn } from '../../lib/utils';
 import { TPageFourSchema } from '../../types/form/PageFour';
-import usePlacesAutocomplete, {
-	getGeocode,
-	getLatLng,
-} from 'use-places-autocomplete';
 import { useFormState } from '../../store/store';
-import { MapRef } from 'react-map-gl';
 import jumpLocation from './Steps/utils/jumpLocation';
 
 export type Option = Record<'place_id' | 'description', string>;
@@ -39,6 +40,7 @@ export type ComboboxPopoverProps = {
 	disabled?: boolean;
 	placeholder?: string;
 	mapRef?: RefObject<MapRef>;
+	setValue?: UseFormSetValue<FieldValues>;
 };
 
 const ComboboxPopover = ({
@@ -49,6 +51,7 @@ const ComboboxPopover = ({
 	// disabled,
 	isLoading = false,
 	mapRef,
+	setValue,
 }: ComboboxPopoverProps) => {
 	const {
 		// value: placesValue,
@@ -128,13 +131,24 @@ const ComboboxPopover = ({
 				return { ...prev, latitude: lat, longitude: lng };
 			});
 			if (mapRef) jumpLocation({ lat, lng, mapRef });
+			if (setValue) {
+				setValue('longitude', lng, { shouldValidate: true });
+				setValue('latitude', lat, { shouldValidate: true });
+			}
 			// This is a hack to prevent the input from being focused after the user selects an option
 			// We can call this hack: "The next tick"
 			setTimeout(() => {
 				inputRef?.current?.blur();
 			}, 0);
 		},
-		[onValueChange, clearSuggestions, setFormData, setPlacesValue, mapRef]
+		[
+			onValueChange,
+			clearSuggestions,
+			setFormData,
+			setPlacesValue,
+			mapRef,
+			setValue,
+		]
 	);
 
 	return (

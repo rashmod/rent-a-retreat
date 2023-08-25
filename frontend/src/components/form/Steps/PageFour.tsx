@@ -19,7 +19,12 @@ const PageFour = ({
 }: TStepProps) => {
 	const mapRef = useRef<MapRef>(null);
 
-	const { handleSubmit } = useForm({
+	const {
+		handleSubmit,
+		register,
+		setValue,
+		formState: { errors },
+	} = useForm({
 		mode: 'all',
 		resolver: zodResolver(PageFourSchema),
 	});
@@ -35,8 +40,14 @@ const PageFour = ({
 					<AutoComplete
 						placeholder='Look for your place'
 						mapRef={mapRef}
+						setValue={setValue}
 					/>
-					<DisplayMap mapRef={mapRef} />
+					<DisplayMap
+						mapRef={mapRef}
+						register={register}
+						errors={errors}
+						setValue={setValue}
+					/>
 				</div>
 				<Navigation
 					goToPreviousPage={goToPreviousPage}

@@ -53,7 +53,7 @@ const CommandInput = React.forwardRef<
 		<label
 			htmlFor=':r2:'
 			className='absolute cursor-text text-black z-10 px-2 text-sm duration-300 transform -translate-y-4 bg-white top-2 left-10 origin-[0] peer-focus:px-2 peer-focus:text-black peer-focus:-translate-y-4 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:left-8 peer-focus:top-2 peer-focus:left-10 peer-disabled:cursor-not-allowed'>
-			Location
+			Search Location
 		</label>
 	</div>
 ));

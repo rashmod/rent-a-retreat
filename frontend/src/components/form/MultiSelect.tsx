@@ -1,4 +1,4 @@
-import { KeyboardEvent, useCallback, useRef, useState } from 'react';
+import { KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 import { Command as CommandPrimitive } from 'cmdk';
 import { Control, useController } from 'react-hook-form';
@@ -29,13 +29,20 @@ const MultiSelect = <T,>({
 	getTitle,
 	control,
 }: TMultiSelectProps<T>) => {
-	const { setFormData } = useFormState();
+	const { formData, setFormData } = useFormState();
 
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [open, setOpen] = useState(false);
 	const [selected, setSelected] = useState<T[]>([]);
 	const [inputValue, setInputValue] = useState('');
 	const { field, fieldState } = useController({ control, name });
+
+	useEffect(() => {
+		setSelected(
+			data.filter((item) => formData[name].includes(getId(item)))
+		);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const handleUnselect = useCallback(
 		(category: T) => {

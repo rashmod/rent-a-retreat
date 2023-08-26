@@ -8,7 +8,7 @@ import { stepTitles } from '../data/data';
 import PageFour from '../components/form/Steps/PageFour';
 import PageFive from '../components/form/Steps/PageFive';
 
-const NewAddListing = () => {
+const AddListing = () => {
 	const {
 		currentStepIndex,
 		isFirstPage,
@@ -78,4 +78,4 @@ const NewAddListing = () => {
 	);
 };
 
-export default NewAddListing;
+export default AddListing;

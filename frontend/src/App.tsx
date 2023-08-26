@@ -11,7 +11,7 @@ import User from './pages/User';
 import Footer from './components/Footer';
 import MyReservations from './pages/MyReservations';
 import ImageModal from './pages/ImageModal';
-import NewAddListing from './pages/NewAddListing';
+import AddListing from './pages/AddListing';
 import { FormContextProvider } from './store/store';
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
 						path='/addListing'
 						element={
 							<FormContextProvider>
-								<NewAddListing />
+								<AddListing />
 							</FormContextProvider>
 						}
 					/>

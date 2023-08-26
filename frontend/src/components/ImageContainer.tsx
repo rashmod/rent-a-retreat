@@ -17,13 +17,12 @@ const ImageContainer = ({ photoArray }: IPhotoArray) => {
 		<div className='relative grid w-full grid-cols-4 grid-rows-2 gap-3 mb-3 max-h-96'>
 			{arr.map((_, i) => {
 				const photo = photoArray[i];
-				console.log(photo);
 				return photo ? (
 					<Link
+						key={photo.listingPhotoId}
 						to={`/listing/${photo.listingId}/${photo.listingPhotoId}`}
 						className={`${gridCol[i]} overflow-hidden`}>
 						<img
-							key={photo.listingPhotoId}
 							className={`h-full w-full object-cover`}
 							src={photo.photoUrl}
 						/>

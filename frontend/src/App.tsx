@@ -6,7 +6,6 @@ import About from './pages/About';
 import Details from './pages/Details';
 import MyListing from './pages/MyListing';
 import EditListing from './pages/EditListing';
-import AddListing from './pages/AddListing';
 import Login from './pages/Login';
 import User from './pages/User';
 import Footer from './components/Footer';
@@ -33,9 +32,8 @@ function App() {
 						path='/myReservations'
 						element={<MyReservations />}
 					/>
-					<Route path='/addListing' element={<AddListing />} />
 					<Route
-						path='/newAddListing'
+						path='/addListing'
 						element={
 							<FormContextProvider>
 								<NewAddListing />

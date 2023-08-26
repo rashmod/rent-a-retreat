@@ -1,5 +1,8 @@
-import { TFormData, useFormState } from '../../../store/store';
 import { useForm } from 'react-hook-form';
+import { Map, Marker } from 'react-map-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
+
+import { TFormData, useFormState } from '../../../store/store';
 import Navigation, { TNavigationProps } from '../Navigation';
 import FormWrapper from '../FormWrapper';
 import { ConfirmPageList } from '../../../data/data';
@@ -24,6 +27,7 @@ const ConfirmPage = ({
 	function onSubmit() {
 		alert(JSON.stringify(formData, null, 2));
 	}
+
 	return (
 		<FormWrapper>
 			<form
@@ -31,7 +35,7 @@ const ConfirmPage = ({
 				onSubmit={handleSubmit(onSubmit)}>
 				<div className='flex flex-col mb-4 divide-y'>
 					{ConfirmPageList.map((item, index) => {
-						if (item)
+						if (item && index < 3)
 							return (
 								<ConfirmSectionWrapper key={index}>
 									<ConfirmSectionHeader title={item.title}>
@@ -47,7 +51,10 @@ const ConfirmPage = ({
 												value={
 													formData[
 														childItem.name as keyof TFormData
-													]
+													] as
+														| string
+														| number
+														| boolean
 												}
 											/>
 										)
@@ -55,6 +62,35 @@ const ConfirmPage = ({
 								</ConfirmSectionWrapper>
 							);
 					})}
+					<ConfirmSectionWrapper>
+						<ConfirmSectionHeader title='Map'>
+							<EditButton gotoIndex={() => gotoIndex(3)} />
+						</ConfirmSectionHeader>
+						<Map
+							mapboxAccessToken={
+								import.meta.env.VITE_MAPBOX_TOKEN
+							}
+							initialViewState={{
+								longitude: formData.longitude as number,
+								latitude: formData.latitude as number,
+								zoom: 14,
+							}}
+							style={{
+								width: '80%',
+								height: 200,
+								borderRadius: 12,
+							}}
+							attributionControl={false}
+							mapStyle='mapbox://styles/mapbox/dark-v10'>
+							<Marker
+								longitude={formData.longitude as number}
+								latitude={formData.latitude as number}
+								anchor='bottom'
+								pitchAlignment='map'
+								color='#e966a0'
+							/>
+						</Map>
+					</ConfirmSectionWrapper>
 				</div>
 
 				<Navigation

@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { getCategoryIds } from '../../api/categories';
-import { getAmenityIds } from '../../api/amenities';
-import { getHouseRuleIds } from '../../api/houseRules';
+import { getCategoryIds } from '../api/categories';
+import { getAmenityIds } from '../api/amenities';
+import { getHouseRuleIds } from '../api/houseRules';
 
 export const PageFiveSchema = z.object({
 	categories: z

@@ -7,7 +7,7 @@ import FormWrapper from '../FormWrapper';
 import FloatingLabelInput from '../FloatingLabelInput';
 import Toggle from '../Toggle';
 import { TStepProps } from '../../../types/form/steps';
-import { PageTwoSchema, TPageTwoSchema } from '../../../types/form/PageTwo';
+import { PageTwoSchema, TPageTwoSchema } from '../../../schema/PageTwo';
 
 const PageTwo = ({
 	isFirstPage,

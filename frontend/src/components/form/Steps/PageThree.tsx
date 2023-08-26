@@ -6,10 +6,7 @@ import Navigation from '../Navigation';
 import FormWrapper from '../FormWrapper';
 import FloatingLabelInput from '../FloatingLabelInput';
 import { TStepProps } from '../../../types/form/steps';
-import {
-	PageThreeSchema,
-	TPageThreeSchema,
-} from '../../../types/form/PageThree';
+import { PageThreeSchema, TPageThreeSchema } from '../../../schema/PageThree';
 
 const PageThree = ({
 	isFirstPage,

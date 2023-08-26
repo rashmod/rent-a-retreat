@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { MapRef } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { PageFourSchema } from '../../../types/form/PageFour';
+import { PageFourSchema } from '../../../schema/PageFour';
 import { TStepProps } from '../../../types/form/steps';
 import FormWrapper from '../FormWrapper';
 import Navigation from '../Navigation';

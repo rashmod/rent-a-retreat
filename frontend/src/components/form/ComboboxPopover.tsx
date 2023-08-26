@@ -22,7 +22,6 @@ import {
 	CommandInput,
 } from '../ui/command';
 import { cn } from '../../lib/utils';
-import { TPageFourSchema } from '../../types/form/PageFour';
 import { useFormState } from '../../store/store';
 import jumpLocation from './Steps/utils/jumpLocation';
 

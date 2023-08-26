@@ -1,5 +1,6 @@
 import { FieldValues, FieldError, RegisterOptions } from 'react-hook-form';
 import { TInputProps } from './Toggle';
+import { useFormState } from '../../store/store';
 
 type TFloatingLabelInputProps<TSchema extends FieldValues> =
 	TInputProps<TSchema> & {
@@ -10,7 +11,7 @@ type TFloatingLabelInputProps<TSchema extends FieldValues> =
 	};
 const FloatingLabelInput = <TSchema extends FieldValues>({
 	register,
-	onChangeHandler,
+	// onChangeHandler,
 	label,
 	placeholder,
 	errors,
@@ -19,13 +20,15 @@ const FloatingLabelInput = <TSchema extends FieldValues>({
 	disabled = false,
 	registerOptions = {},
 }: TFloatingLabelInputProps<TSchema>) => {
+	const { setFormDataFromContext } = useFormState();
+
 	return (
 		<div className='w-full'>
 			<div className='relative'>
 				<input
 					{...register(name, {
 						onChange(event) {
-							onChangeHandler(name, event.target.value);
+							setFormDataFromContext(name, event.target.value);
 						},
 						...registerOptions,
 					})}

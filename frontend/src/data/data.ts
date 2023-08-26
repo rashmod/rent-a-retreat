@@ -35,6 +35,9 @@ export const STORE_INITIAL_DATA = {
 	country: '',
 	longitude: emptyString,
 	latitude: emptyString,
+	categories: [],
+	amenities: [],
+	houseRules: [],
 	email: '',
 };
 

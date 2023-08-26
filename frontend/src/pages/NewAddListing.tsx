@@ -1,5 +1,4 @@
 import useMultiStepForm from '../hooks/useMultiStepForm';
-import { useFormState } from '../store/store';
 import PageOne from '../components/form/Steps/PageOne';
 import PageTwo from '../components/form/Steps/PageTwo';
 import PageThree from '../components/form/Steps/PageThree';
@@ -7,6 +6,7 @@ import ConfirmPage from '../components/form/Steps/ConfirmPage';
 import Stepper from '../components/form/Stepper';
 import { stepTitles } from '../data/data';
 import PageFour from '../components/form/Steps/PageFour';
+import PageFive from '../components/form/Steps/PageFive';
 
 const NewAddListing = () => {
 	const {
@@ -17,7 +17,7 @@ const NewAddListing = () => {
 		goToPreviousPage,
 		gotoIndex,
 		formLength,
-	} = useMultiStepForm(5);
+	} = useMultiStepForm(6);
 
 	const steps = [
 		<PageOne
@@ -44,6 +44,12 @@ const NewAddListing = () => {
 			goToNextPage={goToNextPage}
 			goToPreviousPage={goToPreviousPage}
 		/>,
+		<PageFive
+			isFirstPage={isFirstPage}
+			isLastPage={isLastPage}
+			goToNextPage={goToNextPage}
+			goToPreviousPage={goToPreviousPage}
+		/>,
 		<ConfirmPage
 			gotoIndex={gotoIndex}
 			isFirstPage={isFirstPage}
@@ -52,13 +58,13 @@ const NewAddListing = () => {
 		/>,
 	];
 
-	const { formData } = useFormState();
-
 	return (
 		<div className=''>
-			<h1 className='font-bold text-9xl'>NewAddListing</h1>
-			<div className='grid w-2/3 grid-cols-4 m-1 mx-auto overflow-hidden bg-white border-black rounded-3xl'>
-				<div className='col-span-1 pt-10 pb-12 pl-5 bg-my-primary-700'>
+			<h1 className='mt-8 text-5xl font-bold text-center'>
+				Add new Listing
+			</h1>
+			<div className='grid w-2/3 grid-cols-4 mx-auto mt-5 mb-16 bg-white border-black rounded-3xl'>
+				<div className='col-span-1 pt-10 pb-12 pl-5 bg-my-primary-700 rounded-l-3xl'>
 					<Stepper
 						currentStepIndex={currentStepIndex}
 						formLength={formLength}

@@ -38,25 +38,29 @@ const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
 
 const CommandInput = React.forwardRef<
 	React.ElementRef<typeof CommandPrimitive.Input>,
-	React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
->(({ className, ...props }, ref) => (
-	<div className='flex items-center px-3 border-b' cmdk-input-wrapper=''>
-		<Search className='w-4 h-4 mr-2 opacity-50 shrink-0' />
-		<CommandPrimitive.Input
-			ref={ref}
-			className={cn(
-				'flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-slate-500 disabled:cursor-not-allowed disabled:opacity-50 dark:placeholder:text-slate-400 peer placeholder-shown:placeholder:opacity-0 focus:placeholder:opacity-100 placeholder:transition-all',
-				className
+	React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input> & {
+		label?: string;
+	}
+>(({ className, label, ...props }, ref) => {
+	return (
+		<div className='flex items-center px-3 border-b' cmdk-input-wrapper=''>
+			<Search className='w-4 h-4 mr-2 opacity-50 shrink-0' />
+			<CommandPrimitive.Input
+				ref={ref}
+				className={cn(
+					'flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-slate-500 disabled:cursor-not-allowed disabled:opacity-50 dark:placeholder:text-slate-400 peer placeholder-shown:placeholder:opacity-0 focus:placeholder:opacity-100 placeholder:transition-all',
+					className
+				)}
+				{...props}
+			/>
+			{ref && (
+				<label className='absolute cursor-text text-black z-10 px-2 text-sm duration-300 transform -translate-y-4 bg-white top-2 left-10 origin-[0] peer-focus:px-2 peer-focus:text-black peer-focus:-translate-y-4 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:left-8 peer-focus:top-2 peer-focus:left-10 peer-disabled:cursor-not-allowed'>
+					{label}
+				</label>
 			)}
-			{...props}
-		/>
-		<label
-			htmlFor=':r2:'
-			className='absolute cursor-text text-black z-10 px-2 text-sm duration-300 transform -translate-y-4 bg-white top-2 left-10 origin-[0] peer-focus:px-2 peer-focus:text-black peer-focus:-translate-y-4 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:left-8 peer-focus:top-2 peer-focus:left-10 peer-disabled:cursor-not-allowed'>
-			Search Location
-		</label>
-	</div>
-));
+		</div>
+	);
+});
 
 CommandInput.displayName = CommandPrimitive.Input.displayName;
 

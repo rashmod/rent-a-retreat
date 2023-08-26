@@ -5,10 +5,8 @@ import { useFormState } from '../../../store/store';
 import Navigation from '../Navigation';
 import FormWrapper from '../FormWrapper';
 import FloatingLabelInput from '../FloatingLabelInput';
-import createOnChangeHandler from './utils/onChangeHandler';
 import { PageOneSchema, TPageOneSchema } from '../../../types/form/PageOne';
 import { TStepProps } from '../../../types/form/steps';
-// import { PageOneInputList } from '../../../data/data';
 
 const PageOne = ({
 	isFirstPage,
@@ -16,7 +14,7 @@ const PageOne = ({
 	goToNextPage,
 	goToPreviousPage,
 }: TStepProps) => {
-	const { formData, setFormData } = useFormState();
+	const { formData } = useFormState();
 
 	const {
 		register,
@@ -30,8 +28,6 @@ const PageOne = ({
 
 	const onSubmit = () => goToNextPage();
 
-	const onChangeHandler = createOnChangeHandler(setFormData);
-
 	return (
 		<FormWrapper>
 			<form
@@ -40,7 +36,6 @@ const PageOne = ({
 				<div className='flex flex-col gap-3 mb-4'>
 					<FloatingLabelInput
 						register={register}
-						onChangeHandler={onChangeHandler}
 						errors={errors}
 						label='Listing Name'
 						placeholder='Farm stay in Toscana'
@@ -51,7 +46,6 @@ const PageOne = ({
 						<FloatingLabelInput
 							register={register}
 							registerOptions={{ valueAsNumber: true }}
-							onChangeHandler={onChangeHandler}
 							errors={errors}
 							label='Bedroom'
 							placeholder='4'
@@ -60,7 +54,6 @@ const PageOne = ({
 						<FloatingLabelInput
 							register={register}
 							registerOptions={{ valueAsNumber: true }}
-							onChangeHandler={onChangeHandler}
 							errors={errors}
 							label='Bathroom'
 							placeholder='2'
@@ -71,7 +64,6 @@ const PageOne = ({
 						<FloatingLabelInput
 							register={register}
 							registerOptions={{ valueAsNumber: true }}
-							onChangeHandler={onChangeHandler}
 							errors={errors}
 							label='Price per night'
 							placeholder='250'
@@ -80,7 +72,6 @@ const PageOne = ({
 						<FloatingLabelInput
 							register={register}
 							registerOptions={{ valueAsNumber: true }}
-							onChangeHandler={onChangeHandler}
 							errors={errors}
 							label='Cleaning Fee'
 							placeholder='130'
@@ -89,7 +80,6 @@ const PageOne = ({
 						<FloatingLabelInput
 							register={register}
 							registerOptions={{ valueAsNumber: true }}
-							onChangeHandler={onChangeHandler}
 							errors={errors}
 							label='Max Guests'
 							placeholder='5'

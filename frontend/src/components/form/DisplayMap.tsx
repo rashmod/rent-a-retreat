@@ -8,7 +8,6 @@ import {
 } from 'react-hook-form';
 
 import { useFormState } from '../../store/store';
-import createOnChangeHandler from './Steps/utils/onChangeHandler';
 import jumpLocation from './Steps/utils/jumpLocation';
 
 const DisplayMap = ({
@@ -31,12 +30,9 @@ const DisplayMap = ({
 		: -122.4;
 	const initLatitude = (latitude as number) ? (latitude as number) : 37.8;
 
-	const onChangeHandler = createOnChangeHandler(setFormData);
-
 	const onMarkerDrag = (e: MarkerDragEvent) => {
 		const { lat, lng } = e.lngLat;
-		onChangeHandler('latitude', lat);
-		onChangeHandler('longitude', lng);
+		setFormData((prev) => ({ ...prev, latitude: lat, longitude: lng }));
 		setValue('longitude', lng, { shouldValidate: true });
 		setValue('latitude', lat, { shouldValidate: true });
 		jumpLocation({ lat, lng, mapRef, zoom: mapRef.current?.getZoom() });

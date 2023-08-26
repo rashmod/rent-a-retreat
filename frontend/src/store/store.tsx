@@ -12,15 +12,21 @@ import { TPageOneSchema } from '../types/form/PageOne';
 import { TPageTwoSchema } from '../types/form/PageTwo';
 import { TPageThreeSchema } from '../types/form/PageThree';
 import { TPageFourSchema } from '../types/form/PageFour';
+import { TPageFiveSchema } from '../types/form/PageFive';
 
 export type TFormData = TPageOneSchema &
 	TPageTwoSchema &
 	TPageThreeSchema &
-	TPageFourSchema;
+	TPageFourSchema &
+	TPageFiveSchema;
 
 type TFormContext = {
 	formData: TFormData;
 	setFormData: Dispatch<SetStateAction<TFormData>>;
+	setFormDataFromContext: (
+		name: string,
+		value: string | number | boolean
+	) => void;
 };
 
 const DEFAULT_VALUE = {
@@ -29,14 +35,29 @@ const DEFAULT_VALUE = {
 	setFormData: (formData: TFormData) => {
 		return;
 	},
+	setFormDataFromContext: (name, value) => {
+		return;
+	},
 } as TFormContext;
 
 export const FormContext = createContext<TFormContext>(DEFAULT_VALUE);
 
 export function FormContextProvider({ children }: { children: ReactElement }) {
 	const [formData, setFormData] = useState<TFormData>(STORE_INITIAL_DATA);
+	const setFormDataFromContext = (
+		name: string,
+		value: string | number | boolean
+	) => {
+		setFormData((prev) => ({ ...prev, [name]: value }));
+	};
+
 	return (
-		<FormContext.Provider value={{ formData, setFormData }}>
+		<FormContext.Provider
+			value={{
+				formData,
+				setFormData,
+				setFormDataFromContext,
+			}}>
 			{children}
 		</FormContext.Provider>
 	);

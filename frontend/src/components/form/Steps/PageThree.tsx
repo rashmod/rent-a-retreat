@@ -5,7 +5,6 @@ import { useFormState } from '../../../store/store';
 import Navigation from '../Navigation';
 import FormWrapper from '../FormWrapper';
 import FloatingLabelInput from '../FloatingLabelInput';
-import createOnChangeHandler from './utils/onChangeHandler';
 import { TStepProps } from '../../../types/form/steps';
 import {
 	PageThreeSchema,
@@ -18,7 +17,7 @@ const PageThree = ({
 	goToNextPage,
 	goToPreviousPage,
 }: TStepProps) => {
-	const { formData, setFormData } = useFormState();
+	const { formData } = useFormState();
 
 	const {
 		register,
@@ -32,8 +31,6 @@ const PageThree = ({
 
 	const onSubmit = () => goToNextPage();
 
-	const onChangeHandler = createOnChangeHandler(setFormData);
-
 	return (
 		<FormWrapper>
 			<form
@@ -43,7 +40,6 @@ const PageThree = ({
 					<div className='flex gap-3'>
 						<FloatingLabelInput
 							register={register}
-							onChangeHandler={onChangeHandler}
 							errors={errors}
 							label='Unit Number'
 							placeholder='Room 401'
@@ -52,7 +48,6 @@ const PageThree = ({
 						/>
 						<FloatingLabelInput
 							register={register}
-							onChangeHandler={onChangeHandler}
 							errors={errors}
 							label='Street Name'
 							placeholder='5th Avenue'
@@ -61,7 +56,6 @@ const PageThree = ({
 					</div>
 					<FloatingLabelInput
 						register={register}
-						onChangeHandler={onChangeHandler}
 						errors={errors}
 						label='Address Line'
 						placeholder='322 Deckow Corners'
@@ -70,7 +64,6 @@ const PageThree = ({
 					<div className='flex gap-3'>
 						<FloatingLabelInput
 							register={register}
-							onChangeHandler={onChangeHandler}
 							errors={errors}
 							label='City'
 							placeholder='Carissaton'
@@ -78,7 +71,6 @@ const PageThree = ({
 						/>
 						<FloatingLabelInput
 							register={register}
-							onChangeHandler={onChangeHandler}
 							errors={errors}
 							label='Postal Code'
 							placeholder='695284'
@@ -88,7 +80,6 @@ const PageThree = ({
 					<div className='flex gap-3'>
 						<FloatingLabelInput
 							register={register}
-							onChangeHandler={onChangeHandler}
 							errors={errors}
 							label='State'
 							placeholder='North Carolina'
@@ -96,7 +87,6 @@ const PageThree = ({
 						/>
 						<FloatingLabelInput
 							register={register}
-							onChangeHandler={onChangeHandler}
 							errors={errors}
 							label='Country'
 							placeholder='Belize'

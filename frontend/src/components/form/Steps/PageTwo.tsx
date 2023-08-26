@@ -6,7 +6,6 @@ import Navigation from '../Navigation';
 import FormWrapper from '../FormWrapper';
 import FloatingLabelInput from '../FloatingLabelInput';
 import Toggle from '../Toggle';
-import createOnChangeHandler from './utils/onChangeHandler';
 import { TStepProps } from '../../../types/form/steps';
 import { PageTwoSchema, TPageTwoSchema } from '../../../types/form/PageTwo';
 
@@ -42,8 +41,6 @@ const PageTwo = ({
 		goToNextPage();
 	};
 
-	const onChangeHandler = createOnChangeHandler(setFormData);
-
 	return (
 		<FormWrapper>
 			<form
@@ -52,7 +49,6 @@ const PageTwo = ({
 				<div className='flex flex-col gap-3 mb-4'>
 					<Toggle
 						register={register}
-						onChangeHandler={onChangeHandler}
 						label='Is Refundable?'
 						name='isRefundable'
 						connectedFields={[
@@ -65,7 +61,6 @@ const PageTwo = ({
 					<FloatingLabelInput
 						register={register}
 						registerOptions={{ valueAsNumber: true }}
-						onChangeHandler={onChangeHandler}
 						errors={errors}
 						label='Percent refundable'
 						placeholder='70'
@@ -75,7 +70,6 @@ const PageTwo = ({
 					<FloatingLabelInput
 						register={register}
 						registerOptions={{ valueAsNumber: true }}
-						onChangeHandler={onChangeHandler}
 						errors={errors}
 						label='Days before cancellation'
 						placeholder='5'

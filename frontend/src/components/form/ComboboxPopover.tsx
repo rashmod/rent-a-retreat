@@ -31,10 +31,6 @@ export type Option = Record<'place_id' | 'description', string>;
 export type ComboboxPopoverProps = {
 	emptyMessage?: string;
 	value?: Option;
-	onChangeHandler?: (
-		name: keyof TPageFourSchema,
-		value: string | boolean
-	) => void;
 	onValueChange?: (value: Option) => void;
 	isLoading?: boolean;
 	disabled?: boolean;
@@ -164,10 +160,11 @@ const ComboboxPopover = ({
 					value={inputValue}
 					onValueChange={isLoading ? undefined : setInputValue}
 					onBlur={handleBlur}
-					// onFocus={() => setOpen(true)}
+					onFocus={() => setOpen(true)}
 					placeholder={placeholder}
 					disabled={!ready}
 					className='text-sm px-3 pb-2.5 pt-4'
+					label='Search Location'
 				/>
 			</div>
 			{isOpen ? (

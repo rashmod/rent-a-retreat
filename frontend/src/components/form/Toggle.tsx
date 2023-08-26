@@ -5,10 +5,11 @@ import {
 	UseFormRegister,
 	UseFormResetField,
 } from 'react-hook-form';
+import { useFormState } from '../../store/store';
 
 export type TInputProps<TSchema extends FieldValues> = {
 	register: UseFormRegister<TSchema>;
-	onChangeHandler: (name: Path<TSchema>, value: string | boolean) => void;
+	// onChangeHandler: (name: Path<TSchema>, value: string | boolean) => void;
 	errors?: FieldErrors<TSchema>;
 	label: string;
 	name: Path<TSchema>;
@@ -18,18 +19,20 @@ export type TInputProps<TSchema extends FieldValues> = {
 
 const Toggle = <TSchema extends FieldValues>({
 	register,
-	onChangeHandler,
+	// onChangeHandler,
 	label,
 	name,
 	connectedFields,
 	resetField,
 }: TInputProps<TSchema>) => {
+	const { setFormDataFromContext } = useFormState();
+
 	const onChangeHelper = (event: React.ChangeEvent<HTMLInputElement>) => {
-		onChangeHandler(name, event.target.checked);
+		setFormDataFromContext(name, event.target.checked);
 		if (connectedFields && resetField) {
 			for (let i = 0; i < connectedFields.length; i++) {
 				resetField(connectedFields[i] as Path<TSchema>);
-				onChangeHandler(connectedFields[i] as Path<TSchema>, '');
+				setFormDataFromContext(connectedFields[i] as Path<TSchema>, '');
 			}
 		}
 	};

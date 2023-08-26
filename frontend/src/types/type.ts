@@ -1,4 +1,4 @@
-export interface ICardProps {
+export type TCardProps = {
 	listingId: string;
 	listingName: string;
 	bedroomCount: number;
@@ -7,52 +7,66 @@ export interface ICardProps {
 	avgRating: number;
 	totalRatingCount: number;
 	listingPhoto?: { photoUrl: string }[];
-}
+};
 
-export interface IPhoto {
+export type TPhoto = {
 	listingPhotoId: string;
 	photoUrl: string;
 	position: number;
 	listingId: string;
-}
-export interface IPhotoArray {
-	photoArray: IPhoto[];
-}
+};
+export type TPhotoArray = {
+	photoArray: TPhoto[];
+};
 
-export interface IListingDetail {
+export type TListingDetail = {
 	user: { firstName: string; lastName: string };
 	bedroomCount: number;
 	bathroomCount: number;
 	maxGuest: number;
-	amenity: {
-		amenityId: string;
-		amenityTitle: string;
-		amenityDescription: string;
-	}[];
-	category: {
-		categoryId: string;
-		categoryTitle: string;
-		categoryDescription: string;
-	}[];
-	houseRule: {
-		houseRuleId: string;
-		ruleTitle: string;
-		ruleDescription: string;
-	}[];
-}
+	amenity: TAmenity[];
+	category: TCategory[];
+	houseRule: THouseRule[];
+};
 
-export interface IListingHeading {
+export type TAmenity = {
+	amenityId: string;
+	amenityTitle: string;
+	amenityDescription: string;
+};
+
+export type TCategory = {
+	categoryId: string;
+	categoryTitle: string;
+	categoryDescription: string;
+};
+
+export type THouseRule = {
+	houseRuleId: string;
+	ruleTitle: string;
+	ruleDescription: string;
+};
+
+export type TModalValues = {
+	title: TModalTitle;
+	// content: IAmenity[] | ICategory[] | IHouseRule[]
+	content: { id: string; title: string; description: string }[];
+};
+
+export type TModalTitle = '' | 'Amenities' | 'Categories' | 'House Rules';
+
+export type TListingHeading = {
 	listingName: string;
 	avgRating: number;
 	totalRatingCount: number;
 	address: { city: string; state: string; country: string };
 	listingId?: string;
-}
+};
 
-export interface IReservationData {
+export type TReservationData = {
 	pricePerNight: number;
 	cleaningFee: number;
 	isRefundable: boolean;
 	percentRefundable: number | null;
 	daysBeforeCancellation: number | null;
-}
+};

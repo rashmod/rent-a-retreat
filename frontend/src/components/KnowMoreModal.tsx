@@ -1,5 +1,5 @@
 import { XCircle } from 'lucide-react';
-import { IModalValues } from '../types/type';
+import { TModalValues } from '../types/type';
 
 const CLOSE_BTN_SIZE = 40;
 
@@ -8,7 +8,7 @@ const KnowMoreModal = ({
 	content,
 }: {
 	closeModal: () => void;
-	content: IModalValues;
+	content: TModalValues;
 }) => {
 	return (
 		<div className='w-1/2 px-8 py-5 bg-white rounded-3xl'>

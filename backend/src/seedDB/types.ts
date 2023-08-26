@@ -1,4 +1,4 @@
-export interface IAddress {
+export type TAddress = {
 	unitNumber: string;
 	streetName: string;
 	addressLine: string;
@@ -6,31 +6,31 @@ export interface IAddress {
 	postalCode: string;
 	state: string;
 	country: string;
-}
+};
 
-export interface IEmergencyContact {
+export type TEmergencyContact = {
 	email: string;
 	firstName: string;
 	lastName: string;
 	phoneNumber: number;
 	relationship: string;
-}
+};
 
-export interface IListingPhoto {
+export type TListingPhoto = {
 	create: { photoUrl: string; position: number }[];
-}
+};
 
-export interface ICategory {
+export type TCategory = {
 	connect: { categoryId: string }[];
-}
-export interface IAmenity {
+};
+export type TAmenity = {
 	connect: { amenityId: string }[];
-}
-export interface IHouseRule {
+};
+export type THouseRule = {
 	connect: { houseRuleId: string }[];
-}
+};
 
-export interface IListing {
+export type TListing = {
 	listingName: string;
 	bedroomCount: number;
 	bathroomCount: number;
@@ -44,36 +44,36 @@ export interface IListing {
 	isRefundable: boolean;
 	percentRefundable: number | null;
 	daysBeforeCancellation: number | null;
-	address?: { create: IAddress };
-	listingPhoto?: IListingPhoto;
-	category?: ICategory;
-	amenity?: IAmenity;
-	houseRule?: IHouseRule;
-}
+	address?: { create: TAddress };
+	listingPhoto?: TListingPhoto;
+	category?: TCategory;
+	amenity?: TAmenity;
+	houseRule?: THouseRule;
+};
 
-export interface IUser {
+export type TUser = {
 	firstName: string;
 	lastName: string;
 	gender: string;
 	email: string;
 	phoneNumber: number;
 	dateOfBirth: Date;
-	host?: { create: IHost };
-	guest?: { create: IGuest };
+	host?: { create: THost };
+	guest?: { create: TGuest };
 	profilePhoto?: { create: { imgUrl: string } };
-}
+};
 
-export interface IHost {
+export type THost = {
 	avgRating: number;
 	totalRatingCount: number;
 	listing: {
-		create: IListing[];
+		create: TListing[];
 	};
-	address: { create: IAddress };
-	emergencyContact: { create: IEmergencyContact[] };
-}
+	address: { create: TAddress };
+	emergencyContact: { create: TEmergencyContact[] };
+};
 
-export interface IGuest {
+export type TGuest = {
 	avgRating: number;
 	totalRatingCount: number;
-}
+};

@@ -3,7 +3,7 @@ import { prisma } from '../db/prisma';
 import generateAddress from '../seedDB/generators/address';
 import { Prisma } from '@prisma/client';
 
-interface IAddressData {
+type TAddressData = {
 	unitNumber: string;
 	streetName: string;
 	addressLine: string;
@@ -15,7 +15,7 @@ interface IAddressData {
 	listingId?: string;
 	host?: { connect: { hostId: string } };
 	hostId?: string;
-}
+};
 
 // @desc Post address
 // @route POST /api/address/:ownerId
@@ -43,7 +43,7 @@ export const postAddress = async (req: Request, res: Response) => {
 			select: { hostId: true },
 		});
 
-		const addressData: IAddressData = {
+		const addressData: TAddressData = {
 			unitNumber,
 			streetName,
 			addressLine,

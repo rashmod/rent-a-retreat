@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ICardProps } from '../types/type';
+import { TCardProps } from '../types/type';
 import { useState } from 'react';
 
 const Card = ({
@@ -11,7 +11,7 @@ const Card = ({
 	avgRating,
 	totalRatingCount,
 	listingPhoto,
-}: ICardProps) => {
+}: TCardProps) => {
 	const [imageIsLoaded, setImageIsLoaded] = useState(false);
 
 	return (

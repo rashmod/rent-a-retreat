@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import Card from './Card';
-import { ICardProps } from '../types/type';
+import { TCardProps } from '../types/type';
 import { getListings } from '../api/listings';
 
 const CardList = () => {
@@ -16,7 +16,7 @@ const CardList = () => {
 
 	return (
 		<div className='grid grid-cols-4 gap-5 mx-auto'>
-			{data.map((listing: ICardProps) => (
+			{data.map((listing: TCardProps) => (
 				<Card key={listing.listingId} {...listing} />
 			))}
 		</div>

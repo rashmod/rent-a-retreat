@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import {
-	IAmenity,
-	ICategory,
-	IHouseRule,
-	IListingDetail,
-	IModalValues,
+	TAmenity,
+	TCategory,
+	THouseRule,
+	TListingDetail,
+	TModalValues,
 	TModalTitle,
 } from '../types/type';
 import { ChevronsDown } from 'lucide-react';
@@ -12,16 +12,16 @@ import { useEffect, useState } from 'react';
 import ModalContainer from './ModalContainer';
 import KnowMoreModal from './KnowMoreModal';
 
-type TModalType = IAmenity | ICategory | IHouseRule;
+type TModalType = TAmenity | TCategory | THouseRule;
 
-interface IOutputItem {
+type TOutputItem = {
 	id: string;
 	title: string;
 	description: string;
-}
+};
 
-const changeToValid = (arr: TModalType[]): IOutputItem[] => {
-	const changedArr: IOutputItem[] = arr.map((item) => {
+const changeToValid = (arr: TModalType[]): TOutputItem[] => {
+	const changedArr: TOutputItem[] = arr.map((item) => {
 		let id, title, description;
 
 		if ('amenityId' in item) {
@@ -56,9 +56,9 @@ const ListingDetailsContainer = ({
 	amenity,
 	category,
 	houseRule,
-}: IListingDetail) => {
+}: TListingDetail) => {
 	const [showModal, setShowModal] = useState(false);
-	const [modalContent, setModalContent] = useState<IModalValues>({
+	const [modalContent, setModalContent] = useState<TModalValues>({
 		title: '',
 		content: [],
 	});

@@ -2,7 +2,7 @@ import connectDB, { prisma } from '../db/prisma';
 import generateUser, { generateGuest, generateHost } from './generators/user';
 import generateAddress from './generators/address';
 import generateProfilePhoto from './generators/profilePhoto';
-import { IUser } from './types';
+import { TUser } from './types';
 import {
 	flipThreeSidedCoin,
 	generateArray,
@@ -31,7 +31,7 @@ export const generateCompleteUser = async () => {
 	const amenities = await getAmenities();
 	const houseRules = await getHouseRules();
 
-	const creationObj: IUser = user;
+	const creationObj: TUser = user;
 	const includeObj = {
 		profilePhoto: true,
 		guest: true,

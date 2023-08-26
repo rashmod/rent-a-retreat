@@ -1,5 +1,5 @@
 import { LayoutGrid } from 'lucide-react';
-import { IPhotoArray } from '../types/type';
+import { TPhotoArray } from '../types/type';
 import { Link } from 'react-router-dom';
 
 const gridCol = [
@@ -12,7 +12,7 @@ const gridCol = [
 
 const arr = new Array(5).fill(null);
 
-const ImageContainer = ({ photoArray }: IPhotoArray) => {
+const ImageContainer = ({ photoArray }: TPhotoArray) => {
 	return (
 		<div className='relative grid w-full grid-cols-4 grid-rows-2 gap-3 mb-3 max-h-96'>
 			{arr.map((_, i) => {

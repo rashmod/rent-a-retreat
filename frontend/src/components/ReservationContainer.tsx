@@ -1,5 +1,5 @@
 import { MinusCircle, PlusCircle } from 'lucide-react';
-import { IReservationData } from '../types/type';
+import { TReservationData } from '../types/type';
 import { DatePickerWithRange } from './ui/DatePickerWithRange';
 
 const ReservationContainer = ({
@@ -8,7 +8,7 @@ const ReservationContainer = ({
 	isRefundable,
 	percentRefundable,
 	daysBeforeCancellation,
-}: IReservationData) => {
+}: TReservationData) => {
 	return (
 		<div className='col-span-5 col-start-8 px-8 py-5 text-white bg-my-primary-900 rounded-xl'>
 			<div className='flex gap-2.5 items-end mb-4'>

@@ -4,7 +4,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useFormState } from '../../../store/store';
 import Navigation from '../Navigation';
 import FormWrapper from '../FormWrapper';
-import { PageFiveSchema, TPageFiveSchema } from '../../../schema/PageFive';
+import {
+	PageFiveSchema,
+	TPageFiveSchema,
+} from '../../../schema/PageFiveSchema';
 import { TStepProps } from '../../../types/form/steps';
 import MultiSelect from '../MultiSelect';
 import { useQuery } from '@tanstack/react-query';

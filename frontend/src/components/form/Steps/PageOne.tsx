@@ -5,7 +5,7 @@ import { useFormState } from '../../../store/store';
 import Navigation from '../Navigation';
 import FormWrapper from '../FormWrapper';
 import FloatingLabelInput from '../FloatingLabelInput';
-import { PageOneSchema, TPageOneSchema } from '../../../schema/PageOne';
+import { PageOneSchema, TPageOneSchema } from '../../../schema/PageOneSchema';
 import { TStepProps } from '../../../types/form/steps';
 
 const PageOne = ({

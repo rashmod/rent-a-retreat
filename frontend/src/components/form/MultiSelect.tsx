@@ -5,7 +5,7 @@ import { Control, useController } from 'react-hook-form';
 
 import { Badge } from '../ui/badge';
 import { Command, CommandGroup, CommandItem } from '../ui/command';
-import { TPageFiveSchema } from '../../schema/PageFive';
+import { TPageFiveSchema } from '../../schema/PageFiveSchema';
 import { useFormState } from '../../store/store';
 
 type TMultiSelectProps<T> = {

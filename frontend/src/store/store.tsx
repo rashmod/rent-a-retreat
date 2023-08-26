@@ -8,11 +8,11 @@ import {
 } from 'react';
 
 import { STORE_INITIAL_DATA } from '../data/data';
-import { TPageOneSchema } from '../schema/PageOne';
-import { TPageTwoSchema } from '../schema/PageTwo';
-import { TPageThreeSchema } from '../schema/PageThree';
-import { TPageFourSchema } from '../schema/PageFour';
-import { TPageFiveSchema } from '../schema/PageFive';
+import { TPageOneSchema } from '../schema/PageOneSchema';
+import { TPageTwoSchema } from '../schema/PageTwoSchema';
+import { TPageThreeSchema } from '../schema/PageThreeSchema';
+import { TPageFourSchema } from '../schema/PageFourSchema';
+import { TPageFiveSchema } from '../schema/PageFiveSchema';
 
 export type TFormData = TPageOneSchema &
 	TPageTwoSchema &

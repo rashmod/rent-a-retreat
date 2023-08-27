@@ -38,8 +38,6 @@ const DisplayMap = ({
 		jumpLocation({ lat, lng, mapRef, zoom: mapRef.current?.getZoom() });
 	};
 
-	console.log(errors);
-
 	return (
 		<div>
 			<Map

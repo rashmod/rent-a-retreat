@@ -154,25 +154,6 @@ export const PageInputList = [
 	PageFourInputList,
 ];
 
-// frontend\src\components\form\Steps\ConfirmPage.tsx
-// export const ConfirmPageList = [
-// 	{
-// 		title: 'Page One',
-// 		children: [
-// 			{ label: 'First Name', name: 'firstname' },
-// 			{ label: 'User Name', name: 'username' },
-// 		],
-// 	},
-// 	{
-// 		title: 'Page Two',
-// 		children: [{ label: 'Last Name', name: 'lastname' }],
-// 	},
-// 	{
-// 		title: 'Page Three',
-// 		children: [{ label: 'Email', name: 'email' }],
-// 	},
-// ];
-
 export const ConfirmPageList = stepTitles
 	.map((item, index) => {
 		if (index === stepTitles.length - 1) return;

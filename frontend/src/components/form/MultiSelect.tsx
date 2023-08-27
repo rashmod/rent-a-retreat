@@ -39,37 +39,49 @@ const MultiSelect = <T,>({
 
 	useEffect(() => {
 		setSelected(
-			data.filter((item) => formData[name].includes(getId(item)))
+			// eslint-disable-next-line
+			// @ts-ignore
+			formData[name].filter((item: T) =>
+				data.some((obj) => getId(obj) === getId(item))
+			)
 		);
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleUnselect = useCallback(
-		(category: T) => {
+		(option: T) => {
+			field.onChange(
+				// eslint-disable-next-line
+				// @ts-ignore
+				field.value.filter((item: T) => getId(item) !== getId(option))
+			);
 			setSelected((prev) =>
-				prev.filter((s) => getId(s) !== getId(category))
+				prev.filter((s) => getId(s) !== getId(option))
 			);
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				[name]: prevFormData[name].filter(
-					(item) => getId(category) !== item
+				[name]: (prevFormData[name] as T[]).filter(
+					(item: T) => getId(option) !== getId(item)
 				),
 			}));
 		},
-		[getId, name, setFormData]
+		[getId, name, setFormData, field]
 	);
 
 	const handleSelect = useCallback(
 		(item: T) => {
-			field.onChange([...field.value, getId(item)]);
 			setInputValue('');
+			// eslint-disable-next-line
+			// @ts-ignore
+			field.onChange([...field.value, item]);
 			setSelected((prev) => [...prev, item]);
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				[name]: [...prevFormData[name], getId(item)],
+				[name]: [...prevFormData[name], item],
 			}));
 		},
-		[field, getId, name, setFormData]
+		[name, setFormData, field]
 	);
 
 	const handleKeyDown = useCallback(
@@ -78,6 +90,7 @@ const MultiSelect = <T,>({
 			if (input) {
 				if (e.key === 'Delete' || e.key === 'Backspace') {
 					if (input.value === '' && selected.length > 0) {
+						field.onChange(field.value.slice(0, -1));
 						setSelected((prev) => prev.slice(0, -1));
 						setFormData((prevFormData) => ({
 							...prevFormData,
@@ -91,12 +104,10 @@ const MultiSelect = <T,>({
 				}
 			}
 		},
-		[selected, name, setFormData]
+		[selected, name, setFormData, field]
 	);
 
 	const selectables = data?.filter((item: T) => !selected.includes(item));
-
-	console.log(fieldState.error);
 
 	if (isLoading) return <h1>Loading...</h1>;
 

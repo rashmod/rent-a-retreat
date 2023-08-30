@@ -7,6 +7,7 @@ import Stepper from '../components/form/Stepper';
 import { stepTitles } from '../data/data';
 import PageFour from '../components/form/Steps/PageFour';
 import PageFive from '../components/form/Steps/PageFive';
+import PageSix from '../components/form/Steps/PageSix';
 
 const AddListing = () => {
 	const {
@@ -17,7 +18,7 @@ const AddListing = () => {
 		goToPreviousPage,
 		gotoIndex,
 		formLength,
-	} = useMultiStepForm(6);
+	} = useMultiStepForm(7);
 
 	const steps = [
 		<PageOne
@@ -45,6 +46,12 @@ const AddListing = () => {
 			goToPreviousPage={goToPreviousPage}
 		/>,
 		<PageFive
+			isFirstPage={isFirstPage}
+			isLastPage={isLastPage}
+			goToNextPage={goToNextPage}
+			goToPreviousPage={goToPreviousPage}
+		/>,
+		<PageSix
 			isFirstPage={isFirstPage}
 			isLastPage={isLastPage}
 			goToNextPage={goToNextPage}

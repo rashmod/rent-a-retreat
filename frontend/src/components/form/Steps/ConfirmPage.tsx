@@ -28,6 +28,10 @@ const ConfirmPage = ({
 
 	function onSubmit() {
 		alert(JSON.stringify(formData, null, 2));
+		console.log(formData);
+		// eslint-disable-next-line
+		// @ts-ignore
+		console.log(formData.images);
 	}
 
 	return (

@@ -68,6 +68,7 @@ const ConfirmPage = ({
 								</ConfirmSectionWrapper>
 							);
 					})}
+					{/* ========================================== */}
 					<ConfirmSectionWrapper>
 						<ConfirmSectionHeader title='Map'>
 							<EditButton gotoIndex={() => gotoIndex(3)} />
@@ -97,6 +98,7 @@ const ConfirmPage = ({
 							/>
 						</Map>
 					</ConfirmSectionWrapper>
+					{/* ========================================== */}
 					<ConfirmSectionWrapper>
 						<ConfirmSectionHeader title='Miscellaneous'>
 							<EditButton gotoIndex={() => gotoIndex(4)} />
@@ -125,6 +127,30 @@ const ConfirmPage = ({
 							getTitle={(item) => item.ruleTitle}
 							getDesc={(item) => item.ruleDescription}
 						/>
+					</ConfirmSectionWrapper>
+					{/* ========================================== */}
+					<ConfirmSectionWrapper>
+						<ConfirmSectionHeader title='Images'>
+							<EditButton gotoIndex={() => gotoIndex(5)} />
+						</ConfirmSectionHeader>
+						<div className='p-3 rounded-xl bg-my-primary-100 min-h-32'>
+							{formData.images.length === 0 ? (
+								<div className='flex flex-col items-center justify-center h-32 p-3 text-center'>
+									<p>No images added</p>
+								</div>
+							) : (
+								<div className='grid w-full grid-cols-3 gap-3 mx-auto'>
+									{formData.images.map((image) => (
+										<img
+											key={image.localURL}
+											src={image.localURL}
+											className='object-cover w-full rounded-md aspect-square min-w-32'
+											loading='lazy'
+										/>
+									))}
+								</div>
+							)}
+						</div>
 					</ConfirmSectionWrapper>
 				</div>
 

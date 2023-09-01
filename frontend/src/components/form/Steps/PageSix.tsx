@@ -1,4 +1,10 @@
-import { ChangeEvent, DragEvent, useCallback, useState } from 'react';
+import {
+	ChangeEvent,
+	DragEvent,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
 import { Trash2, UploadCloud } from 'lucide-react';
 
 import { TStepProps } from '../../../types/form/steps';
@@ -19,7 +25,10 @@ const PageSix = ({
 	goToPreviousPage,
 }: TStepProps) => {
 	const [dragActive, setDragActive] = useState(false);
-	const { setFormData } = useFormState();
+	const {
+		formData: { images: initialImages },
+		setFormData,
+	} = useFormState();
 
 	const [input, dispatch] = useFileReducer();
 	const noInput = input.length === 0;
@@ -37,6 +46,11 @@ const PageSix = ({
 		},
 		[dispatch]
 	);
+
+	useEffect(() => {
+		addFilesToState(initialImages);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const handleChange = useCallback(
 		async (event: ChangeEvent<HTMLInputElement>) => {

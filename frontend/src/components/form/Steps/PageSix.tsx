@@ -1,10 +1,11 @@
 import { ChangeEvent, DragEvent, useCallback, useState } from 'react';
+import { Trash2, UploadCloud } from 'lucide-react';
+
 import { TStepProps } from '../../../types/form/steps';
 import FormWrapper from '../FormWrapper';
 import Navigation from '../Navigation';
 import { useFormState } from '../../../store/store';
 import { cn } from '../../../lib/utils';
-import { UploadCloud } from 'lucide-react';
 import processFiles from './utils/processFiles';
 import useFileReducer from './utils/useFileReducer';
 
@@ -25,6 +26,7 @@ const PageSix = ({
 	const { setFormData } = useFormState();
 
 	const [input, dispatch] = useFileReducer();
+	const noInput = input.length === 0;
 
 	const addFilesToState = useCallback(
 		(files: FileWithUrl[]) => {
@@ -33,7 +35,12 @@ const PageSix = ({
 		[dispatch]
 	);
 
-	const noInput = input.length === 0;
+	const removeFileFromState = useCallback(
+		(fileName: string) => {
+			dispatch({ type: 'REMOVE_FILE_FROM_INPUT', payload: fileName });
+		},
+		[dispatch]
+	);
 
 	const handleChange = useCallback(
 		async (event: ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +93,7 @@ const PageSix = ({
 	return (
 		<FormWrapper>
 			<form onSubmit={onSubmit}>
-				<div className='mb-5 rounded-xl bg-my-primary-100'>
+				<div className='mb-5 rounded-xl bg-my-primary-100 min-h-32'>
 					{noInput ? (
 						<div className='flex flex-col items-center justify-center h-32 p-3 text-center'>
 							<p>Added images will be previewed here.</p>
@@ -103,8 +110,17 @@ const PageSix = ({
 											src={image.localURL}
 											className='object-cover w-full rounded-md aspect-square min-w-32'
 											loading='lazy'
-											draggable='true'
 										/>
+										<div className='absolute inset-0 flex items-center justify-center gap-4 text-white transition duration-200 bg-black rounded-md opacity-0 bg-opacity-70 group-hover:opacity-100'>
+											<Trash2
+												className='hover:text-red-400'
+												onClick={() =>
+													removeFileFromState(
+														image.image.name
+													)
+												}
+											/>
+										</div>
 									</div>
 								))}
 							</div>

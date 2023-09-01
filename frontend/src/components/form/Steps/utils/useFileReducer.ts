@@ -17,6 +17,7 @@ const removeFileFromInputAction = () => ({
 type Action =
 	| ReturnType<typeof addFilesToInputAction>
 	| ReturnType<typeof removeFileFromInputAction>;
+
 type State = FileWithUrl[];
 
 const useFileReducer = () => {

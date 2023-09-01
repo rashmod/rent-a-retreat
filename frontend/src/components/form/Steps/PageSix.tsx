@@ -8,13 +8,9 @@ import { useFormState } from '../../../store/store';
 import { cn } from '../../../lib/utils';
 import processFiles from './utils/processFiles';
 import useFileReducer from './utils/useFileReducer';
+import { FileWithUrl } from '../../../schema/PageSixSchema';
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2 MB
-
-export type FileWithUrl = {
-	image: File;
-	localURL: string;
-};
 
 const PageSix = ({
 	isFirstPage,

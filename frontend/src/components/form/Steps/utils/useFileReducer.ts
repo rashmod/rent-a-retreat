@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
 
 import removeDuplicateFiles from './removeDuplicateFiles';
-import { FileWithUrl } from '../PageSix';
+import { FileWithUrl } from '../../../../schema/PageSixSchema';
 
 // Reducer action(s)
 const addFilesToInputAction = () => ({

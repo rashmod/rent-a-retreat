@@ -13,12 +13,14 @@ import { TPageTwoSchema } from '../schema/PageTwoSchema';
 import { TPageThreeSchema } from '../schema/PageThreeSchema';
 import { TPageFourSchema } from '../schema/PageFourSchema';
 import { TPageFiveSchema } from '../schema/PageFiveSchema';
+import { TPageSixSchema } from '../schema/PageSixSchema';
 
 export type TFormData = TPageOneSchema &
 	TPageTwoSchema &
 	TPageThreeSchema &
 	TPageFourSchema &
-	TPageFiveSchema;
+	TPageFiveSchema &
+	TPageSixSchema;
 
 type TFormContext = {
 	formData: TFormData;

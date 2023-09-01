@@ -38,7 +38,7 @@ export const STORE_INITIAL_DATA = {
 	categories: [],
 	amenities: [],
 	houseRules: [],
-	email: '',
+	images: [],
 };
 
 // frontend\src\components\form\Steps\PageOne.tsx

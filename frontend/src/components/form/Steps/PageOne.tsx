@@ -15,6 +15,7 @@ const PageOne = ({
 	goToPreviousPage,
 }: TStepProps) => {
 	const { formData } = useFormState();
+	// todo add user input to local storage
 
 	const {
 		register,

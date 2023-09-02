@@ -24,6 +24,7 @@ const PageSix = ({
 	goToNextPage,
 	goToPreviousPage,
 }: TStepProps) => {
+	// todo show error on image size exceed size or name conflict
 	const [dragActive, setDragActive] = useState(false);
 	const {
 		formData: { images: initialImages },

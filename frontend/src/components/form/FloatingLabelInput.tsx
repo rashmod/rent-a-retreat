@@ -1,4 +1,9 @@
-import { FieldValues, FieldError, RegisterOptions } from 'react-hook-form';
+import {
+	FieldValues,
+	FieldError,
+	FieldErrors,
+	RegisterOptions,
+} from 'react-hook-form';
 import { TInputProps } from './Toggle';
 import { useFormState } from '../../store/store';
 
@@ -8,6 +13,7 @@ type TFloatingLabelInputProps<TSchema extends FieldValues> =
 		placeholder: string;
 		autofocus?: boolean;
 		disabled?: boolean;
+		errors: FieldErrors<TSchema>;
 	};
 const FloatingLabelInput = <TSchema extends FieldValues>({
 	register,

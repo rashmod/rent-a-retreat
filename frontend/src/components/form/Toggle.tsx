@@ -1,39 +1,68 @@
 import {
-	FieldErrors,
 	FieldValues,
 	Path,
+	PathValue,
 	UseFormRegister,
 	UseFormResetField,
+	UseFormSetValue,
+	UseFormUnregister,
 } from 'react-hook-form';
 import { useFormState } from '../../store/store';
 
 export type TInputProps<TSchema extends FieldValues> = {
 	register: UseFormRegister<TSchema>;
-	// onChangeHandler: (name: Path<TSchema>, value: string | boolean) => void;
-	errors?: FieldErrors<TSchema>;
 	label: string;
 	name: Path<TSchema>;
-	connectedFields?: string[];
-	resetField?: UseFormResetField<TSchema>;
+};
+
+type TToggleProps<TSchema extends FieldValues> = TInputProps<TSchema> & {
+	connectedFields: string[];
+	resetField: UseFormResetField<TSchema>;
+	unregister: UseFormUnregister<TSchema>;
+	setValue: UseFormSetValue<TSchema>;
 };
 
 const Toggle = <TSchema extends FieldValues>({
 	register,
-	// onChangeHandler,
 	label,
 	name,
 	connectedFields,
 	resetField,
-}: TInputProps<TSchema>) => {
-	const { setFormDataFromContext } = useFormState();
+	unregister,
+	setValue,
+}: TToggleProps<TSchema>) => {
+	const { setFormDataFromContext, setFormData } = useFormState();
 
 	const onChangeHelper = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setFormDataFromContext(name, event.target.checked);
-		if (connectedFields && resetField) {
-			for (let i = 0; i < connectedFields.length; i++) {
-				resetField(connectedFields[i] as Path<TSchema>);
-				setFormDataFromContext(connectedFields[i] as Path<TSchema>, '');
-			}
+
+		for (let i = 0; i < connectedFields.length; i++) {
+			resetField(connectedFields[i] as Path<TSchema>);
+			// setFormDataFromContext(connectedFields[i] as Path<TSchema>, '');
+		}
+		if (!event.target.checked) {
+			setFormData((prev) => ({
+				...prev,
+				percentRefundable: undefined,
+				daysBeforeCancellation: undefined,
+			}));
+			unregister('percentRefundable' as Path<TSchema>);
+			unregister('daysBeforeCancellation' as Path<TSchema>);
+		} else {
+			setFormData((prev) => ({
+				...prev,
+				percentRefundable: '',
+				daysBeforeCancellation: '',
+			}));
+
+			setValue(
+				'percentRefundable' as Path<TSchema>,
+				'' as PathValue<TSchema, Path<TSchema>>
+			);
+			setValue(
+				'daysBeforeCancellation' as Path<TSchema>,
+				'' as PathValue<TSchema, Path<TSchema>>
+			);
 		}
 	};
 

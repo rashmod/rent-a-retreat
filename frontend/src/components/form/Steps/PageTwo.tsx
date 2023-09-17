@@ -16,7 +16,6 @@ const PageTwo = ({
 	goToNextPage,
 	goToPreviousPage,
 }: TStepProps) => {
-	// todo validation broke
 	const { formData, setFormData } = useFormState();
 
 	const {
@@ -25,6 +24,8 @@ const PageTwo = ({
 		control,
 		formState: { errors },
 		resetField,
+		unregister,
+		setValue,
 	} = useForm<TPageTwoSchema>({
 		defaultValues: formData,
 		mode: 'all',
@@ -59,6 +60,8 @@ const PageTwo = ({
 							'daysBeforeCancellation',
 						]}
 						resetField={resetField}
+						unregister={unregister}
+						setValue={setValue}
 					/>
 
 					<FloatingLabelInput

@@ -26,8 +26,17 @@ const generateUser = () => {
 		.replace(/[^a-zA-Z0-9 ]/g, '')
 		.slice(2);
 	const dateOfBirth = faker.date.birthdate();
+	const password = firstName + lastName;
 
-	return { firstName, lastName, gender, email, phoneNumber, dateOfBirth };
+	return {
+		firstName,
+		lastName,
+		gender,
+		email,
+		phoneNumber,
+		dateOfBirth,
+		password,
+	};
 };
 
 export const generateHost = () => {

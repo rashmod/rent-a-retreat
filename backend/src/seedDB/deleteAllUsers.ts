@@ -6,7 +6,7 @@ const deleteAllUsers = async () => {
 		prisma.emergencyContact.deleteMany(),
 
 		prisma.address.deleteMany(),
-		prisma.listingPhoto.deleteMany(),
+		prisma.listingImage.deleteMany(),
 		prisma.reservation.deleteMany(),
 		prisma.listing.deleteMany(),
 
@@ -15,7 +15,7 @@ const deleteAllUsers = async () => {
 		prisma.reservation.deleteMany(),
 		prisma.guest.deleteMany(),
 
-		prisma.profilePhoto.deleteMany(),
+		prisma.profileImage.deleteMany(),
 
 		prisma.user.deleteMany(),
 	]);

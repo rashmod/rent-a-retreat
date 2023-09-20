@@ -22,14 +22,14 @@ model User {
   phoneNumber BigInt
   dateOfBirth DateTime
 
-  profilePhoto ProfilePhoto?
+  profileImage ProfileImage?
   host         Host?
   guest        Guest?
 }
 
-model ProfilePhoto {
-  profilePhotoId String @id @default(uuid())
-  imgUrl         String
+model ProfileImage {
+  profileImageId   String @id @default(uuid())
+  profileImageName String
 
   user   User   @relation(fields: [userId], references: [userId])
   userId String @unique
@@ -113,7 +113,7 @@ model Listing {
   updatedAt DateTime @updatedAt
 
   address      Address?
-  listingPhoto ListingPhoto[]
+  listingImage ListingImage[]
   houseRule    HouseRule[]
   category     Category[]
   amenity      Amenity[]
@@ -122,10 +122,10 @@ model Listing {
   reservation  Reservation[]
 }
 
-model ListingPhoto {
-  listingPhotoId String @id @default(uuid())
-  photoUrl       String
-  position       Int
+model ListingImage {
+  listingImageId   String @id @default(uuid())
+  listingImageName String
+  position         Int
 
   listing   Listing @relation(fields: [listingId], references: [listingId])
   listingId String

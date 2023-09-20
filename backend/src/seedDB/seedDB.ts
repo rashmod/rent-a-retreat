@@ -9,5 +9,5 @@ connectDB();
 // seedCallback(seedCategories, 'categories');
 // seedCallback(seedAmenities, 'amenities');
 
-// seedCallback(() => addUsersToDB(50), 'user');
+seedCallback(() => addUsersToDB(1), 'user');
 // seedCallback(deleteAllUsers, 'delete users');

@@ -10,7 +10,7 @@ import generateListing from '../seedDB/generators/listing';
 export const getAllListings = async (req: Request, res: Response) => {
 	try {
 		const listings = await prisma.listing.findMany({
-			include: { listingPhoto: { where: { position: 1 } } },
+			include: { listingImage: { where: { position: 1 } } },
 			take: 10,
 			orderBy: { createdAt: 'desc' },
 		});
@@ -48,7 +48,7 @@ export const getListingDetails = async (req: Request, res: Response) => {
 					},
 				},
 				houseRule: true,
-				listingPhoto: true,
+				listingImage: true,
 				reservation: true,
 			},
 		});
@@ -70,13 +70,13 @@ export const postListing = async (req: Request, res: Response) => {
 			categoryIds,
 			amenityIds,
 			houseRuleIds,
-			listingPhoto,
+			listingImage,
 		}: {
 			hostId: string;
 			categoryIds: string[];
 			amenityIds: string[];
 			houseRuleIds: string[];
-			listingPhoto: { photoUrl: string; position: number }[];
+			listingImage: { photoUrl: string; position: number }[];
 		} = req.body;
 		const {
 			listingName,
@@ -121,9 +121,9 @@ export const postListing = async (req: Request, res: Response) => {
 						houseRuleId,
 					})),
 				},
-				listingPhoto: {
-					create: listingPhoto.map((item) => ({
-						photoUrl: item.photoUrl,
+				listingImage: {
+					create: listingImage.map((item) => ({
+						listingImageName: item.photoUrl,
 						position: item.position,
 					})),
 				},
@@ -132,7 +132,7 @@ export const postListing = async (req: Request, res: Response) => {
 				category: true,
 				amenity: true,
 				houseRule: true,
-				listingPhoto: true,
+				listingImage: true,
 			},
 		});
 
@@ -153,13 +153,13 @@ export const updateListing = async (req: Request, res: Response) => {
 			categoryIds,
 			amenityIds,
 			houseRuleIds,
-			listingPhoto,
+			listingImage,
 		}: {
 			hostId: string;
 			categoryIds: string[];
 			amenityIds: string[];
 			houseRuleIds: string[];
-			listingPhoto: { photoUrl: string; position: number }[];
+			listingImage: { photoUrl: string; position: number }[];
 		} = req.body;
 
 		const { listingId } = req.params;
@@ -182,7 +182,7 @@ export const updateListing = async (req: Request, res: Response) => {
 		const address = await prisma.address.findUnique({
 			where: { listingId },
 		});
-		const listingPhotos = await prisma.listingPhoto.findMany({
+		const listingImages = await prisma.listingImage.findMany({
 			where: { listingId },
 		});
 		const reservations = await prisma.reservation.findMany({
@@ -205,7 +205,7 @@ export const updateListing = async (req: Request, res: Response) => {
 				category: true,
 				amenity: true,
 				houseRule: true,
-				listingPhoto: true,
+				listingImage: true,
 				address: true,
 			},
 		});
@@ -226,7 +226,7 @@ export const deleteListing = async (req: Request, res: Response) => {
 
 		const listing = await prisma.$transaction([
 			prisma.address.deleteMany({ where: { listingId } }),
-			prisma.listingPhoto.deleteMany({ where: { listingId } }),
+			prisma.listingImage.deleteMany({ where: { listingId } }),
 			prisma.reservation.deleteMany({ where: { listingId } }),
 
 			prisma.listing.delete({ where: { listingId } }),

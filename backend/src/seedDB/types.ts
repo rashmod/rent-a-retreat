@@ -16,8 +16,8 @@ export type TEmergencyContact = {
 	relationship: string;
 };
 
-export type TListingPhoto = {
-	create: { photoUrl: string; position: number }[];
+export type TListingImage = {
+	create: { listingImageName: string; position: number }[];
 };
 
 export type TCategory = {
@@ -45,7 +45,7 @@ export type TListing = {
 	percentRefundable: number | null;
 	daysBeforeCancellation: number | null;
 	address?: { create: TAddress };
-	listingPhoto?: TListingPhoto;
+	listingImage?: TListingImage;
 	category?: TCategory;
 	amenity?: TAmenity;
 	houseRule?: THouseRule;
@@ -56,11 +56,12 @@ export type TUser = {
 	lastName: string;
 	gender: string;
 	email: string;
+	password: string;
 	phoneNumber: number;
 	dateOfBirth: Date;
 	host?: { create: THost };
 	guest?: { create: TGuest };
-	profilePhoto?: { create: { imgUrl: string } };
+	profileImage?: { create: { profileImageName: string } };
 };
 
 export type THost = {

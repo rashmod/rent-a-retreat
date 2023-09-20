@@ -23,7 +23,7 @@ function App() {
 					<Route path='/' element={<Home />} />
 					<Route path='/listing/:listingId' element={<Details />} />
 					<Route
-						path='/listing/:listingId/:photoId'
+						path='/listing/:listingId/:imageId'
 						element={<ImageModal />}
 					/>
 					<Route path='/landing' element={<About />} />

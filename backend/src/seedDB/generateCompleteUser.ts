@@ -1,7 +1,6 @@
-import connectDB, { prisma } from '../db/prisma';
 import generateUser, { generateGuest, generateHost } from './generators/user';
 import generateAddress from './generators/address';
-import generateProfilePhoto from './generators/profilePhoto';
+import generateProfileImage from './generators/profileImage';
 import { TUser } from './types';
 import {
 	flipThreeSidedCoin,
@@ -16,7 +15,7 @@ export const generateCompleteUser = async () => {
 	const coinFlip = flipThreeSidedCoin();
 
 	const user = generateUser();
-	const profilePhoto = generateProfilePhoto();
+	const profileImage = generateProfileImage();
 
 	const guest = generateGuest();
 
@@ -33,7 +32,7 @@ export const generateCompleteUser = async () => {
 
 	const creationObj: TUser = user;
 	const includeObj = {
-		profilePhoto: true,
+		profileImage: true,
 		guest: true,
 		host: {
 			include: {
@@ -42,7 +41,7 @@ export const generateCompleteUser = async () => {
 				listing: {
 					include: {
 						address: true,
-						listingPhoto: true,
+						listingImage: true,
 						category: true,
 						amenity: true,
 						houseRule: true,
@@ -54,7 +53,7 @@ export const generateCompleteUser = async () => {
 
 	const listing = seedListing(categories, amenities, houseRules);
 
-	creationObj.profilePhoto = { create: profilePhoto };
+	creationObj.profileImage = { create: profileImage };
 
 	if (coinFlip === 1) {
 		creationObj.guest = { create: guest };
@@ -88,8 +87,4 @@ export const generateCompleteUser = async () => {
 	}
 
 	return { creationObj, includeObj };
-
-	await prisma.user.create({
-		data: creationObj,
-	});
 };

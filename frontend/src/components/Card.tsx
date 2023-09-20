@@ -10,7 +10,7 @@ const Card = ({
 	pricePerNight,
 	avgRating,
 	totalRatingCount,
-	listingPhoto,
+	listingImage,
 }: TCardProps) => {
 	const [imageIsLoaded, setImageIsLoaded] = useState(false);
 
@@ -19,22 +19,22 @@ const Card = ({
 			to={`/listing/${listingId}`}
 			className='p-3 text-sm font-medium text-black transition duration-300 bg-white rounded-xl hover:-translate-y-0.5 hover:drop-shadow-xl'>
 			<div className='relative'>
-				{listingPhoto && listingPhoto.length === 0 && (
+				{listingImage && listingImage.length === 0 && (
 					<div className='flex items-center justify-center mb-4 bg-black rounded-md aspect-square text-my-primary-500'>
 						No Image
 					</div>
 				)}
-				{listingPhoto && listingPhoto.length > 0 && (
+				{listingImage && listingImage.length > 0 && (
 					<img
 						onLoad={() => setImageIsLoaded(true)}
 						className={`${
 							imageIsLoaded && 'mb-3'
 						} aspect-square object-cover rounded-md`}
-						src={listingPhoto[0].photoUrl}
+						src={listingImage[0].listingImageName}
 						alt=''
 					/>
 				)}
-				{listingPhoto && listingPhoto.length > 0 && !imageIsLoaded && (
+				{listingImage && listingImage.length > 0 && !imageIsLoaded && (
 					<div className='flex items-center justify-center mb-4 bg-black aspect-square rounded-xl text-my-primary-500'>
 						Loading...
 					</div>

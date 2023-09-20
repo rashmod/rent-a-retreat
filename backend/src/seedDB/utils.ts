@@ -1,6 +1,6 @@
 import generateAddress from './generators/address';
 import generateListing from './generators/listing';
-import generateListingPhoto from './generators/listingPhoto';
+import generateListingImage from './generators/listingImage';
 import { TListing } from './types';
 
 export const flipThreeSidedCoin = (): number => {
@@ -51,8 +51,8 @@ export const seedListing = (
 	for (let i = 0; i <= len; i++) {
 		const listing: TListing = generateListing();
 		const address = generateAddress();
-		const listingPhotos: { photoUrl: string; position: number }[] =
-			generateArray(generateListingPhoto, randomNumInRange(12, 4));
+		const listingImages: { listingImageName: string; position: number }[] =
+			generateArray(generateListingImage, randomNumInRange(12, 4));
 		const categoryArray = getRandomElements(
 			categories,
 			randomNumInRange(10, 1)
@@ -67,7 +67,7 @@ export const seedListing = (
 		);
 
 		listing.address = { create: address };
-		listing.listingPhoto = { create: listingPhotos };
+		listing.listingImage = { create: listingImages };
 		listing.category = {
 			connect: categoryArray.map((categoryId) => ({ categoryId })),
 		};

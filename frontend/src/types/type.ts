@@ -1,3 +1,9 @@
+import {
+	TAmenity,
+	TCategory,
+	THouseRule,
+} from '../components/form/Steps/PageFive';
+
 export type TCardProps = {
 	listingId: string;
 	listingName: string;
@@ -6,17 +12,17 @@ export type TCardProps = {
 	pricePerNight: number;
 	avgRating: number;
 	totalRatingCount: number;
-	listingPhoto?: { photoUrl: string }[];
+	listingImage?: { listingImageName: string }[];
 };
 
-export type TPhoto = {
-	listingPhotoId: string;
-	photoUrl: string;
+export type TListingImage = {
+	listingImageId: string;
+	imageUrl: string;
 	position: number;
 	listingId: string;
 };
-export type TPhotoArray = {
-	photoArray: TPhoto[];
+export type TListingImageArray = {
+	listingImageArray: TListingImage[];
 };
 
 export type TListingDetail = {
@@ -27,24 +33,6 @@ export type TListingDetail = {
 	amenity: TAmenity[];
 	category: TCategory[];
 	houseRule: THouseRule[];
-};
-
-export type TAmenity = {
-	amenityId: string;
-	amenityTitle: string;
-	amenityDescription: string;
-};
-
-export type TCategory = {
-	categoryId: string;
-	categoryTitle: string;
-	categoryDescription: string;
-};
-
-export type THouseRule = {
-	houseRuleId: string;
-	ruleTitle: string;
-	ruleDescription: string;
 };
 
 export type TModalValues = {

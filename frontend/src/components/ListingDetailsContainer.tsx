@@ -1,16 +1,10 @@
 import { Link } from 'react-router-dom';
-import {
-	TAmenity,
-	TCategory,
-	THouseRule,
-	TListingDetail,
-	TModalValues,
-	TModalTitle,
-} from '../types/type';
+import { TListingDetail, TModalValues, TModalTitle } from '../types/type';
 import { ChevronsDown } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import ModalContainer from './ModalContainer';
 import KnowMoreModal from './KnowMoreModal';
+import { TAmenity, TCategory, THouseRule } from './form/Steps/PageFive';
 
 type TModalType = TAmenity | TCategory | THouseRule;
 

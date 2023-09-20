@@ -36,7 +36,7 @@ const Details = () => {
 				address={data.address}
 				listingId={params.listingId ? params.listingId : undefined}
 			/>
-			<ImageContainer photoArray={data.listingPhoto} />
+			<ImageContainer listingImageArray={data.listingImage} />
 
 			<section className='grid grid-cols-12 gap-5'>
 				<ListingDetailsContainer

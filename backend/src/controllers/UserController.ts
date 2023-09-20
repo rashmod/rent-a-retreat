@@ -8,7 +8,7 @@ import generateUser, {
 // todo get all hosts
 // todo get all guests
 // todo error checking
-// todo add profile photo when posting user
+// todo add profile image when posting user
 // todo delete all related listing to user
 
 // @desc Get all users
@@ -60,8 +60,15 @@ export const getUserDetails = async (req: Request, res: Response) => {
 // @access Public
 export const postUser = async (req: Request, res: Response) => {
 	try {
-		const { firstName, lastName, gender, email, phoneNumber, dateOfBirth } =
-			generateUser();
+		const {
+			firstName,
+			lastName,
+			gender,
+			email,
+			phoneNumber,
+			dateOfBirth,
+			password,
+		} = generateUser();
 
 		const user = await prisma.user.create({
 			data: {
@@ -69,6 +76,7 @@ export const postUser = async (req: Request, res: Response) => {
 				lastName,
 				gender,
 				email,
+				password,
 				phoneNumber,
 				dateOfBirth,
 			},
@@ -175,7 +183,7 @@ export const deleteUser = async (req: Request, res: Response) => {
 			prisma.address.deleteMany({
 				where: { listing: { host: { userId } } },
 			}),
-			prisma.listingPhoto.deleteMany({
+			prisma.listingImage.deleteMany({
 				where: { listing: { host: { userId } } },
 			}),
 			prisma.reservation.deleteMany({
@@ -188,7 +196,7 @@ export const deleteUser = async (req: Request, res: Response) => {
 			prisma.reservation.deleteMany({ where: { guest: { userId } } }),
 			prisma.guest.deleteMany({ where: { userId } }),
 
-			prisma.profilePhoto.deleteMany({ where: { userId } }),
+			prisma.profileImage.deleteMany({ where: { userId } }),
 
 			prisma.user.delete({ where: { userId } }),
 		]);
@@ -212,7 +220,7 @@ export const deleteHost = async (req: Request, res: Response) => {
 			prisma.emergencyContact.deleteMany({ where: { hostId } }),
 
 			prisma.address.deleteMany({ where: { listing: { hostId } } }),
-			prisma.listingPhoto.deleteMany({ where: { listing: { hostId } } }),
+			prisma.listingImage.deleteMany({ where: { listing: { hostId } } }),
 			prisma.reservation.deleteMany({ where: { listing: { hostId } } }),
 
 			prisma.listing.deleteMany({ where: { hostId } }),

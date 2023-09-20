@@ -8,7 +8,6 @@ import FloatingLabelInput from '../FloatingLabelInput';
 import Toggle from '../Toggle';
 import { TStepProps } from '../../../types/form/steps';
 import { PageTwoSchema, TPageTwoSchema } from '../../../schema/PageTwoSchema';
-import { DevTool } from '@hookform/devtools';
 
 const PageTwo = ({
 	isFirstPage,
@@ -21,7 +20,6 @@ const PageTwo = ({
 	const {
 		register,
 		handleSubmit,
-		control,
 		formState: { errors },
 		resetField,
 		unregister,
@@ -89,7 +87,6 @@ const PageTwo = ({
 					isLastPage={isLastPage}
 				/>
 			</form>
-			<DevTool control={control} />
 		</FormWrapper>
 	);
 };

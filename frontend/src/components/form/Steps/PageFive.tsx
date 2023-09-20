@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { DevTool } from '@hookform/devtools';
 
 import { useFormState } from '../../../store/store';
 import Navigation from '../Navigation';
@@ -113,7 +112,6 @@ const PageFive = ({
 					isLastPage={isLastPage}
 				/>
 			</form>
-			<DevTool control={control} />
 		</FormWrapper>
 	);
 };

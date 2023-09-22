@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { prisma } from '../db/prisma';
 import {
 	deleteListing,
 	getAllListings,
@@ -7,12 +6,13 @@ import {
 	postListing,
 	updateListing,
 } from '../controllers/ListingController';
+import upload from '../config/multerConfig';
 
 const router = Router();
 
 router.get('/', getAllListings);
 
-router.post('/', postListing);
+router.post('/', upload.array('images', 10), postListing);
 
 router.get('/:listingId', getListingDetails);
 

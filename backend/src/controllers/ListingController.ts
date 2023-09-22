@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
+
 import { prisma } from '../db/prisma';
 import generateListing from '../seedDB/generators/listing';
-
-// todo add category amenity photo house rules when posting
+import uploadImageToS3 from '../utils/uploadImageToS3';
 
 // @desc Get all listings
 // @route GET /api/listings
@@ -52,6 +52,7 @@ export const getListingDetails = async (req: Request, res: Response) => {
 				reservation: true,
 			},
 		});
+		// todo sort listing image array by position before returning
 
 		res.status(200).json(listing);
 	} catch (error) {
@@ -70,14 +71,16 @@ export const postListing = async (req: Request, res: Response) => {
 			categoryIds,
 			amenityIds,
 			houseRuleIds,
-			listingImage,
 		}: {
 			hostId: string;
 			categoryIds: string[];
 			amenityIds: string[];
 			houseRuleIds: string[];
-			listingImage: { photoUrl: string; position: number }[];
 		} = req.body;
+		const images = req.files as Express.Multer.File[] | undefined;
+
+		const s3ImageArray = await uploadImageToS3(images);
+
 		const {
 			listingName,
 			bedroomCount,
@@ -122,8 +125,8 @@ export const postListing = async (req: Request, res: Response) => {
 					})),
 				},
 				listingImage: {
-					create: listingImage.map((item) => ({
-						listingImageName: item.photoUrl,
+					create: s3ImageArray.map((item) => ({
+						listingImageName: item.listingImageName,
 						position: item.position,
 					})),
 				},
@@ -179,6 +182,8 @@ export const updateListing = async (req: Request, res: Response) => {
 		} = generateListing();
 		const body = req.body;
 
+		// todo handle images update from s3
+
 		const address = await prisma.address.findUnique({
 			where: { listingId },
 		});
@@ -223,6 +228,8 @@ export const updateListing = async (req: Request, res: Response) => {
 export const deleteListing = async (req: Request, res: Response) => {
 	try {
 		const { listingId } = req.params;
+
+		// todo delete images from s3
 
 		const listing = await prisma.$transaction([
 			prisma.address.deleteMany({ where: { listingId } }),

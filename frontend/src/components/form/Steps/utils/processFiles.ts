@@ -1,4 +1,4 @@
-import { FileWithUrl } from '../PageSix';
+import { FileWithUrl } from '../../../../schema/PageSixSchema';
 
 function processFiles(
 	fileList: FileList,

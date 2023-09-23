@@ -12,6 +12,11 @@ import ConfirmSectionHeader from '../ConfirmSectionHeader';
 import ConfirmSectionWrapper from '../ConfirmSectionWrapper';
 import ConfirmTags from '../ConfirmTags';
 import { TAmenity, TCategory, THouseRule } from './PageFive';
+import createValidFormData from './utils/createValidFormData';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { addListing } from '../../../api/listings';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 type TConfirmPageProps = TNavigationProps & {
 	gotoIndex: (index: number) => void;
@@ -23,15 +28,28 @@ const ConfirmPage = ({
 	goToPreviousPage,
 	gotoIndex,
 }: TConfirmPageProps) => {
-	const { formData } = useFormState();
 	const { handleSubmit } = useForm();
+	const queryClient = useQueryClient();
+	// todo show loading and errors
+	const { mutate, data, isLoading, isSuccess, isError } = useMutation({
+		mutationFn: addListing,
+		onSuccess: () => queryClient.invalidateQueries(['listings']),
+	});
+	const navigate = useNavigate();
+
+	const { formData } = useFormState();
+
+	useEffect(() => {
+		if (isSuccess && data) {
+			navigate(`/listing/${data.listingId}`);
+		}
+	}, [isSuccess, data, navigate]);
 
 	function onSubmit() {
-		alert(JSON.stringify(formData, null, 2));
-		console.log(formData);
-		// eslint-disable-next-line
-		// @ts-ignore
-		console.log(formData.images);
+		const validFormData = createValidFormData(formData);
+		// todo dynamically add hostId
+		validFormData.append('hostId', '006a6e2c-159e-434e-97e2-d7a31c6ece23');
+		mutate(validFormData);
 	}
 
 	return (

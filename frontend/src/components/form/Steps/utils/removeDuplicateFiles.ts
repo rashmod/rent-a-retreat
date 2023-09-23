@@ -1,4 +1,4 @@
-import { FileWithUrl } from '../PageSix';
+import { FileWithUrl } from '../../../../schema/PageSixSchema';
 
 function removeDuplicateFiles(
 	originalFiles: FileWithUrl[],

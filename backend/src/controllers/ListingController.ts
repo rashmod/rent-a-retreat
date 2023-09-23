@@ -3,6 +3,8 @@ import { Request, Response } from 'express';
 import { prisma } from '../db/prisma';
 import generateListing from '../seedDB/generators/listing';
 import uploadImageToS3 from '../utils/uploadImageToS3';
+import generateAddress from '../seedDB/generators/address';
+import createValidArray from '../utils/createValidArray';
 
 // @desc Get all listings
 // @route GET /api/listings
@@ -73,13 +75,17 @@ export const postListing = async (req: Request, res: Response) => {
 			houseRuleIds,
 		}: {
 			hostId: string;
-			categoryIds: string[];
-			amenityIds: string[];
-			houseRuleIds: string[];
+			categoryIds: string | string[];
+			amenityIds: string | string[];
+			houseRuleIds: string | string[];
 		} = req.body;
 		const images = req.files as Express.Multer.File[] | undefined;
 
 		const s3ImageArray = await uploadImageToS3(images);
+
+		const categoryArray = createValidArray(categoryIds);
+		const amenityArray = createValidArray(amenityIds);
+		const houseRuleArray = createValidArray(houseRuleIds);
 
 		const {
 			listingName,
@@ -94,6 +100,7 @@ export const postListing = async (req: Request, res: Response) => {
 			longitude,
 			isRefundable,
 		} = generateListing();
+		const address = generateAddress();
 
 		const listing = await prisma.listing.create({
 			data: {
@@ -114,13 +121,15 @@ export const postListing = async (req: Request, res: Response) => {
 					},
 				},
 				category: {
-					connect: categoryIds.map((categoryId) => ({ categoryId })),
+					connect: categoryArray.map((categoryId) => ({
+						categoryId,
+					})),
 				},
 				amenity: {
-					connect: amenityIds.map((amenityId) => ({ amenityId })),
+					connect: amenityArray.map((amenityId) => ({ amenityId })),
 				},
 				houseRule: {
-					connect: houseRuleIds.map((houseRuleId) => ({
+					connect: houseRuleArray.map((houseRuleId) => ({
 						houseRuleId,
 					})),
 				},
@@ -130,12 +139,16 @@ export const postListing = async (req: Request, res: Response) => {
 						position: item.position,
 					})),
 				},
+				address: {
+					create: address,
+				},
 			},
 			include: {
 				category: true,
 				amenity: true,
 				houseRule: true,
 				listingImage: true,
+				address: true,
 			},
 		});
 

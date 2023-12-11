@@ -19,26 +19,25 @@ const Card = ({
 			to={`/listing/${listingId}`}
 			className='p-3 text-sm font-medium text-black transition duration-300 bg-white rounded-xl hover:-translate-y-0.5 hover:drop-shadow-xl'>
 			<div className='relative'>
-				{listingImage && listingImage.length === 0 && (
-					<div className='flex items-center justify-center mb-4 bg-black rounded-md aspect-square text-my-primary-500'>
-						No Image
-					</div>
-				)}
-				{listingImage && listingImage.length > 0 && (
-					<img
-						onLoad={() => setImageIsLoaded(true)}
-						className={`${
-							imageIsLoaded && 'mb-3'
-						} aspect-square object-cover rounded-md`}
-						src={listingImage[0].listingImageName}
-						alt=''
-					/>
-				)}
-				{listingImage && listingImage.length > 0 && !imageIsLoaded && (
-					<div className='flex items-center justify-center mb-4 bg-black aspect-square rounded-xl text-my-primary-500'>
-						Loading...
-					</div>
-				)}
+				{listingImage &&
+					(listingImage.length <= 0 ? (
+						<div className='flex items-center justify-center mb-4 bg-black rounded-md aspect-square text-my-primary-500'>
+							No Image
+						</div>
+					) : imageIsLoaded ? (
+						<img
+							onLoad={() => setImageIsLoaded(true)}
+							className={`${
+								imageIsLoaded && 'mb-3'
+							} aspect-square object-cover rounded-md`}
+							src={listingImage[0].listingImageName}
+							alt=''
+						/>
+					) : (
+						<div className='flex items-center justify-center mb-4 bg-black aspect-square rounded-xl text-my-primary-500'>
+							Loading...
+						</div>
+					))}
 				<div className='absolute px-2 py-1 text-xs text-white bg-black bg-opacity-50 border border-gray-200 border-none rounded-full top-3 left-3 backdrop-filter backdrop-blur-lg'>
 					city, country
 				</div>
